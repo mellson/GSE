@@ -1,38 +1,39 @@
 # Created by http://www.gitignore.io
 
 ### LaTeX ###
-*.acn
-*.acr
-*.alg
-*.aux
-*.bbl
-*.blg
-*.dvi
-*.fdb_latexmk
-*.glg
-*.glo
-*.gls
-*.idx
-*.ilg
-*.ind
-*.ist
-*.lof
-*.log
-*.lot
-*.maf
-*.mtc
-*.mtc0
-*.nav
-*.nlo
-*.out
-*.pdfsync
-*.ps
-*.snm
-*.synctex.gz
-*.toc
-*.vrb
-*.xdy
-*.tdo
+Report/*.acn
+Report/*.acr
+Report/*.alg
+Report/*.aux
+Report/*.bbl
+Report/*.blg
+Report/*.dvi
+Report/*.fdb_latexmk
+Report/*.glg
+Report/*.glo
+Report/*.gls
+Report/*.idx
+Report/*.ilg
+Report/*.ind
+Report/*.ist
+Report/*.lof
+Report/*.log
+Report/*.lot
+Report/*.maf
+Report/*.mtc
+Report/*.mtc0
+Report/*.nav
+Report/*.nlo
+Report/*.out
+Report/*.pdfsync
+Report/*.ps
+Report/*.snm
+Report/*.synctex.gz
+Report/*.toc
+Report/*.vrb
+Report/*.xdy
+Report/*.tdo
+Report/*.fls
 
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
