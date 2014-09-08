@@ -35,6 +35,40 @@ Report/*.xdy
 Report/*.tdo
 Report/*.fls
 
+Project_Proposal/*.acn
+Project_Proposal/*.acr
+Project_Proposal/*.alg
+Project_Proposal/*.aux
+Project_Proposal/*.bbl
+Project_Proposal/*.blg
+Project_Proposal/*.dvi
+Project_Proposal/*.fdb_latexmk
+Project_Proposal/*.glg
+Project_Proposal/*.glo
+Project_Proposal/*.gls
+Project_Proposal/*.idx
+Project_Proposal/*.ilg
+Project_Proposal/*.ind
+Project_Proposal/*.ist
+Project_Proposal/*.lof
+Project_Proposal/*.log
+Project_Proposal/*.lot
+Project_Proposal/*.maf
+Project_Proposal/*.mtc
+Project_Proposal/*.mtc0
+Project_Proposal/*.nav
+Project_Proposal/*.nlo
+Project_Proposal/*.out
+Project_Proposal/*.pdfsync
+Project_Proposal/*.ps
+Project_Proposal/*.snm
+Project_Proposal/*.synctex.gz
+Project_Proposal/*.toc
+Project_Proposal/*.vrb
+Project_Proposal/*.xdy
+Project_Proposal/*.tdo
+Project_Proposal/*.fls
+
 ### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 
