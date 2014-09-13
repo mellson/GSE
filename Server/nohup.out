@@ -1,0 +1,4 @@
+[0m[[0minfo[0m] [0mLoading project definition from /Users/anbh/Desktop/Git/GSE/Server/project[0m
+[0m[[0minfo[0m] [0mSet current project to server (in build file:/Users/anbh/Desktop/Git/GSE/Server/)[0m
+[0m[[0minfo[0m] [0mRunning dk.itu.spcl.server.Server [0m
+[INFO] [09/04/2014 21:54:32.155] [spray-can-akka.actor.default-dispatcher-3] [akka://spray-can/user/IO-HTTP/listener-0] Bound to /0.0.0.0:8080

@@ -20,12 +20,13 @@ object SensorJsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
 }
 
 // Defines our service behavior independently from the service actor
-trait PresenceService extends HttpService {
+trait PresenceService extends HttpService with Authenticator {
   def registerSensor(sensor: Sensor) = {
     s"Registered sensor with name ${sensor.name}"
   }
 
   import dk.itu.spcl.server.SensorJsonSupport._
+  import scala.concurrent.ExecutionContext.Implicits.global
 
   val route =
     path("") {
@@ -39,5 +40,13 @@ trait PresenceService extends HttpService {
             complete(registerSensor(sensor))
           }
         }
+      } ~
+      path("private") {
+        authenticate(basicUserAuthenticator) { authInfo =>
+        get {
+          // All authenticated users can enter here
+          complete(s"Hi, ${authInfo.user.login} you have access!")
+        }
       }
+    }
 }

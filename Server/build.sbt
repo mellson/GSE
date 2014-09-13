@@ -7,7 +7,7 @@ scalaVersion  := "2.11.2"
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
 libraryDependencies ++= {
-  val AkkaVersion = "2.3.5"
+  val AkkaVersion = "2.3.6"
   val SprayVersion = "1.3.1"
   Seq(
     "io.spray"            %%  "spray-can"     % SprayVersion,
@@ -16,7 +16,8 @@ libraryDependencies ++= {
     "io.spray"            %%  "spray-testkit" % SprayVersion  % "test",
     "com.typesafe.akka"   %%  "akka-actor"    % AkkaVersion,
     "com.typesafe.akka"   %%  "akka-testkit"  % AkkaVersion   % "test",
-    "org.specs2"          %%  "specs2-core"   % "2.3.11" % "test"
+    "org.specs2"          %%  "specs2-core"   % "2.3.11" % "test",
+    "com.github.t3hnar"   %% "scala-bcrypt"   % "2.4"
   )
 }
 
