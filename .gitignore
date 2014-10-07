@@ -26,6 +26,7 @@ Report/*.pdfsync
 Report/*.ps
 Report/*.snm
 Report/*.synctex.gz
+Report/*.synctex
 Report/*.toc
 Report/*.vrb
 Report/*.xdy
