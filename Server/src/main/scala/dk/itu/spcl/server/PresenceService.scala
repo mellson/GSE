@@ -1,6 +1,6 @@
 package dk.itu.spcl.server
 
-import akka.actor.Actor
+import akka.actor.{Props, ActorRef, Actor}
 import spray.httpx.SprayJsonSupport
 import spray.json._
 import spray.routing._
@@ -9,9 +9,9 @@ class PresenceServiceActor extends PresenceService with Actor {
   def receive = runRoute(route)
 }
 
-case class Sensor(name: String, user: String)
+case class Sensor(name: String, user: String, jsonData: String)
 object SensorJsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
-  implicit val sensorFormat = jsonFormat2(Sensor)
+  implicit val sensorFormat = jsonFormat3(Sensor)
 }
 
 // Defines our service behavior independently from the service actor
@@ -22,7 +22,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
   def ok(s: String) = Map("Ok" -> s)
   def error(s: String) = Map("Error" -> s)
 
-  var userIdMap:Map[String, Int] = Map.empty
+  var userIdMap:Map[String, (Int, ActorRef)] = Map.empty
   var idCounter = 0
 
   val sensorPath = "sensor"
@@ -32,21 +32,24 @@ trait PresenceService extends HttpServiceActor with Authenticator {
 
     case (_, None)  =>
       val id = idCounter
-      userIdMap += (sensor.user -> id)
+      val sensorCluster = actorRefFactory.actorOf(Props[SensorCluster], sensor.user)
+      userIdMap += (sensor.user -> (id, sensorCluster))
       idCounter += 1
       ok(s"Send updates to $sensorPath/$id")
 
     case (_,Some(i))  => ok(s"Send updates to $sensorPath/$i")
   }
 
-  def registerSensor(id: Int, sensor: Sensor) = {
+  def getSensorData(id: Int, sensor: Sensor) = {
     val user = userIdMap.get(sensor.user)
     if (!user.isDefined)
       error("No user registered for this sensor")
-    else if (user.isDefined && user.get != id)
+    else if (user.isDefined && user.get._1 != id)
       error("Wrong id")
-    else
-      ok(s"Registered sensor with name ${sensor.name}")
+    else {
+      user.get._2 ! sensor
+      ok(s"Received sensor data")
+    }
   }
   val route =
     path("") {
@@ -65,7 +68,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       {
         put {
           entity(as[Sensor]) { sensor =>
-            complete(registerSensor(id, sensor))
+            complete(getSensorData(id, sensor))
           }
         }
       }
