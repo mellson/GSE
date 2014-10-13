@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="KWx-Ko-fzv">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="sZz-TB-YOc">
+            <objects>
+                <navigationController id="KWx-Ko-fzv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sLU-pT-q1q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pHm-ej-Exm" kind="relationship" relationship="rootViewController" id="51J-2w-dew"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Vi-gk-5iy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42" y="377"/>
+        </scene>
+        <!--PunchIn-->
+        <scene sceneID="nDP-NX-Zux">
+            <objects>
+                <viewController id="pHm-ej-Exm" customClass="MainViewController" customModule="PunchIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FJN-L0-Yv2"/>
+                        <viewControllerLayoutGuide type="bottom" id="nLb-3f-kk8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EAy-aT-9Hi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Present at Work" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GWb-SC-fET">
+                                <rect key="frame" x="223" y="135" width="155" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GWb-SC-fET" firstAttribute="top" secondItem="FJN-L0-Yv2" secondAttribute="bottom" constant="71" id="WNd-NH-i7j"/>
+                            <constraint firstAttribute="centerX" secondItem="GWb-SC-fET" secondAttribute="centerX" constant="-0.5" id="mjF-aa-E6U"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="PunchIn" id="tem-kB-cm5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="ZuY-oe-G9q">
+                            <connections>
+                                <segue destination="KzF-tf-cYH" kind="presentation" id="gNb-me-HJM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="statusLabel" destination="GWb-SC-fET" id="igt-1P-7vr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yV2-rb-lcw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="377"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="A0L-m9-0TP">
+            <objects>
+                <navigationController id="KzF-tf-cYH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="2dy-JA-Jb3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="5Iq-4H-ZpT" kind="relationship" relationship="rootViewController" id="SkO-Mr-hYJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O3R-x0-MGE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="690" y="1077"/>
+        </scene>
+        <!--Set Workplace-->
+        <scene sceneID="sR6-5O-jYd">
+            <objects>
+                <viewController id="5Iq-4H-ZpT" customClass="SettingsViewController" customModule="PunchIn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Sg-rz-ABF"/>
+                        <viewControllerLayoutGuide type="bottom" id="UJ7-cF-Kem"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Enz-0f-aad" customClass="SettingsView" customModule="PunchIn" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xud-w6-i8r">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5Iq-4H-ZpT" id="I8z-CJ-b8K"/>
+                                </connections>
+                            </mapView>
+                            <searchBar contentMode="redraw" placeholder="Search for Location" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQr-Cm-H7r">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                                <connections>
+                                    <outlet property="delegate" destination="5Iq-4H-ZpT" id="Jot-Uk-Ss5"/>
+                                </connections>
+                            </searchBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="FuD-yt-IfM">
+                                <rect key="frame" x="282" y="335" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PQr-Cm-H7r" firstAttribute="top" secondItem="0Sg-rz-ABF" secondAttribute="bottom" id="4b5-Ms-esj"/>
+                            <constraint firstItem="UJ7-cF-Kem" firstAttribute="top" secondItem="Xud-w6-i8r" secondAttribute="bottom" id="7SE-k8-n8O"/>
+                            <constraint firstItem="Xud-w6-i8r" firstAttribute="leading" secondItem="Enz-0f-aad" secondAttribute="leading" id="9Hx-Y5-pz3"/>
+                            <constraint firstItem="FuD-yt-IfM" firstAttribute="centerY" secondItem="Xud-w6-i8r" secondAttribute="centerY" id="DTi-ls-tzM"/>
+                            <constraint firstAttribute="trailing" secondItem="Xud-w6-i8r" secondAttribute="trailing" id="KF8-zP-SU4"/>
+                            <constraint firstItem="PQr-Cm-H7r" firstAttribute="leading" secondItem="Enz-0f-aad" secondAttribute="leading" id="Kzb-HQ-b2p"/>
+                            <constraint firstItem="FuD-yt-IfM" firstAttribute="centerX" secondItem="Xud-w6-i8r" secondAttribute="centerX" id="cdc-ut-ohf"/>
+                            <constraint firstAttribute="trailing" secondItem="PQr-Cm-H7r" secondAttribute="trailing" id="cem-sU-4YL"/>
+                            <constraint firstItem="Xud-w6-i8r" firstAttribute="top" secondItem="PQr-Cm-H7r" secondAttribute="bottom" id="nwe-oD-kaG"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="activityIndicator" destination="FuD-yt-IfM" id="vBX-g5-qse"/>
+                            <outlet property="mapview" destination="Xud-w6-i8r" id="2XF-xG-yXG"/>
+                            <outlet property="searchBar" destination="PQr-Cm-H7r" id="usI-5N-CQK"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set Workplace" id="5iF-Jp-wcX">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="IyG-s1-go2">
+                            <connections>
+                                <action selector="done:" destination="5Iq-4H-ZpT" id="lvb-fq-yls"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avc-Cp-Gva" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="1077"/>
+        </scene>
+    </scenes>
+</document>
