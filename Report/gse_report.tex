@@ -79,6 +79,15 @@ breaklinks=true,
 }
 
 \section{Introduction}
+Nowadays, globalization is an economical and societal trend that has pushed industries to move from local to global markets requiring practitioners to work more and more in distributed arrangements.  However, this rapid shift of practice has not been followed timely by organizational changes. In fact, a fundamental difference between a co-located arrangement and a distributed one is represented by the lack of physical presence.  Often underestimated, this intrinsic characteristic has severe repercussions, which need to be properly addressed for the distributed cooperation to succeed.
+
+Paraphrasing Herbsleb \footnote{Herbsleb, James D. (2007). Global Software Engineering: The Future of Socio-technical Coordination}, many of the mechanisms that function in a co-located setting are absent or disrupted in a distributed project. Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
+
+We wish to create a presence information infrastructure for global software engineers. The central idea behind the project is focused on proposing a solution to the context awareness problem described in the above. Our initial conceptualization of a possible implementation of such solution considers a modular system able to gather presence information from inputs sources (sensors).
+The data gathered and aggregated through the sensors would then be exposed by the system via REST APIs.
+The system needs to be highly scalable to support many users.
+For this reason we will create a system based on the Actor model by Carl Hewitt \footnote{Carl Hewitt; Peter Bishop; Richard Steiger (1973). A Universal Modular Actor Formalism for Artificial Intelligence}.
+We will create a minimum of 2 demonstrators leveraging the APIs provided by the infrastructure to showcase possible applications.
 
 \section{Related work}
 Computer-Supported Cooperative Work (CSCW) started to appear as a research area in 1986 \cite{schmidt1994cooperative}.
