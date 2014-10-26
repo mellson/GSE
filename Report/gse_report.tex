@@ -102,10 +102,23 @@ The work presented in this paper represents two primary contributions.
 First, we demonstrate an implementation of a presence and interruptibility-sharing infrastructure for global software engineers.
 Second, we demonstrate a possible application. This is used to test and evaluate the infrastructure by implementing enough sensors to provide accurate interruptibility information.
 
-\section{Implementation}
+\section{Technical Implementation}
 \subsection{Infrastructure}
-The system needs to be highly scalable to support many users.
-For this reason we will create a system based on the Actor model by Carl Hewitt \footnote{Carl Hewitt; Peter Bishop; Richard Steiger (1973). A Universal Modular Actor Formalism for Artificial Intelligence}.
+Each user typically has several sensor inputs.
+The system needs to be highly scalable to support a large number of users.
+
+To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
+The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
+These units of work are encapsulated in the actor abstraction.
+Actors communicate by sending messages to each other.
+Actors does not share any state, making it possible to run actors in parallel and even on different machines.
+This makes the actor model a good candidate for building highly scalable applications.
+
+There are several frameworks implementing the actor model, such as Akka\cite{akka}, Project Orleans\cite{orleans} and most famously Erlang\cite{erlang}.
+For this project we have chosen Akka because it is Java based.
+This supports the technical knowledge in our group.
+
+We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
 
 \section{Related work}
 % TODO vi skal have en reference ind her så det ikke bare bliver en påstand!
@@ -125,18 +138,6 @@ Ocon is built in .NET and consists of three components (i) central (center of in
 For this specific project we feel that NooSphere is too extensive for our needs and the Ocon paper have not indicated that Ocon is scalable.
 Because of this we have decided to create our own infrastructure.
 
-For this infrastructure we will be using the actor model \cite{hewitt1973universal}.
-The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
-These units are encapsulated in an actor.
-And the actors communicate by sending messages to each other.
-Actors does not share any state making it possible to run actors in parallel and even on different machines.
-This makes the actor model a good candidate for building highly scalable applications.
-
-For evaluation we will use Gutwins awareness framework and the C3 model as points of measurement.
-
-\section{Technical Implementation}
-
-
 \section{Discussion}
 
 \section{Conclusion}
@@ -145,5 +146,6 @@ For evaluation we will use Gutwins awareness framework and the C3 model as point
 \bibliographystyle{acm-sigchi}
 \bibliography{ubicomp}
 
-% \section{Appendix}
+\section{Appendix}
+Ontology\url{http://d.pr/11X6n}
 \end{document}
