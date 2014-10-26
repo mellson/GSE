@@ -1,5 +1,0 @@
-# Report noter
-## Sensor
-Artiklen `Predicting Human Interruptibility with Sensors` har lavet undersøgelser vi kan bygge videre på.
-De har fundet ud af at man kan med 68% nøjagtighed finde ud af om en person er `Highly Non-Interruptable` eller ej.
-Vores sensor service skal implementere `automated models of human interruptibility`.

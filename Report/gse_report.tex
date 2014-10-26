@@ -32,7 +32,7 @@
 % since its job is to redefine many LaTeX commands.
 \usepackage[pdftex]{hyperref}
 \hypersetup{
-pdftitle={Presence Awareness in Global Software Engineering},
+pdftitle={Approximator - An infrastructure for presence and interruptibility-sharing},
 pdfauthor={Kristian S. M. Andersen, Anders Bech Mellson and Mads Daniel Christensen},
 pdfkeywords={spce, gse, presence, awareness},
 bookmarksnumbered,
@@ -52,8 +52,8 @@ breaklinks=true,
 % End of preamble. Here it comes the document.
 \begin{document}
 
-\title{Presence Awareness in Global Software Engineering}
-
+\title{Approximator}
+\subtitle{An infrastructure for presence and interruptibility-sharing}
 \numberofauthors{3}
 \author{
   \alignauthor Anders Bech Mellson\\
@@ -79,23 +79,36 @@ breaklinks=true,
 }
 
 \section{Introduction}
-Nowadays, globalization is an economical and societal trend that has pushed industries to move from local to global markets requiring practitioners to work more and more in distributed arrangements.  However, this rapid shift of practice has not been followed timely by organizational changes. In fact, a fundamental difference between a co-located arrangement and a distributed one is represented by the lack of physical presence.  Often underestimated, this intrinsic characteristic has severe repercussions, which need to be properly addressed for the distributed cooperation to succeed.
+Globalization is an economical and societal trend that has pushed industries to move from local to global markets.
+Working in a global setting requires practitioners to work in distributed arrangements.
 
-Paraphrasing Herbsleb \footnote{Herbsleb, James D. (2007). Global Software Engineering: The Future of Socio-technical Coordination}, many of the mechanisms that function in a co-located setting are absent or disrupted in a distributed project. Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
+Paraphrasing Herbsleb \footnote{Herbsleb, James D. (2007). Global Software Engineering: The Future of Socio-technical Coordination}, many of the mechanisms that work correctly in a co-located setting are absent or disrupted in a distributed arrangement.
+Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
+% TODO hvem har sagt ovenstående? Er det fra Herbsleb? Tror vi skal specificere lidt mere end bare skrive different approaches have been investigated.
 
-We wish to create a presence information infrastructure for global software engineers. The central idea behind the project is focused on proposing a solution to the context awareness problem described in the above. Our initial conceptualization of a possible implementation of such solution considers a modular system able to gather presence information from inputs sources (sensors).
-The data gathered and aggregated through the sensors would then be exposed by the system via REST APIs.
+One fundamental difference between a co-located arrangement and a distributed one is the lack of presence awareness.
+The ability to assess how interruptible another person is, becomes very hard when you are not in the same room.
+When you are in the near proximity of another person it is fairly easy to guess the interruptibility of that person.
+We use the interruptibility assessment to facility behavior that we consider socially acceptable.
+If you are in a distributed setting you are dependent on tool support from computer and communication systems.
+These systems are largely unaware of the social contracts of human interactions.
+
+Research by the Human Computer Interaction Institute at Carnegie Mellon University \cite{Fogarty:2005:PHI:1057237.1057243} shows that you can detect the interruptibility of a person using sensor inputs.
+In their research they find that you can predict interruptibility with sensor inputs to an accuracy of 68\%.
+The researchers note that their results could ``motivate the development of systems that use these models to negotiate interruptions at socially appropriate times.''
+
+We will try to build upon the research done by Fogarty etc.
+The work presented in this paper represents two primary contributions.
+First, we demonstrate an implementation of a presence and interruptibility-sharing infrastructure for global software engineers.
+Second, we test and evaluate the infrastructure by implementing enough sensors to provide accurate interruptibility information.
+
+\section{Implementation}
+\subsection{Infrastructure}
 The system needs to be highly scalable to support many users.
 For this reason we will create a system based on the Actor model by Carl Hewitt \footnote{Carl Hewitt; Peter Bishop; Richard Steiger (1973). A Universal Modular Actor Formalism for Artificial Intelligence}.
 We will create a minimum of 2 demonstrators leveraging the APIs provided by the infrastructure to showcase possible applications.
 
 \section{Related work}
-Computer-Supported Cooperative Work (CSCW) started to appear as a research area in 1986 \cite{schmidt1994cooperative}.
-Modern companies need to innovate, be flexible and have a high product quality.
-This requires fluent cooperation horizontally across the company and in cooperation with outsiders.
-This requirement has created the high demand for good tools to support cooperation.
-Many have tried to contribute to the field of CSCW; here we will look at a few that are related to the project at hand.
-
 % TODO vi skal have en reference ind her så det ikke bare bliver en påstand!
 The idea of context aware systems started at Xerox PARC through the idea of smart spaces, smart rooms and other context aware technologies.
 These context aware systems made it possible to make a system react to a given situation.
