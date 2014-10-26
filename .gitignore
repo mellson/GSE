@@ -141,3 +141,4 @@ project/plugins/project/
 hs_err_pid*
 Project_Proposal/gse_project_proposal.pdf
 Report/gse_report.pdf
+Server/nohup.out
