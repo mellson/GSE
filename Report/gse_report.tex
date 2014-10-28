@@ -102,25 +102,40 @@ The work presented in this paper represents two primary contributions.
 First, we demonstrate an implementation of a presence and interruptibility-sharing infrastructure for global software engineers.
 Second, we demonstrate a possible application. This is used to test and evaluate the infrastructure by implementing enough sensors to provide accurate interruptibility information.
 
-\section{Technical Implementation}
-\subsection{Infrastructure}
-Each user typically has several sensor inputs.
-The system needs to be highly scalable to support a large number of users.
+% \section{Technical Implementation}
+% \subsection{Infrastructure}
+% Each user typically has several sensor inputs.
+% The system needs to be highly scalable to support a large number of users.
 
-To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
-The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
-These units of work are encapsulated in the actor abstraction.
-Actors communicate by sending messages to each other.
-Actors does not share any state, making it possible to run actors in parallel and even on different machines.
-This makes the actor model a good candidate for building highly scalable applications.
+% To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
+% The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
+% These units of work are encapsulated in the actor abstraction.
+% Actors communicate by sending messages to each other.
+% Actors does not share any state, making it possible to run actors in parallel and even on different machines.
+% This makes the actor model a good candidate for building highly scalable applications.
 
-There are several frameworks implementing the actor model, such as Akka\cite{akka}, Project Orleans\cite{orleans} and most famously Erlang\cite{erlang}.
-For this project we have chosen Akka because it is Java based.
-This supports the technical knowledge in our group.
+% There are several frameworks implementing the actor model, such as Akka\cite{akka}, Project Orleans\cite{orleans} and most famously Erlang\cite{erlang}.
+% For this project we have chosen Akka because it is Java based.
+% This supports the technical knowledge in our group.
 
-We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
+% We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
 
 \section{Related work}
+Research in using technology to support awareness in a distributed setting has been going on since the early 90’s. Some of the work\cite{bly1993media}\cite{gaver1992realizing}\cite{mantei1991experiences} tried to keep an instant audiovisual connection between workplaces. This has the benefit that not only intentional communication is supported, but also more social communication since the co-workers is always visible. This approach also has some drawbacks. Users can feel self- conscious about the image of themselves being broadcasted. Keeping high quality media streams running all day can also be expensive since it takes up a high amount of bandwidth.
+
+Distributed teams can use instant messaging (IM) applications to communicate. Research on IM usage \cite{nardi2000interaction}\cite{handel2002chat}\cite{tang2001connexus} has shown that IM is used to negotiate availability besides normal communication. Most IM systems rely on the user to manually set their status or on the users activity data, which does not always truly reflect the precise availability of the user.
+
+\cite{fogarty2004examining} Shows that sensors can be constructed so satisfying accuracy such that they can determining users interruptibility value through the use of a statistical model. \cite{Fogarty:2005:PHI:1057237.1057243} Then goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans.
+
+Several systems have tried to build an awareness solution using sensors. The earliest work dates back to the active badge system\cite{want1992active}. A similar approach has been tried in MyTeam \cite{lai2003myteam}, they use an active badge sensor in combination with the users computer activity. This solution builds upon the premise that success of communications is having prior knowledge about the availability of others before initiating contact. Lack of this information may explain why over 60% of business phone calls fail to reach the intended party\cite{whittaker1995rethinking}.
+Their system MyTeam differs from other IM systems in that participants can get information about the availability of colleagues even if that person is not running the MyTeam client. MyTeam uses photos on a colored background to indicate availability. A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
+
+Another system that also uses sensors to determine availability is MyVine. MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this. What differs the two systems, is MyVine’s use of holistic aggregated sensors instead of just two sensors. The two systems differs in two more ways. One is that MyVine is symmetric, which means the user has to be online in order to see other users availability. The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
+MyVine has a problem with misinterpretations of speech as an indication of being unavailable, while users has observed the speech as an indication of availability.
+
+The SenSay context-aware mobile phone\cite{siewiorek2003sensay} use accelerometer, light, and microphone sensor inputs to determine the availability of the user. The phone dynamically adapts it’s volume, vibration etc to match the user's current context. A novel feature about the phone is that the caller can communicate the urgency of their call. SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should be in. The system requires the user to carry additional sensors besides the phone, which is not ideal from a user perspective.
+
+\cite{Ramos2011} evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient. Informed by the evaluation of other systems InterruptMe is presented. InterruptMe uses implicit inputs from the user to present availability information. However to get these inputs several external sensors are needed. This makes the system unable to run on commodity laptops.
 
 \section{Discussion}
 
