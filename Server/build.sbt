@@ -12,11 +12,11 @@ libraryDependencies ++= {
   Seq(
     "io.spray"            %%  "spray-can"     % SprayVersion,
     "io.spray"            %%  "spray-routing" % SprayVersion,
-    "io.spray"            %%  "spray-json"    % "1.3.0",
+    "io.spray"            %%  "spray-json"    % "1.3.1",
     "io.spray"            %%  "spray-testkit" % SprayVersion  % "test",
     "com.typesafe.akka"   %%  "akka-actor"    % AkkaVersion,
     "com.typesafe.akka"   %%  "akka-testkit"  % AkkaVersion   % "test",
-    "org.specs2"          %%  "specs2-core"   % "2.4.6" % "test",
+    "org.specs2"          %%  "specs2-core"   % "2.4.9" % "test",
     "com.github.t3hnar"   %%  "scala-bcrypt"  % "2.4"
   )
 }
