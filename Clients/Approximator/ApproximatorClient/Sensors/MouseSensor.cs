@@ -11,7 +11,7 @@ namespace ApproximatorClient.Sensors
             SensorName = name;
             HookManager.MouseMove += MouseMoved;
             UpdateReadingForSensorName(SensorName, "Init");
-            StartUploadingEverySecond();
+            StartUploading();
         }
 
         private void MouseMoved(object sender, MouseEventArgs e)

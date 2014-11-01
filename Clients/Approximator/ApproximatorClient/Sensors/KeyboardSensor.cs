@@ -11,7 +11,7 @@ namespace ApproximatorClient.Sensors
             SensorName = name;
             HookManager.KeyDown += HookManagerOnKeyDown;
             UpdateReadingForSensorName(SensorName, "Init");
-            StartUploadingEverySecond();
+            StartUploading();
         }
 
         private void HookManagerOnKeyDown(object sender, KeyEventArgs keyEventArgs)

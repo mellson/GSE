@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Reactive.Linq;
 using Newtonsoft.Json;
 
@@ -7,6 +6,7 @@ namespace ApproximatorClient.Sensors
 {
     public abstract class AbstractSensor
     {
+        private const double SecondsBetweenUploads = 1;
         internal string SensorName;
         internal SensorReading LastReading;
 
@@ -21,18 +21,13 @@ namespace ApproximatorClient.Sensors
             {
                 SensorName = name,
                 Value = value,
-                Time = FormatDateTime(DateTime.Now)
+                Time = DateTime.Now
             };
         }
 
-        internal static string FormatDateTime(DateTime dateTime)
+        public void StartUploading()
         {
-            return dateTime.ToString("HH:mm:ss fff", CultureInfo.CurrentUICulture);
-        }
-
-        public void StartUploadingEverySecond()
-        {
-            var updateEverySecond = Observable.Interval(TimeSpan.FromSeconds(1));
+            var updateEverySecond = Observable.Interval(TimeSpan.FromSeconds(SecondsBetweenUploads));
             updateEverySecond.Subscribe(UploadHelper);
         }
 
