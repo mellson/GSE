@@ -1,17 +1,10 @@
 package dk.itu.spcl.server
 
 import akka.actor.{Props, ActorRef, Actor}
-import spray.httpx.SprayJsonSupport
-import spray.json._
 import spray.routing._
 
 class PresenceServiceActor extends PresenceService with Actor {
   def receive = runRoute(route)
-}
-
-case class Sensor(name: String, user: String, jsonData: String)
-object SensorJsonSupport extends DefaultJsonProtocol with SprayJsonSupport {
-  implicit val sensorFormat = jsonFormat3(Sensor)
 }
 
 // Defines our service behavior independently from the service actor

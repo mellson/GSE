@@ -4,6 +4,8 @@ import akka.actor.Actor
 
 class SensorCluster extends Actor {
   override def receive: Receive = {
-    case sensorData: Sensor => println(s"$sensorData")
+    case sensor: Sensor =>
+      val jsonReading = sensor.jsonData
+      println(s"$sensor")
   }
 }

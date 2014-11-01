@@ -17,7 +17,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-actor"    % AkkaVersion,
     "com.typesafe.akka"   %%  "akka-testkit"  % AkkaVersion   % "test",
     "org.specs2"          %%  "specs2-core"   % "2.4.9" % "test",
-    "com.github.t3hnar"   %%  "scala-bcrypt"  % "2.4"
+    "com.github.t3hnar"   %%  "scala-bcrypt"  % "2.4",
+    "com.github.nscala-time" %% "nscala-time" % "1.4.0"
   )
 }
 
