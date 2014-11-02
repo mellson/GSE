@@ -8,7 +8,8 @@ class SensorCluster extends Actor {
   var readings: List[SensorReading] = Nil
 
   override def receive: Receive = {
-    case reading: SensorReading =>
+    case sensorReading: SensorReading =>
+      val reading = SensorReading(sensorReading.SensorName, DateTime.now.toString(), sensorReading.Value)
       lastReading = reading
       if (readings.length < 10)
         readings = reading :: readings
