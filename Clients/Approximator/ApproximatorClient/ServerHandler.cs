@@ -9,18 +9,18 @@ namespace ApproximatorClient
 {
     class ServerHandler
     {
-        private static string sensorEndpointUrl;
+        private static Dictionary<string,string> sensorEndpointUrls = new Dictionary<string,string>();
         private static string baseURL = @"http://spcl.cloudapp.net:8080/";
         private static string method = "PUT";
         private static string contentType = "application/json";
         //Retrives the endpoint that the sensor sends data to
-        public static void SetupConnection()
+        public static void SetupConnection(string sensorName)
         {
             string endPoint =  baseURL + "register";
             var parameters = new Dictionary<string, string>{
-                {"name","sensor1"},
-                {"user","user1"},
-                {"jsonData","data"}
+                {"SensorName",sensorName},
+                {"Time", "0"},
+                {"Value","Init"}
             };
             var request = (HttpWebRequest)WebRequest.Create(endPoint);
 
@@ -40,7 +40,7 @@ namespace ApproximatorClient
             {
                 var result = streamReader.ReadToEnd();
                 var resultDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
-                sensorEndpointUrl = baseURL + Regex.Match(resultDict["Ok"], "sensor.*").Value;
+                sensorEndpointUrls.Add(sensorName, baseURL + Regex.Match(resultDict["Ok"], "sensor.*").Value);
             }
             
         }
@@ -48,9 +48,10 @@ namespace ApproximatorClient
         // Upload to infrastructure and return true if the upload was successfull
         public static bool UploadJson(string json)
         {
-            if (String.IsNullOrEmpty(sensorEndpointUrl)) SetupConnection();
+            var convertedJson = JsonConvert.DeserializeObject <Dictionary<string, string>>(json);
+            if (!sensorEndpointUrls.ContainsKey(convertedJson["SensorName"])) SetupConnection(convertedJson["SensorName"]);
             Console.Out.WriteLine(json);
-            string endPoint = sensorEndpointUrl;
+            string endPoint = sensorEndpointUrls[convertedJson["SensorName"]];
             var request = (HttpWebRequest)WebRequest.Create(endPoint);
 
             request.Method = method;
@@ -66,6 +67,7 @@ namespace ApproximatorClient
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
+                Console.WriteLine(result);
             }
             return true;
         }
