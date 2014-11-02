@@ -3,7 +3,7 @@ package dk.itu.spcl.server
 import akka.actor.{Actor, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
-import org.joda.time.{DateTime, Seconds}
+import org.joda.time.{DateTimeZone, DateTime, Seconds}
 import org.json4s.{DefaultFormats, Formats}
 import spray.json._
 import spray.routing._
@@ -42,17 +42,16 @@ trait PresenceService extends HttpServiceActor with Authenticator {
     case (_,Some(i: (Int, ActorRef)))  => ok(s"Send updates to $sensorPath/${i._1}")
   }
 
-  def getSensorData(id: Int): String = {
+  def getSensorData(id: Int): List[SensorReading] = {
     implicit val timeout = Timeout(5 seconds)
     for (user <- userIdMap)
       if (user._2._1 == id) {
         val userActor = user._2._2
         val future = userActor ? GetReadings
         val readings = Await.result(future, timeout.duration).asInstanceOf[List[SensorReading]]
-        import dk.itu.spcl.server.SensorReadingJsonSupport._
-        return readings.toJson.compactPrint
+        return readings
       }
-    s"No sensor with id $id"
+    Nil
   }
 
   def getSensorData(id: Int, sensor: SensorReading) = {
@@ -83,21 +82,16 @@ trait PresenceService extends HttpServiceActor with Authenticator {
         val future = userActor ? AskForLastUpdateMessage
         val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReading]
         println("Sensor time: " + lastReading.date())
-        println("Server time: " + DateTime.now())
+        val now = new DateTime(DateTimeZone.UTC)
+        println("Server time: " + now)
         val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
         val present = secondsSinceLastUpdate <= timeToNonPresent
         val availability = if (present) 100 else getAvailability(secondsSinceLastUpdate)
         UserStatus(userName, present, availability)
       }
-
-    val jsonStatuses = userStatuses.map(u => Map(
-      "UserName" -> u.userName,
-      "Present" -> u.present.toString,
-      "Availability" -> u.available.toString
-    )).toList
-    import dk.itu.spcl.server.UserStatusJsonSupport._
-    userStatuses.toList.toJson.compactPrint
+    userStatuses.toList
   }
+
 
   import dk.itu.spcl.server.SensorReadingJsonSupport._
   val route =
@@ -131,6 +125,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       } ~
       path("users") {
         get {
+          import dk.itu.spcl.server.UserStatusJsonSupport._
           complete(getUserStatuses())
         }
       } ~
