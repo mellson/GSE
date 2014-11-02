@@ -10,6 +10,7 @@ http put spcl.cloudapp.net:8080/sensor/0 name=sensor1 user=user1 jsonData=data
 http spcl.cloudapp.net:8080/users
 
 http put spcl.cloudapp.net:8080/register SensorName=sensor1 Time=0 Value=Init
+http put 0.0.0.0:8080/register SensorName=sensor1 Time=0 Value=Init
 http put spcl.cloudapp.net:8080/sensor/0 SensorName=sensor1 Time=2014-11-02T12:16:08.8888177+01:00 Value=Init
 
 http put spcl.cloudapp.net:8080/register SensorName=sensor2 Time=2014-11-02T12:16:08.8888177+01:00 Value=Init

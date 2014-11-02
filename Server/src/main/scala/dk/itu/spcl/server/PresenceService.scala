@@ -36,7 +36,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       idCounter += 1
       ok(s"Send updates to $sensorPath/$id")
 
-    case (_,Some(i))  => ok(s"Send updates to $sensorPath/$i")
+    case (_,Some(i: (Int, ActorRef)))  => ok(s"Send updates to $sensorPath/${i._1}")
   }
 
   def getSensorData(id: Int, sensor: SensorReading) = {
