@@ -81,9 +81,6 @@ trait PresenceService extends HttpServiceActor with Authenticator {
         val userActor = user._2._2
         val future = userActor ? AskForLastUpdateMessage
         val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReading]
-        println("Sensor time: " + lastReading.date())
-        val now = new DateTime(DateTimeZone.UTC)
-        println("Server time: " + now)
         val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
         val present = secondsSinceLastUpdate <= timeToNonPresent
         val availability = if (present) 100 else getAvailability(secondsSinceLastUpdate)
