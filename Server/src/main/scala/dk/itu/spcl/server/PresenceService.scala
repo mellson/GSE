@@ -42,7 +42,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
     case (_,Some(i: (Int, ActorRef)))  => ok(s"Send updates to $sensorPath/${i._1}")
   }
 
-  def getSensorData(id: Int): Map[String, String] = {
+  def getSensorData(id: Int): String = {
     implicit val timeout = Timeout(5 seconds)
     for (user <- userIdMap)
       if (user._2._1 == id) {
@@ -50,9 +50,9 @@ trait PresenceService extends HttpServiceActor with Authenticator {
         val future = userActor ? GetReadings
         val readings = Await.result(future, timeout.duration).asInstanceOf[List[SensorReading]]
         import dk.itu.spcl.server.SensorReadingJsonSupport._
-        return ok(readings.toJson.compactPrint)
+        return readings.toJson.compactPrint
       }
-    error(s"No sensor with id $id")
+    s"No sensor with id $id"
   }
 
   def getSensorData(id: Int, sensor: SensorReading) = {
@@ -96,7 +96,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       "Availability" -> u.available.toString
     )).toList
     import dk.itu.spcl.server.UserStatusJsonSupport._
-    ok(userStatuses.toList.toJson.compactPrint)
+    userStatuses.toList.toJson.compactPrint
   }
 
   import dk.itu.spcl.server.SensorReadingJsonSupport._
