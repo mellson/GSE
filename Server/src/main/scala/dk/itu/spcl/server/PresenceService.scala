@@ -62,7 +62,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       for (user <- userIdMap) yield {
         val userName = user._1
         val userActor = user._2._2
-        val status = DecisionModule.getPresenceAndAvailibility(userActor)
+        val status = DecisionModule.getPresenceAndAvailability(userActor)
         UserStatus(userName, status.Present, status.Availability)
       }
     userStatuses.toList

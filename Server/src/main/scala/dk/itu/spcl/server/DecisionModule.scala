@@ -13,17 +13,20 @@ object DecisionModule {
   implicit val timeout = Timeout(5 seconds)
   val timeToNonPresent = 30
 
+  // Degrade availability with 1 point every second after timeToNonPresent
   def getAvailability(secondsSinceLastReading: Int): Int = {
-    val temp = 100 / (secondsSinceLastReading - timeToNonPresent)
+    val temp = 100 - (secondsSinceLastReading - timeToNonPresent)
     if (temp > 0) temp else 0
   }
+  
+  def getPresence(secondsSinceLastReading: Int): Boolean = secondsSinceLastReading < timeToNonPresent
 
-  def getPresenceAndAvailibility(actor: ActorRef): Status = {
+  def getPresenceAndAvailability(actor: ActorRef): Status = {
     val future = actor ? AskForLastUpdateMessage
     val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReading]
     val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
-    val present = secondsSinceLastUpdate <= timeToNonPresent
-    val availability = if (present) 100 else getAvailability(secondsSinceLastUpdate)
+    val present = getPresence(secondsSinceLastUpdate)
+    val availability = getAvailability(secondsSinceLastUpdate)
     Status(present, availability)
   }
 }
