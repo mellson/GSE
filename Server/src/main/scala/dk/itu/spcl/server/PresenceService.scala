@@ -3,14 +3,9 @@ package dk.itu.spcl.server
 import akka.actor.{Actor, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
-import org.joda.time.{DateTimeZone, DateTime, Seconds}
-import org.json4s.{DefaultFormats, Formats}
-import spray.json._
 import spray.routing._
-
 import scala.concurrent.Await
 import scala.concurrent.duration._
-
 
 class PresenceServiceActor extends PresenceService with Actor {
   def receive = runRoute(route)
@@ -18,7 +13,6 @@ class PresenceServiceActor extends PresenceService with Actor {
 
 // Defines our service behavior independently from the service actor
 trait PresenceService extends HttpServiceActor with Authenticator {
-  implicit def json4sFormats: Formats = DefaultFormats
   import scala.concurrent.ExecutionContext.Implicits.global
 
   def ok(s: String) = Map("Ok" -> s)
@@ -26,19 +20,16 @@ trait PresenceService extends HttpServiceActor with Authenticator {
 
   var userIdMap:Map[String, (Int, ActorRef)] = Map.empty
   var idCounter = 0
-
   val sensorPath = "sensor"
 
   def getPostStringFromUserId(sensor: SensorReading) = (sensor.SensorName, userIdMap.get(sensor.SensorName)) match {
     case ("", None) => error("You need to provide a user id")
-
     case (_, None)  =>
       val id = idCounter
       val sensorCluster = actorRefFactory.actorOf(Props[SensorCluster], sensor.SensorName)
       userIdMap += (sensor.SensorName -> (id, sensorCluster))
       idCounter += 1
       ok(s"Send updates to $sensorPath/$id")
-
     case (_,Some(i: (Int, ActorRef)))  => ok(s"Send updates to $sensorPath/${i._1}")
   }
 
@@ -66,25 +57,13 @@ trait PresenceService extends HttpServiceActor with Authenticator {
     }
   }
 
-  def getUserStatuses() = {
-    implicit val timeout = Timeout(5 seconds)
-    val timeToNonPresent = 30
-
-    def getAvailability(secondsSinceLastReading: Int): Int = {
-      val temp = 100 / (secondsSinceLastReading - timeToNonPresent)
-      if (temp > 0) temp else 0
-    }
-
+  def getUserStatuses = {
     val userStatuses =
       for (user <- userIdMap) yield {
         val userName = user._1
         val userActor = user._2._2
-        val future = userActor ? AskForLastUpdateMessage
-        val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReading]
-        val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
-        val present = secondsSinceLastUpdate <= timeToNonPresent
-        val availability = if (present) 100 else getAvailability(secondsSinceLastUpdate)
-        UserStatus(userName, present, availability)
+        val status = DecisionModule.getPresenceAndAvailibility(userActor)
+        UserStatus(userName, status.Present, status.Availability)
       }
     userStatuses.toList
   }
@@ -123,7 +102,7 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       path("users") {
         get {
           import dk.itu.spcl.server.UserStatusJsonSupport._
-          complete(getUserStatuses())
+          complete(getUserStatuses)
         }
       } ~
       path("private") {
