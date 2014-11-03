@@ -351,3 +351,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+Server/.classpath
+Server/.project
+Server/.settings/org.scala-ide.sdt.core.prefs
