@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Threading;
 using System.Text.RegularExpressions;
 
 namespace ApproximatorClient
@@ -45,25 +46,58 @@ namespace ApproximatorClient
         // Upload to infrastructure and return true if the upload was successfull
         public static bool UploadJson(string json)
         {
-            var convertedJson = JsonConvert.DeserializeObject <Dictionary<string, string>>(json);
-            if (!SensorEndpointUrls.ContainsKey(convertedJson["SensorName"])) SetupConnection(convertedJson["SensorName"]);
-            Console.Out.WriteLine(json);
-            var endPoint = SensorEndpointUrls[convertedJson["SensorName"]];
-            var request = WebRequest.Create(endPoint);
-            request.Method = Method;
-            request.ContentType = ContentType;
+            try
+            {
+                var convertedJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                if (!SensorEndpointUrls.ContainsKey(convertedJson["SensorName"])) SetupConnection(convertedJson["SensorName"]);
+                Console.Out.WriteLine(json);
+                var endPoint = SensorEndpointUrls[convertedJson["SensorName"]];
+                var request = WebRequest.Create(endPoint);
+                request.Method = Method;
+                request.ContentType = ContentType;
 
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-            {
-                streamWriter.Write(json);
-                streamWriter.Flush();
-                streamWriter.Close();
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    streamWriter.Write(json);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+                }
+                var httpResponse = request.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var result = streamReader.ReadToEnd();
+                    Console.WriteLine(result);
+                }
             }
-            var httpResponse = request.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            catch (WebException e)
             {
-                var result = streamReader.ReadToEnd();
-                Console.WriteLine(result);
+                switch (e.Status)
+                {
+                    case WebExceptionStatus.ConnectionClosed:
+                        Console.WriteLine("Connection Closed, trying again in 1 second.");
+                        Thread.Sleep(5000);
+                        UploadJson(json);
+                        break;
+                    case WebExceptionStatus.ConnectFailure:
+                        Console.WriteLine("Connection Failure, trying again in 1 second.");
+                        Thread.Sleep(5000);
+                        UploadJson(json);
+                        break;
+                    default:
+                        Console.WriteLine("Connection failure.");
+                        Console.WriteLine("Message: {0}",e.Message);
+                        Console.WriteLine("Status: {0}", e.Status);
+                        Console.WriteLine("Exiting");
+                        break;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("ERROR");
+                Console.WriteLine("Message: {0}", e.Message);
+                Console.WriteLine("Exiting");
+                return false;
             }
             return true;
         }
