@@ -59,7 +59,7 @@ namespace ApproximatorClient
                 streamWriter.Flush();
                 streamWriter.Close();
             }
-            var httpResponse = (HttpWebResponse)request.GetResponse();
+            var httpResponse = request.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
