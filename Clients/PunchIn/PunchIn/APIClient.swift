@@ -23,6 +23,24 @@ public class APIClient {
 	public init() {
 		
 	}
+    
+    public func fetchUsers(completion: (Bool, [APIUser]?) -> Void) {
+        let path = "users"
+        let request = APIRequest.GET(path)
+        
+        performRequest(
+            request,
+            parsingBlock: { [weak self] json in
+                var users = [APIUser]()
+                for userJSON in json.arrayValue {
+                    users.append(APIUser(json: userJSON))
+                }
+                
+                return users
+            },
+            completion: completion
+        )
+    }
 	
 	public func fetchClusterNodeAdress(completion: (Bool, String?) -> Void) {
 		let path = "private"
