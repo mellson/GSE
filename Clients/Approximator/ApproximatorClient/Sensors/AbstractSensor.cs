@@ -8,6 +8,7 @@ namespace ApproximatorClient.Sensors
     {
         private const double SecondsBetweenUploads = 1;
         internal string SensorName;
+        internal string UserName;
         internal SensorReading LastReading;
 
         internal static bool UploadToServer(string json)
@@ -15,13 +16,13 @@ namespace ApproximatorClient.Sensors
             return ServerHandler.UploadJson(json);
         }
 
-        internal void UpdateReadingForSensorName(string name, string value)
+        internal void UpdateReadingForSensorName(string name, string username, string value)
         {
             LastReading = new SensorReading
             {
                 SensorName = name,
                 Value = value,
-                Time = DateTime.Now
+                UserName = username
             };
         }
 

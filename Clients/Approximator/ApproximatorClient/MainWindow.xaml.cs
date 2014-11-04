@@ -10,8 +10,8 @@ namespace ApproximatorClient
         public MainWindow()
         {
             InitializeComponent();
-            new MouseSensor();
-            new KeyboardSensor();
+            new MouseSensor("User1");
+            new KeyboardSensor("User1");
         }
     }
 }

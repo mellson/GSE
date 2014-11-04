@@ -1,9 +1,21 @@
 package dk.itu.spcl.server
 
-import com.github.t3hnar.bcrypt._
-import org.mindrot.jbcrypt.BCrypt
+import akka.actor.Actor
+import org.joda.time.DateTime
 
-case class User(login: String, hashedPassword: Option[String] = None) {
-  def withPassword(password: String) = copy (hashedPassword = Some(password.bcrypt(generateSalt)))
-  def passwordMatches(password: String): Boolean =  hashedPassword.exists(hp => BCrypt.checkpw(password, hp))
+class User extends Actor {
+  var lastReading: SensorReadingWithTime = SensorReadingWithTime("DefaultSensor", "DefaultUser", DateTime.now.toString, "Init")
+  var readings: List[SensorReadingWithTime] = Nil
+
+  override def receive: Receive = {
+    case sensorReading: SensorReading =>
+      val reading = SensorReadingWithTime(sensorReading.SensorName, sensorReading.UserName, DateTime.now.toString, sensorReading.Value)
+      lastReading = reading
+      if (readings.length < 10)
+        readings = reading :: readings
+      else
+        readings = reading :: readings.take(9)
+    case AskForLastUpdateMessage => sender ! lastReading
+    case GetReadings => sender ! readings
+  }
 }

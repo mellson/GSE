@@ -6,17 +6,18 @@ namespace ApproximatorClient.Sensors
 {
     class KeyboardSensor : AbstractSensor
     {
-        public KeyboardSensor(string name = "KeyboardSensor")
+        public KeyboardSensor(string username, string name = "KeyboardSensor")
         {
             SensorName = name;
+            UserName = username;
             HookManager.KeyDown += HookManagerOnKeyDown;
-            UpdateReadingForSensorName(SensorName, "Init");
+            UpdateReadingForSensorName(SensorName, UserName, "Init");
             StartUploading();
         }
 
         private void HookManagerOnKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
-            UpdateReadingForSensorName(SensorName, keyEventArgs.KeyValue.ToString(CultureInfo.InvariantCulture));
+            UpdateReadingForSensorName(SensorName, UserName, keyEventArgs.KeyValue.ToString(CultureInfo.InvariantCulture));
         }
     }
 }

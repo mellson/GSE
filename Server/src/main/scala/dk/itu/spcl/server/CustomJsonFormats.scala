@@ -7,4 +7,6 @@ import spray.json.DefaultJsonProtocol
 object CustomJsonFormats extends DefaultJsonProtocol with SprayJsonSupport {
   implicit val userStatusFormat = jsonFormat3(UserStatus)
   implicit val sensorReadingFormat = jsonFormat3(SensorReading)
+  implicit val sensorReadingWithTimeFormat = jsonFormat4(SensorReadingWithTime)
+  implicit val sensorRegistrationFormat = jsonFormat2(SensorRegistration)
 }

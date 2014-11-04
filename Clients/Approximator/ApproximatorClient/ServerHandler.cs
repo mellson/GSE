@@ -11,24 +11,20 @@ namespace ApproximatorClient
     class ServerHandler
     {
         private static readonly Dictionary<string,string> SensorEndpointUrls = new Dictionary<string,string>();
-        private const string BaseUrl = @"http://spcl.cloudapp.net:8080/";
+//        private const string BaseUrl = @"http://spcl.cloudapp.net:8080/";
+        private const string BaseUrl = @"http://localhost:8080/";
         private const string Method = "PUT";
         private const string ContentType = "application/json";
         //Retrives the endpoint that the sensor sends data to
-        public static void SetupConnection(string sensorName)
+        public static void SetupConnection(SensorRegistration registration)
         {
-            const string endPoint = BaseUrl + "register";
-            var parameters = new Dictionary<string, string>{
-                {"SensorName",sensorName},
-                {"Time", "0"},
-                {"Value","Init"}
-            };
+            const string endPoint = BaseUrl + "register";            
             var request = WebRequest.Create(endPoint);
             request.Method = Method;
             request.ContentType = ContentType;
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {
-                var json = JsonConvert.SerializeObject(parameters);
+                var json = JsonConvert.SerializeObject(registration);
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
@@ -38,7 +34,7 @@ namespace ApproximatorClient
             {
                 var result = streamReader.ReadToEnd();
                 var resultDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
-                SensorEndpointUrls.Add(sensorName, BaseUrl + Regex.Match(resultDict["Ok"], "sensor.*").Value);
+                SensorEndpointUrls.Add(registration.SensorName, BaseUrl + resultDict["Ok"]);
             }
             
         }
@@ -46,16 +42,16 @@ namespace ApproximatorClient
         // Upload to infrastructure and return true if the upload was successfull
         public static bool UploadJson(string json)
         {
+            SensorReading sensorReading = null;
             try
             {
-                var convertedJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-                if (!SensorEndpointUrls.ContainsKey(convertedJson["SensorName"])) SetupConnection(convertedJson["SensorName"]);
                 Console.Out.WriteLine(json);
-                var endPoint = SensorEndpointUrls[convertedJson["SensorName"]];
+                sensorReading = JsonConvert.DeserializeObject<SensorReading>(json);
+                if (!SensorEndpointUrls.ContainsKey(sensorReading.SensorName)) SetupConnection(sensorReading.GetSensorRegistration());
+                var endPoint = SensorEndpointUrls[sensorReading.SensorName];
                 var request = WebRequest.Create(endPoint);
                 request.Method = Method;
                 request.ContentType = ContentType;
-
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
                     streamWriter.Write(json);
@@ -69,31 +65,9 @@ namespace ApproximatorClient
                     Console.WriteLine(result);
                 }
             }
-            catch (WebException e)
-            {
-                switch (e.Status)
-                {
-                    case WebExceptionStatus.ConnectionClosed:
-                        Console.WriteLine("Connection Closed, trying again in 1 second.");
-                        Thread.Sleep(5000);
-                        UploadJson(json);
-                        break;
-                    case WebExceptionStatus.ConnectFailure:
-                        Console.WriteLine("Connection Failure, trying again in 1 second.");
-                        Thread.Sleep(5000);
-                        UploadJson(json);
-                        break;
-                    default:
-                        Console.WriteLine("Connection failure.");
-                        Console.WriteLine("Message: {0}",e.Message);
-                        Console.WriteLine("Status: {0}", e.Status);
-                        Console.WriteLine("Exiting");
-                        break;
-                }
-                
-            }
             catch (Exception e)
             {
+                if (sensorReading != null) SensorEndpointUrls.Remove(sensorReading.SensorName);
                 Console.WriteLine("ERROR");
                 Console.WriteLine("Message: {0}", e.Message);
                 Console.WriteLine("Exiting");
