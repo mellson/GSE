@@ -16,7 +16,7 @@ object DecisionModule {
   // Degrade availability with 1 point every second after timeToNonPresent
   def getAvailability(secondsSinceLastReading: Int): Int = {
     val temp = 100 - (secondsSinceLastReading - timeToNonPresent)
-    if (temp > 0) temp else 0
+    if (temp > 0 && temp < 100) temp else if (temp > 100) 100 else 0
   }
   
   def getPresence(secondsSinceLastReading: Int): Boolean = secondsSinceLastReading < timeToNonPresent
