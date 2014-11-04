@@ -23,7 +23,7 @@ object DecisionModule {
 
   def getPresenceAndAvailability(actor: ActorRef): Status = {
     val future = actor ? AskForLastUpdateMessage
-    val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReading]
+    val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReadingWithTime]
     val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
     val present = getPresence(secondsSinceLastUpdate)
     val availability = getAvailability(secondsSinceLastUpdate)

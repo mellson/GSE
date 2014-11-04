@@ -6,17 +6,18 @@ namespace ApproximatorClient.Sensors
 {
     public class MouseSensor : AbstractSensor
     {
-        public MouseSensor(string name = "MouseSensor")
+        public MouseSensor(string username, string name = "MouseSensor")
         {
             SensorName = name;
+            UserName = username;
             HookManager.MouseMove += MouseMoved;
-            UpdateReadingForSensorName(SensorName, "Init");
+            UpdateReadingForSensorName(SensorName, UserName, "Init");
             StartUploading();
         }
 
         private void MouseMoved(object sender, MouseEventArgs e)
         {
-            UpdateReadingForSensorName(SensorName, String.Format("X:{0},Y:{1}",e.X,e.Y));
+            UpdateReadingForSensorName(SensorName, UserName, String.Format("X:{0},Y:{1}",e.X,e.Y));
         }
     }
 }
