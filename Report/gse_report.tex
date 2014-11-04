@@ -102,23 +102,6 @@ The work presented in this paper represents two primary contributions.
 First, we demonstrate an implementation of a presence and interruptibility-sharing infrastructure for global software engineers.
 Second, we demonstrate a possible application. This is used to test and evaluate the infrastructure by implementing enough sensors to provide accurate interruptibility information.
 
-% \subsection{Infrastructure}
-% Each user typically has several sensor inputs.
-% The system needs to be highly scalable to support a large number of users.
-
-% To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
-% The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
-% These units of work are encapsulated in the actor abstraction.
-% Actors communicate by sending messages to each other.
-% Actors does not share any state, making it possible to run actors in parallel and even on different machines.
-% This makes the actor model a good candidate for building highly scalable applications.
-
-% There are several frameworks implementing the actor model, such as Akka\cite{akka}, Project Orleans\cite{orleans} and most famously Erlang\cite{erlang}.
-% For this project we have chosen Akka because it is Java based.
-% This supports the technical knowledge in our group.
-
-% We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
-
 \section{Related work}
 Research in using technology to support awareness in a distributed setting has been going on since the early 90’s. Some of the work\cite{bly1993media}\cite{gaver1992realizing}\cite{mantei1991experiences} tried to keep an instant audiovisual connection between workplaces. This has the benefit that not only intentional communication is supported, but also more social communication since the co-workers is always visible. This approach also has some drawbacks. Users can feel self- conscious about the image of themselves being broadcasted. Keeping high quality media streams running all day can also be expensive since it takes up a high amount of bandwidth.
 
@@ -143,6 +126,22 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 % - Overal system description
 
 \subsection{Infrastructure}
+% Each user typically has several sensor inputs.
+% The system needs to be highly scalable to support a large number of users.
+
+% To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
+% The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
+% These units of work are encapsulated in the actor abstraction.
+% Actors communicate by sending messages to each other.
+% Actors does not share any state, making it possible to run actors in parallel and even on different machines.
+% This makes the actor model a good candidate for building highly scalable applications.
+
+% There are several frameworks implementing the actor model, such as Akka\cite{akka}, Project Orleans\cite{orleans} and most famously Erlang\cite{erlang}.
+% For this project we have chosen Akka because it is Java based.
+% This supports the technical knowledge in our group.
+
+% We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
+
 \subsection{Sensors}
 \subsection{Demonstrator}
 
