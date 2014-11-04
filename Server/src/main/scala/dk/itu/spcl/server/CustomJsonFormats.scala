@@ -1,0 +1,10 @@
+package dk.itu.spcl.server
+
+import spray.httpx.SprayJsonSupport
+import spray.json.DefaultJsonProtocol
+
+// Provide a conversion to Json for all custom objects here
+object CustomJsonFormats extends DefaultJsonProtocol with SprayJsonSupport {
+  implicit val userStatusFormat = jsonFormat3(UserStatus)
+  implicit val sensorReadingFormat = jsonFormat3(SensorReading)
+}

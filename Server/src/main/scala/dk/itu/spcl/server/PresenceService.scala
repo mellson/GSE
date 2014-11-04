@@ -6,6 +6,8 @@ import akka.util.Timeout
 import spray.routing._
 import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.ExecutionContext.Implicits.global
+import dk.itu.spcl.server.CustomJsonFormats._
 
 class PresenceServiceActor extends PresenceService with Actor {
   def receive = runRoute(route)
@@ -13,8 +15,6 @@ class PresenceServiceActor extends PresenceService with Actor {
 
 // Defines our service behavior independently from the service actor
 trait PresenceService extends HttpServiceActor with Authenticator {
-  import scala.concurrent.ExecutionContext.Implicits.global
-
   def ok(s: String) = Map("Ok" -> s)
   def error(s: String) = Map("Error" -> s)
 
@@ -68,8 +68,6 @@ trait PresenceService extends HttpServiceActor with Authenticator {
     userStatuses.toList
   }
 
-
-  import dk.itu.spcl.server.SensorReadingJsonSupport._
   val route =
     path("") {
       get {
@@ -101,7 +99,6 @@ trait PresenceService extends HttpServiceActor with Authenticator {
       } ~
       path("users") {
         get {
-          import dk.itu.spcl.server.UserStatusJsonSupport._
           complete(getUserStatuses)
         }
       } ~
