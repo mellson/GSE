@@ -14,7 +14,7 @@ public class APIClient {
 	private let networkClient = NetworkClient(host: "spcl.cloudapp.net")
 	
 	private var currentNode: NSURL?
-	private let rootNode = NSURL(string: "http://spcl.cloudapp.net:8080")!
+	private let rootNode = NSURL(string: "http://spcl.cloudapp.net")!
 	
 	public var baseURL: NSURL {
 		return currentNode? ?? rootNode

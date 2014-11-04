@@ -23,7 +23,7 @@ public class NetworkClient: NSObject, NSURLSessionDelegate {
 		
 		protectionSpace = NSURLProtectionSpace(
 			host: host,
-			port: 8080,
+			port: 80,
 			`protocol`: "http",
 			realm: "Private API",
 			authenticationMethod: NSURLAuthenticationMethodHTTPBasic)

@@ -24,11 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			
 		})
 		
-		let client = APIClient()
-		client.fetchClusterNodeAdress({ success, address in
-			println("status: \(success), address: \(address)")
-		})
-		
 		return true
 	}
 
