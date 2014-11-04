@@ -119,13 +119,13 @@ The SenSay context-aware mobile phone\cite{siewiorek2003sensay} use acceleromete
 
 In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient. Informed by the evaluation of other systems InterruptMe is presented. InterruptMe uses implicit inputs from the user to present availability information. However to get these inputs several external sensors are needed. This makes the system unable to run on commodity laptops.
 
-\section{Architecture}
-
+\section{Approximator}
+\subsection{Idea}
 % - Motivation
+\subsection{Architecture}
 % - Requirements
 % - Overal system description
-
-\subsection{Infrastructure}
+\subsubsection{Infrastructure}
 % Each user typically has several sensor inputs.
 % The system needs to be highly scalable to support a large number of users.
 
@@ -141,9 +141,7 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 % This supports the technical knowledge in our group.
 
 % We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
-
-\subsection{Sensors}
-
+\subsubsection{Sensors}
 % - Inputs
 %	- Keyboard
 %	- Mouse
@@ -154,19 +152,13 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 % Example: We exclude the webcam because Fogarty
 % shows that it is not needed when they have the
 % microphone
-
-\subsection{Demonstrator}
-
+\subsubsection{Demonstrators}
 % - Screenshot of app with presence + interruptibility
-
-\section{Implementation}
-
-\subsection{Infrastructure}
-\subsection{Sensors}
-\subsection{Demonstrator}
+\subsection{Decision Logic}
 
 \section{Evaluation}
 
+\subsection{Methodology}
 We used the same methodology for evaluation as Fogarty et al use in their paper: Predicting human interruptibility with sensors\cite{Fogarty:2005:PHI:1057237.1057243} were we did a recording of a video-test-person in his/hers working environment and mark the places where the video-test-person claims to be interruptible or non-interruptible. Afterwards we presented the video-test-person to a confidence questionnaire, for the purpose of finding sequences in the video where we could rely on the level of interruptibility.
 We had gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could participate in the study over 30 minutes.
@@ -181,9 +173,13 @@ The experiment was not repeated as the circumstances in which the experiment was
 Instead we had Approximator generate new interruptibility values based on the historic information provided from the subset of sensors leftover after the ablation test.
 This process was repeated until we found the combination of sensors that provided the most accurate information compared to the information given by the video-test-person.
 
-\section{Result and Discussion}
+\subsection{Results}
+
+\section{Discussion}
 
 \section{Conclusion}
+
+\section{Acknowledgements}
 
 \balance
 \bibliographystyle{acm-sigchi}
