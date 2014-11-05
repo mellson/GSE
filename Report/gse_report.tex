@@ -84,7 +84,6 @@ Working in a global setting requires practitioners to work in distributed arrang
 
 Paraphrasing Herbsleb \footnote{Herbsleb, James D. (2007). Global Software Engineering: The Future of Socio-technical Coordination}, many of the mechanisms that work correctly in a co-located setting are absent or disrupted in a distributed arrangement.
 Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
-% TODO hvem har sagt ovenstående? Er det fra Herbsleb? Tror vi skal specificere lidt mere end bare skrive different approaches have been investigated.
 
 One fundamental difference between a co-located arrangement and a distributed one is the lack of presence awareness.
 The ability to assess how interruptible another person is, becomes very hard when you are not in the same room.
@@ -103,21 +102,47 @@ First, we demonstrate an implementation of a presence and interruptibility-shari
 Second, we demonstrate a possible application. This is used to test and evaluate the infrastructure by implementing enough sensors to provide accurate interruptibility information.
 
 \section{Related work}
-Research in using technology to support awareness in a distributed setting has been going on since the early 90’s. Some of the work\cite{bly1993media}\cite{gaver1992realizing}\cite{mantei1991experiences} tried to keep an instant audiovisual connection between workplaces. This has the benefit that not only intentional communication is supported, but also more social communication since the co-workers is always visible. This approach also has some drawbacks. Users can feel self- conscious about the image of themselves being broadcasted. Keeping high quality media streams running all day can also be expensive since it takes up a high amount of bandwidth.
+Research in using technology to support awareness in a distributed setting has been going on since the early 90’s.
+Some of the work\cite{bly1993media}\cite{gaver1992realizing}\cite{mantei1991experiences} tried to keep an instant audiovisual connection between workplaces.
+This has the benefit that not only intentional communication is supported, but also more social communication since the co-workers is always visible.
+This approach also has some drawbacks. Users can feel self- conscious about the image of themselves being broadcasted.
+Keeping high quality media streams running all day can also be expensive since it takes up a high amount of bandwidth.
 
-Distributed teams can use instant messaging (IM) applications to communicate. Research on IM usage \cite{nardi2000interaction}\cite{handel2002chat}\cite{tang2001connexus} has shown that IM is used to negotiate availability besides normal communication. Most IM systems rely on the user to manually set their status or on the users activity data, which does not always truly reflect the precise availability of the user.
+Distributed teams can use instant messaging (IM) applications to communicate.
+Research on IM usage \cite{nardi2000interaction}\cite{handel2002chat}\cite{tang2001connexus} has shown that IM is used to negotiate availability besides normal communication.
+Most IM systems rely on the user to manually set their status or on the users activity data, which does not always truly reflect the precise availability of the user.
 
- Fogarty et al. has shown that sensors can be constructed so satisfying accuracy such that they can determining users interruptibility value through the use of a statistical model \cite{fogarty2004examining}.  Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans \cite{Fogarty:2005:PHI:1057237.1057243}.
+ Fogarty et al. has shown that sensors can be constructed so satisfying accuracy such that they can determining users interruptibility value through the use of a statistical model \cite{fogarty2004examining}.
+ Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans \cite{Fogarty:2005:PHI:1057237.1057243}.
 
-Several systems have tried to build an awareness solution using sensors. The earliest work dates back to the active badge system\cite{want1992active}. A similar approach has been tried in MyTeam \cite{lai2003myteam}, they use an active badge sensor in combination with the users computer activity. This solution builds upon the premise that success of communications is having prior knowledge about the availability of others before initiating contact. Lack of this information may explain why over 60\% of business phone calls fail to reach the intended party\cite{whittaker1995rethinking}.
-Their system MyTeam differs from other IM systems in that participants can get information about the availability of colleagues even if that person is not running the MyTeam client. MyTeam uses photos on a colored background to indicate availability. A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
+Several systems have tried to build an awareness solution using sensors.
+The earliest work dates back to the active badge system\cite{want1992active}.
+A similar approach has been tried in MyTeam \cite{lai2003myteam}, they use an active badge sensor in combination with the users computer activity.
+This solution builds upon the premise that success of communications is having prior knowledge about the availability of others before initiating contact.
+Lack of this information may explain why over 60\% of business phone calls fail to reach the intended party\cite{whittaker1995rethinking}.
+Their system MyTeam differs from other IM systems in that participants can get information about the availability of colleagues even if that person is not running the MyTeam client.
+MyTeam uses photos on a colored background to indicate availability.
+A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
 
-Another system that also uses sensors to determine availability is MyVine. MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this. What differs the two systems, is MyVine’s use of holistic aggregated sensors instead of just two sensors. The two systems differs in two more ways. One is that MyVine is symmetric, which means the user has to be online in order to see other users availability. The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
+Another system that also uses sensors to determine availability is MyVine.
+MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this.
+What differs the two systems, is MyVine’s use of holistic aggregated sensors instead of just two sensors.
+The two systems differs in two more ways.
+One is that MyVine is symmetric, which means the user has to be online in order to see other users availability.
+The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
 MyVine has a problem with misinterpretations of speech as an indication of being unavailable, while users has observed the speech as an indication of availability.
 
-The SenSay context-aware mobile phone\cite{siewiorek2003sensay} use accelerometer, light, and microphone sensor inputs to determine the availability of the user. The phone dynamically adapts it’s volume, vibration etc to match the user's current context. A novel feature about the phone is that the caller can communicate the urgency of their call. SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should be in. The system requires the user to carry additional sensors besides the phone, which is not ideal from a user perspective.
+The SenSay context-aware mobile phone\cite{siewiorek2003sensay} use accelerometer, light, and microphone sensor inputs to determine the availability of the user.
+The phone dynamically adapts it’s volume, vibration etc to match the user's current context.
+A novel feature about the phone is that the caller can communicate the urgency of their call.
+SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should be in.
+The system requires the user to carry additional sensors besides the phone, which is not ideal from a user perspective.
 
-In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient. Informed by the evaluation of other systems InterruptMe is presented. InterruptMe uses implicit inputs from the user to present availability information. However to get these inputs several external sensors are needed. This makes the system unable to run on commodity laptops.
+In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient.
+Informed by the evaluation of other systems InterruptMe is presented.
+InterruptMe uses implicit inputs from the user to present availability information.
+However to get these inputs several external sensors are needed.
+This makes the system unable to run on commodity laptops.
 
 \section{Approximator}
 \subsection{Idea}
@@ -141,17 +166,18 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 % This supports the technical knowledge in our group.
 
 % We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
-\subsubsection{Sensors} 
+\subsubsection{Sensors}
 % - Inputs
 %	- Keyboard
 %	- Mouse
 %	- Microphone?
 
 \subsubsection{Keyboard and Mouse}
-By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second. With this information we can infer presence due to the fact that there is "something" triggering these events.
+By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second.
+With this information we can infer presence due to the fact that there is "something" triggering these events.
 
 The issue with using keyboard and mouse as sensors, is that even though that they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
-We can tie the machine to a specific user, but we can not infer if the machine is being used by a colleague or if a cat decide to rest on the keyboard.   
+We can tie the machine to a specific user, but we can not infer if the machine is being used by a colleague or if a cat decide to rest on the keyboard.
 
 % Which sensors do we choose to include and how?
 % Which sensors do we choose to exclude and why?
@@ -165,13 +191,14 @@ We can tie the machine to a specific user, but we can not infer if the machine i
 \section{Evaluation}
 
 \subsection{Methodology}
-We applied the same methodology for evaluation as Fogarty et al use in their paper\cite{Fogarty:2005:PHI:1057237.1057243} where we used a recording of a video-test-person in his/hers working environment and marked the places where the video-test-person claims to be interruptible or non-interruptible. Afterwards we presented the video-test-person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the video-test-person was or hes/her judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
+We applied the same methodology for evaluation as Fogarty et al use in their paper\cite{Fogarty:2005:PHI:1057237.1057243} where we used a recording of a video-test-person in his/hers working environment and marked the places where the video-test-person claims to be interruptible or non-interruptible.
+Afterwards we presented the video-test-person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the video-test-person was or hes/her judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
 
 We had gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
 Then we showed the video to x estimator-test-persons and asked them at specific situations in the video to tell us to which degree on a five point scale from 1 (non-interruptible) to 5 (interruptible) where they found the video-test-person as interruptible or non-interruptible.
 
-Following we compared estimator-test-persons answers and the values that Approximator had calculated to the values the video-test-person had reported. 
+Following we compared estimator-test-persons answers and the values that Approximator had calculated to the values the video-test-person had reported.
 This was done by plotting the values into two confusion matrixes, one comparing the answers of video-test-person to answers of the estimator-test-persons, and one comparing the answers of the video-test-person to the results of Approximator.
 By finding correlations between hits in the video-test-person/estimator-test-persons and video-test-person/Approximator we could compare how Approximator performs in relation to human judgement, and we could also compare our findings to those found by Fogarty et al \cite{Fogarty:2005:PHI:1057237.1057243}
 
