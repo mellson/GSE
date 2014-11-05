@@ -141,11 +141,17 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 % This supports the technical knowledge in our group.
 
 % We use the general programming language Scala\cite{scala} to program our Akka-based infrastructure.
-\subsubsection{Sensors}
+\subsubsection{Sensors} 
 % - Inputs
 %	- Keyboard
 %	- Mouse
 %	- Microphone?
+
+\subsubsection{Keyboard and Mouse}
+By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second. With this information we can infer presence due to the fact that there is "something" triggering these events.
+
+The issue with using keyboard and mouse as sensors, is that even though that they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
+We can tie the machine to a specific user, but we can not infer if the machine is being used by a colleague or if a cat decide to rest on the keyboard.   
 
 % Which sensors do we choose to include and how?
 % Which sensors do we choose to exclude and why?
@@ -159,7 +165,7 @@ In \cite{Ramos2011} Ramos et al. evaluates the design space of availability-shar
 \section{Evaluation}
 
 \subsection{Methodology}
-We used the same methodology for evaluation as Fogarty et al use in their paper\cite{Fogarty:2005:PHI:1057237.1057243} where we used a recording of a video-test-person in his/hers working environment and marked the places where the video-test-person claims to be interruptible or non-interruptible. Afterwards we presented the video-test-person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the video-test-person was or hes/her judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
+We applied the same methodology for evaluation as Fogarty et al use in their paper\cite{Fogarty:2005:PHI:1057237.1057243} where we used a recording of a video-test-person in his/hers working environment and marked the places where the video-test-person claims to be interruptible or non-interruptible. Afterwards we presented the video-test-person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the video-test-person was or hes/her judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
 
 We had gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
