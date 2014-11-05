@@ -178,11 +178,32 @@ This makes the system unable to run on commodity laptops.
 
 \subsubsection{Keyboard and Mouse}
 By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second.
-With this information we can infer presence due to the fact that there is ``something'' triggering these events.
+With this information we can infer presence due to the fact that there is someone triggering these events.
 
-The issue with using keyboard and mouse as sensors, is that even though that they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
+The issue with using keyboard and mouse as sensors, is that even though they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
 We can tie the machine to a specific user, but we can not infer if the machine is being used by a colleague or if a cat decide to rest on the keyboard.
 
+Another issue with mouse and keyboard sensors is that they provide a very weak indicator of non-presence.
+When a key is pressed or the mouse moved, we know that someone is interacting with the machine, but the lack of action cannot tell us whether a person is present or non-present.
+A person could be talking on the phone, reading, watching a video etc. all in which the person is present, but the mouse and keyboard cannot provide us with this information.
+
+In terms of interruptibility the information from the mouse and keyboard is too ambiguous to deduct whether a person is busy or interruptible.
+If the identity of the person sitting in front of the computer could be confirmed, it would still be difficult to determine whether the behavior is an indication of interruptibility.
+An approach to determine interruptibility based on these sensors, would involve sending all information to the decision logic, effectively acting as a key logger, and therefore raising security and privacy issues. 
+% Jeg ved ikke om det er noget vi skal gå i dybden med, eller om det er nok bare at nævne det her.... eller om det overhoved skal nævnes.
+% Min overvejelse er om man kunne bruge en vægtet dictionary hvor specifikke ord fik en vægt på hvor arbejds releterede de er og evt kombinere det med en form for pattern matching hvor sprog mønstre blev undersøgt. 
+This approach will be described later in the decision logic section.
+
+\subsubsection{Microphone}
+The use of a microphone as a sensor allows Approximator to sense the presence of a person, even if the person is not directly interacting with the machine.
+With more advanced speech recognition algorithms it could even be used to identify the person/persons speaking.  
+This would provide us not only with presence, but also identity, which was a problem with the keyboard and mouse sensors.
+
+The same issue with the detection of non-presence also appears with the microphone, it is not possible to infer non-presence from the lack of sound.
+As described with the keyboard and mouse sensors, a person can perform activities that does not trigger the sensor, and thus be present without detection. 
+
+Beside the detection of presence, the microphone provides a tool for inferring interruptibility. 
+According to Fogarty et al\cite{Fogarty:2005:PHI:1057237.1057243} speaking present a situation of non-interruptibility.
 % Which sensors do we choose to include and how?
 % Which sensors do we choose to exclude and why?
 % Example: We exclude the webcam because Fogarty
