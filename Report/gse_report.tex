@@ -159,7 +159,11 @@ Building on the research of Fogarty et al.\cite{fogarty2005predicting} we will p
 \subsection{Overall System Architecture}
 
 The central component of Approximator is the infrastructure. The infrastructure is a server component that is deployed to a cloud service. 
-It is based on the actor model by Carl Hewitt \cite{hewitt1973universal} to make highly scalable.
+It is based on the actor model by Carl Hewitt \cite{hewitt1973universal} to make highly scalable. 
+The infrastructure exposes a REST API that Sensors and Demonstrators use to communicate through.
+Sensors register themselves with the infrastructure and sends raw sensors data.
+The infrastructure aggregates and interprets the raw sensor data to deduct presence and interruptibility of users.
+Demonstrators pull interpreted presence and interruptibility from the infrastructure to expose it to users.
 
 
 \begin{figure}[H]
