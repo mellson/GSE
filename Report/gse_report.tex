@@ -67,7 +67,7 @@ breaklinks=true,
 \maketitle
 
 \begin{abstract}
-This paper presents a practical approach on how to get user availability information using only a standard laptop.
+This paper presents a practical approach on how to get user presence and interruptability information using only a standard laptop.
 \end{abstract}
 
 \keywords{
@@ -82,7 +82,7 @@ This paper presents a practical approach on how to get user availability informa
 Globalization is an economical and societal trend that has pushed industries to move from local to global markets.
 Working in a global setting requires practitioners to work in distributed arrangements.
 
-Paraphrasing Herbsleb \footnote{Herbsleb, James D. (2007). Global Software Engineering: The Future of Socio-technical Coordination}, many of the mechanisms that work correctly in a co-located setting are absent or disrupted in a distributed arrangement.
+Paraphrasing Herbsleb \cite{herbsleb2007}, many of the mechanisms that work correctly in a co-located setting are absent or disrupted in a distributed arrangement.
 Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
 
 One fundamental difference between a co-located arrangement and a distributed one is the lack of presence awareness.
@@ -92,11 +92,11 @@ We use the interruptibility assessment to facility behavior that we consider soc
 If you work in a distributed setting you are dependent on tool support from computer and communication systems to provide availability information about your co-workers.
 Today these systems are largely unaware of the social contracts of human interactions.
 
-Research by the Human Computer Interaction Institute at Carnegie Mellon University \cite{Fogarty:2005:PHI:1057237.1057243} shows that you can detect the interruptibility of a person using sensor inputs.
+Research by the Human Computer Interaction Institute at Carnegie Mellon University \cite{fogarty2005predicting} shows that you can detect the interruptibility of a person using sensor inputs.
 In their research they find that you can predict interruptibility with sensor inputs at an accuracy of 68\%.
 The researchers note that their results could ``motivate the development of systems that use these models to negotiate interruptions at socially appropriate times.''
 
-We will try to build upon their research and be inspired by their models in a practical pursuit of a presence and interruptibility-sharing system.
+We will build upon their research and be inspired by their models in a practical pursuit of a presence and interruptibility-sharing system.
 The work presented in this paper represents two primary contributions.
 First, we demonstrate an implementation of a presence and interruptibility-sharing system for global software engineers.
 Second, we evaluate the system.
@@ -117,7 +117,7 @@ This does not always reflect the availability of the user.
 
  Fogarty et al. has shown that sensors can be used to extract satisfying accuracy data about a user.
  They have used this data to construct a statistical model \cite{fogarty2004examining}.
- Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a person working \cite{Fogarty:2005:PHI:1057237.1057243}.
+ Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a person working \cite{fogarty2005predicting}.
 
 Several systems have tried to build an awareness solution using sensors.
 The earliest work dates back to the active badge system \cite{want1992active}.
@@ -203,7 +203,7 @@ The same issue with the detection of non-presence also appears with the micropho
 As described with the keyboard and mouse sensors, a person can perform activities that does not trigger the sensor, and thus be present without detection. 
 
 Beside the detection of presence, the microphone provides a tool for inferring interruptibility. 
-According to Fogarty et al\cite{Fogarty:2005:PHI:1057237.1057243} speaking present a situation of non-interruptibility.
+According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
 % Which sensors do we choose to include and how?
 % Which sensors do we choose to exclude and why?
 % Example: We exclude the webcam because Fogarty
@@ -219,16 +219,16 @@ This section will provide information about how we approach this.
 \section{Evaluation}
 
 \subsection{Methodology}
-We applied the same methodology for evaluation as Fogarty et al use in their paper \cite{Fogarty:2005:PHI:1057237.1057243} where we used a recording of a video-test-person in his/hers working environment and marked the places where the video-test-person claims to be interruptible or non-interruptible.
-Afterwards we presented the video-test-person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the video-test-person was or hes/her judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
+We applied the same methodology for evaluation as Fogarty et al use in their paper \cite{fogarty2005predicting} where we used a video recording of a test person in their work environment and marked the places where the test person claims to be interruptible or non-interruptible.
+Afterwards we presented the test person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the test-person was or their judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
 
-We had gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
+We have gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
 Then we showed the video to x estimator-test-persons and asked them at specific situations in the video to tell us to which degree on a five point scale from 1 (non-interruptible) to 5 (interruptible) where they found the video-test-person as interruptible or non-interruptible.
 
 Following we compared estimator-test-persons answers and the values that Approximator had calculated to the values the video-test-person had reported.
 This was done by plotting the values into two confusion matrixes, one comparing the answers of video-test-person to answers of the estimator-test-persons, and one comparing the answers of the video-test-person to the results of Approximator.
-By finding correlations between hits in the video-test-person/estimator-test-persons and video-test-person/Approximator we could compare how Approximator performs in relation to human judgement, and we could also compare our findings to those found by Fogarty et al \cite{Fogarty:2005:PHI:1057237.1057243}
+By finding correlations between hits in the video-test-person/estimator-test-persons and video-test-person/Approximator we could compare how Approximator performs in relation to human judgement, and we could also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
 When the matrix was complete we investigated which sensors fed the infrastructure with true information (information supporting a higher hit rate) and false information (misleading information resulting i lower hit rate).
 Based on this investigation we performed an ablation test on the sensors to improve our result.
