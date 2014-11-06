@@ -201,10 +201,25 @@ This supports the technical knowledge in our group.
 
 We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
 \subsection{Sensors}
+
+Modern laptops are every pervasive system developers dream, filled with all kinds of sensors that can be used to sense the environment.
+Every modenr laptop is equiped with sensors like microphones, webcameras, trackpads, keyboards and light sensors.
+They also contain radios for Bluetooth, Wifi and Infrared. 
+
+% Something about modern laptops
+
+% What sensors are available in a modern laptop?
+% Which sensors should we use given Fogarty?
+% Which sensors can we exclude?
 % - Inputs
 %	- Keyboard
 %	- Mouse
 %	- Microphone?
+% Which sensors do we choose to include and how?
+% Which sensors do we choose to exclude and why?
+% Example: We exclude the webcam because Fogarty
+% shows that it is not needed when they have the
+% microphone
 
 \subsubsection{Keyboard and Mouse}
 By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second.
@@ -234,11 +249,6 @@ As described with the keyboard and mouse sensors, a person can perform activitie
 
 Beside the detection of presence, the microphone provides a tool for inferring interruptibility. 
 According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
-% Which sensors do we choose to include and how?
-% Which sensors do we choose to exclude and why?
-% Example: We exclude the webcam because Fogarty
-% shows that it is not needed when they have the
-% microphone
 
 \subsection{Decision Logic}
 While each sensor by itself does not provide useable information, we can actually get quite accurate reading by aggregating the sensors and feeding them into a decision module.
