@@ -115,9 +115,9 @@ Research on IM usage \cite{nardi2000interaction} \cite{handel2002chat} \cite{tan
 Most IM systems rely on the user manually setting their status or on simple activity data, such as mouse movement.
 This does not always reflect the availability of the user.
 
- Fogarty et al. has shown that sensors can be used to extract satisfying accuracy data about a user.
- They have used this data to construct a statistical model \cite{fogarty2004examining}.
- Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a person working \cite{fogarty2005predicting}.
+Fogarty et al. has shown that sensors can be used to extract satisfying accuracy data about a user.
+They have used this data to construct a statistical model \cite{fogarty2004examining}.
+Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a person working \cite{fogarty2005predicting}.
 
 Several systems have tried to build an awareness solution using sensors.
 The earliest work dates back to the active badge system \cite{want1992active}.
@@ -152,8 +152,10 @@ This makes the system unable to run on commodity laptops.
 \subsection{Design}
 % - Motivation
 Based on the related work we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
-To support this system we design and build an a scalable infrastructure that can be easily deployed with cloud services. 
+To support this system we design and build an a scalable infrastructure that can be easily deployed with cloud services.
 The infrastructure facilitates the presence and interrubtibility by reading raw sensor input and intepreting presence and interrubtibility from that.
+Building on the research of Fogarty et al.\cite{fogarty2005predicting} we will predict interruptability from raw sensor input but only facilitating sensors found in modern laptops while still aiming at the same 68\% precision rate.
+
 \subsection{Implementation}
 % - Requirements
 % - Overal system description
