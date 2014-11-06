@@ -160,21 +160,21 @@ Building on the research of Fogarty et al.\cite{fogarty2005predicting} we will p
 % - Requirements
 % - Overal system description
 \subsubsection{Infrastructure}
-% Each user typically has several sensor inputs.
-% The system needs to be highly scalable to support a large number of users.
+Each user typically has several sensor inputs.
+The system needs to be highly scalable to support a large number of users.
 
-% To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
-% The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
-% These units of work are encapsulated in the actor abstraction.
-% Actors communicate by sending messages to each other.
-% Actors does not share any state, making it possible to run actors in parallel and even on different machines.
-% This makes the actor model a good candidate for building highly scalable applications.
+To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
+The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
+These units of work are encapsulated in the actor abstraction.
+Actors communicate by sending messages to each other.
+Actors does not share any state, making it possible to run actors in parallel and even on different machines.
+This makes the actor model a good candidate for building highly scalable applications.
 
-% There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
-% For this project we have chosen Akka because it is Java based.
-% This supports the technical knowledge in our group.
+There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
+For this project we have chosen Akka because it is Java based.
+This supports the technical knowledge in our group.
 
-% We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
+We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
 \subsubsection{Sensors}
 % - Inputs
 %	- Keyboard
