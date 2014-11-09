@@ -150,7 +150,7 @@ This makes the system unable to run on commodity laptops.
 
 \section{Approximator}
 
-Based on the related work we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting. 
+Based on the related work we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
 Our solution is called Approximator.
 To support this system we design and build an a scalable infrastructure that can be easily deployed with cloud services.
 The infrastructure facilitates the presence and interrubtibility by reading raw sensor input and intepreting presence and interrubtibility from that.
@@ -158,8 +158,8 @@ Building on the research of Fogarty et al.\cite{fogarty2005predicting} we will p
 
 \subsection{Overall System Architecture}
 
-The central component of Approximator is the infrastructure. The infrastructure is a server component that is deployed to a cloud service. 
-It is based on the actor model by Carl Hewitt \cite{hewitt1973universal} to make highly scalable. 
+The central component of Approximator is the infrastructure.
+The infrastructure is a server component that is deployed to a cloud service.
 The infrastructure exposes a REST API that Sensors and Demonstrators use to communicate through.
 Sensors register themselves with the infrastructure and sends raw sensors data.
 The infrastructure aggregates and interprets the raw sensor data to deduct presence and interruptibility of users.
@@ -169,7 +169,7 @@ Demonstrators pull interpreted presence and interruptibility from the infrastruc
 \begin{figure}[H]
   \centering
   \includegraphics[width=\columnwidth]{figures/architecture.png}
-  \caption{System architecture.}
+  \caption{SKETCH!!! System architecture.}
   \label{fig:architecture}
 \end{figure}
 
@@ -185,14 +185,30 @@ Demonstrators pull interpreted presence and interruptibility from the infrastruc
 % Where each User has a cluster of sensors nodes
 
 \subsection{Infrastructure}
-Each user typically has several sensor inputs.
-The system needs to be highly scalable to support a large number of users.
+To provide presence and availability information to cloud workers we need a few things.
+Firstly we need to gather data input from the working environment.
+Secondly we need to aggregate this data and combine it for each user.
+Lastly we need to look at the data and through analyzises provide presence and availability information.
 
-To support the scalability needs we will use the actor model by Carl Hewitt \cite{hewitt1973universal}.
+All these tasks are combined in our infrastructure which can read input from sensors and analyze this with a decision module.
+
+The work flow of the infrastructure is:
+\begin{enumerate}
+  \item Gather data
+  \item Aggregate data
+  \item Analyze data
+  \item Provide data
+\end{enumerate}
+
+\subsubsection{Design}
+The infrastructure is built to support many sensors for each user.
+This modelling can lead to a very high amount of sensors connecting to the system.
+To support this scalability need we base our system on the actor model by Carl Hewitt \cite{hewitt1973universal}.
+
 The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
 These units of work are encapsulated in the actor abstraction.
 Actors communicate by sending messages to each other.
-Actors does not share any state, making it possible to run actors in parallel and even on different machines.
+Actors does not share state, making it possible to run actors in parallel and even on different machines.
 This makes the actor model a good candidate for building highly scalable applications.
 
 There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
@@ -200,11 +216,41 @@ For this project we have chosen Akka because it is Java based.
 This supports the technical knowledge in our group.
 
 We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
+
+It is possible to deploy Akka applications on a server which can run Java.
+For this project we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
+Having the infrastructure running at a cloud provider makes it reachable from the standard internet.
+This enables us to build sensors and demonstrators that can run anywhere, as long as they have an internet connection they can reach our infrastructure.
+
+\subsubsection{Data}
+Gathering data happens by sensors providing data.
+To communicate with our infrastructure a sensor needs to register with the service.
+When a sensor registers itself it provides a username.
+This username is used to aggregate a group of sensors together around the notion of user.
+
+\subsubsection{Decision Logic}
+Raw sensor data does not say much about presence or availability.
+We need to analyze the data to make sense of it.
+The infrastructure has a decision module which can do this.
+
+When a client asks the service to provide data the decision module translates the data before serving it through the REST API.
+
 \subsection{Sensors}
+To gather data about the users presence and availability we use sensors.
+This project has restricted itself to only look at sensors which are available in commodity laptops.
+Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
+\begin{enumerate}
+  \item Mouse
+  \item Keyboard
+  \item Microphone
+  \item Lightsensor
+  \item Operating System which supports running custom software
+  \item More???
+\end{enumerate}
 
 Modern laptops are every pervasive system developers dream, filled with all kinds of sensors that can be used to sense the environment.
 Every modenr laptop is equiped with sensors like microphones, webcameras, trackpads, keyboards and light sensors.
-They also contain radios for Bluetooth, Wifi and Infrared. 
+They also contain radios for Bluetooth, Wifi and Infrared.
 
 % Something about modern laptops
 
@@ -234,20 +280,20 @@ A person could be talking on the phone, reading, watching a video etc. all in wh
 
 In terms of interruptibility the information from the mouse and keyboard is too ambiguous to deduct whether a person is busy or interruptible.
 If the identity of the person sitting in front of the computer could be confirmed, it would still be difficult to determine whether the behavior is an indication of interruptibility.
-An approach to determine interruptibility based on these sensors, would involve sending all information to the decision logic, effectively acting as a key logger, and therefore raising security and privacy issues. 
+An approach to determine interruptibility based on these sensors, would involve sending all information to the decision logic, effectively acting as a key logger, and therefore raising security and privacy issues.
 % Jeg ved ikke om det er noget vi skal gå i dybden med, eller om det er nok bare at nævne det her.... eller om det overhoved skal nævnes.
-% Min overvejelse er om man kunne bruge en vægtet dictionary hvor specifikke ord fik en vægt på hvor arbejds releterede de er og evt kombinere det med en form for pattern matching hvor sprog mønstre blev undersøgt. 
+% Min overvejelse er om man kunne bruge en vægtet dictionary hvor specifikke ord fik en vægt på hvor arbejds releterede de er og evt kombinere det med en form for pattern matching hvor sprog mønstre blev undersøgt.
 This approach will be described later in the decision logic section.
 
 \subsubsection{Microphone}
 The use of a microphone as a sensor allows Approximator to sense the presence of a person, even if the person is not directly interacting with the machine.
-With more advanced speech recognition algorithms it could even be used to identify the person/persons speaking.  
+With more advanced speech recognition algorithms it could even be used to identify the person/persons speaking.
 This would provide us not only with presence, but also identity, which was a problem with the keyboard and mouse sensors.
 
 The same issue with the detection of non-presence also appears with the microphone, it is not possible to infer non-presence from the lack of sound.
-As described with the keyboard and mouse sensors, a person can perform activities that does not trigger the sensor, and thus be present without detection. 
+As described with the keyboard and mouse sensors, a person can perform activities that does not trigger the sensor, and thus be present without detection.
 
-Beside the detection of presence, the microphone provides a tool for inferring interruptibility. 
+Beside the detection of presence, the microphone provides a tool for inferring interruptibility.
 According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
 
 \subsection{Decision Logic}
