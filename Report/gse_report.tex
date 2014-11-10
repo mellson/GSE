@@ -205,8 +205,10 @@ The infrastructure is built to support many sensors for each user.
 This modelling can lead to a very high amount of sensors connecting to the system.
 To support this scalability need we base our system on the actor model by Carl Hewitt \cite{hewitt1973universal}.
 
-The actor model is a way to model computer programs where everything is split up into the smallest possible unit of work.
-These units of work are encapsulated in the actor abstraction.
+Many software applications are written using the object oriented modelling.
+The actor model is an alternative way to model computer programs.
+In the actor model the unit of work is an actor.
+In object oriented programming the unit of work is an object.
 Actors communicate by sending messages to each other.
 Actors does not share state, making it possible to run actors in parallel and even on different machines.
 This makes the actor model a good candidate for building highly scalable applications.
