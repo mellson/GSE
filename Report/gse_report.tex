@@ -83,7 +83,7 @@ Globalization is an economical and societal trend that has pushed industries to 
 Working in a global setting requires practitioners to work in distributed arrangements.
 
 Paraphrasing Herbsleb \cite{herbsleb2007}, many of the mechanisms that work correctly in a co-located setting are absent or disrupted in a distributed arrangement.
-Different approaches have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
+Different approaches \cite{bly1993media} \cite{fogarty2004myvine} \cite{hincapie2011design} \cite{lai2003myteam} \cite{want1992active} have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
 
 One fundamental difference between a co-located arrangement and a distributed one is the lack of presence awareness.
 The ability to assess how interruptible another person is, becomes very hard when you are not in the same room.
@@ -247,6 +247,9 @@ Commodity laptops can be many things, we define it as a machine with the followi
   \item Microphone
   \item Lightsensor
   \item Operating System which supports running custom software
+  \item Webcam
+  \item Bluetooth
+  \item Wifi
   \item More???
 \end{enumerate}
 
@@ -297,6 +300,46 @@ As described with the keyboard and mouse sensors, a person can perform activitie
 
 Beside the detection of presence, the microphone provides a tool for inferring interruptibility.
 According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
+\subsubsection{Lightsensor}
+????
+
+\subsubsection{Process monitor}
+This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility. 
+The idea of the process monitor is to supply it with a list of processes (programs) that it should monitor.
+This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input. 
+Through this we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
+
+\subsubsection{Geolocation}
+This sensor works by looking up the machines registered ip address, or if available uses the machines build-in gps, and uses this to acquire an geographical address.
+Knowing the whereabouts of the machine neither infer presence nor interruptibility on its own. 
+But it does supply the other sensors and the decision module with useful information regarding the geographical setting of the machine.
+The most simple use of this is to detect if the machine currently resides at the office, home, or another location. 
+But one of the more useful appliances would be in combination with the webcam. 
+If the webcam can detect action such as a person entering or leaving the room, this information could tells us whether the a person is in close proximity to the machine, but only that.
+Combined with even the coarse location of the machine, Approximator could infer that a person was in a specific office, in close proximity the machine.
+
+\subsubsection{Webcam}
+Like the microphone the webcam enables Approximator to sense the presence of a person without the person having to interact with the machine, but differs in the way it does so.
+In the setting of a room a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in this room that they are located.
+
+The webcam (based on the assumption that the webcam is facing the same way as the viewfield of the screen) can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, but also an indicator of non-presence.
+Unlike the other sensors, the webcam can sense if a person is setting in front of the machine, even if the person is not directly interacting with the machine.
+But even though the webcam can infer non-presence, there are still some issues.
+For example, if a person is located in his/her office but not facing the machine e.g. sitting in a chair across the office, the person will be present and possible available, but the webcam will infer that it cannot detect a presence.
+
+The webcam can also apply face-recognition in order to determine the identity of the person present.
+It could also be possible to detect actions that the person is executing e.g. entering the room leaving, leaving the room, reading a book etc. that can be used to measure interruptibility.
+But of course for these things to work, the actions must be performed within the view-field of the webcam.
+
+\subsubsection{Bluetooth, Wifi and Infrared}
+These sensors can not be used to infer presence nor interruptibility on its own.
+But they can be used to detect other devices such as mobile devices or beacons.
+If we assume that a person always carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the person is in proximity of the machine.
+Another usage is if the office the person works in have beacons installed at the workplace, ether as bluetooth or wifi beacons, then the machine can infer its current symbolic location.
+This can be used to infer presence by detecting if the mobile device is nearby.
+The issue here is if the person should forget his/her mobile device, ether nearby the machine or at home. 
+In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
+
 
 \subsection{Decision Logic}
 While each sensor by itself does not provide useable information, we can actually get quite accurate reading by aggregating the sensors and feeding them into a decision module.
