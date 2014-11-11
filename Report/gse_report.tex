@@ -323,9 +323,9 @@ Like the microphone the webcam enables Approximator to sense the presence of a p
 In the setting of a room a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in this room that they are located.
 
 The webcam (based on the assumption that the webcam is facing the same way as the viewfield of the screen) can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, but also an indicator of non-presence.
-Unlike the other sensors, the webcam can sense if a person is setting in front of the machine, even if the person is not directly interacting with the machine.
+Unlike the other sensors, the webcam can sense if a person is sitting in front of the machine, even if the person is not directly interacting with the machine.
 But even though the webcam can infer non-presence, there are still some issues.
-For example, if a person is located in his/her office but not facing the machine e.g. sitting in a chair across the office, the person will be present and possible available, but the webcam will infer that it cannot detect a presence.
+For example, if a person is located in his/her office but not facing the machine e.g. sitting in a chair across the office, the person will be present and possible available, but the webcam will not be able to detect a person but only movement.
 
 The webcam can also apply face-recognition in order to determine the identity of the person present.
 It could also be possible to detect actions that the person is executing e.g. entering the room leaving, leaving the room, reading a book etc. that can be used to measure interruptibility.
@@ -334,10 +334,10 @@ But of course for these things to work, the actions must be performed within the
 \subsubsection{Bluetooth, Wifi and Infrared}
 These sensors can not be used to infer presence nor interruptibility on its own.
 But they can be used to detect other devices such as mobile devices or beacons.
-If we assume that a person always carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the person is in proximity of the machine.
-Another usage is if the office the person works in have beacons installed at the workplace, ether as bluetooth or wifi beacons, then the machine can infer its current symbolic location.
+If we assume that a person always carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the persons proximity to the machine.
+Another usage is if the office the person works in have beacons installed at the workplace, ether as Bluetooth or WiFi beacons, then the machine can infer its current symbolic location.
 This can be used to infer presence by detecting if the mobile device is nearby.
-The issue here is if the person should forget his/her mobile device, ether nearby the machine or at home. 
+The issue here is if the person should forget their mobile device, ether nearby the machine or at home. 
 In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
 
 
