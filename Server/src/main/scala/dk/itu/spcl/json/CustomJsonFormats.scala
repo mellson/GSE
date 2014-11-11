@@ -1,6 +1,6 @@
 package dk.itu.spcl.json
 
-import dk.itu.spcl.approximator.{UserStatus, SensorReading, SensorRegistration, SensorReadingWithTime}
+import dk.itu.spcl.approximator.{SensorRegistration, SensorReadingWithTime, SensorReading, UserStatus}
 import spray.httpx.SprayJsonSupport
 import spray.json.DefaultJsonProtocol
 

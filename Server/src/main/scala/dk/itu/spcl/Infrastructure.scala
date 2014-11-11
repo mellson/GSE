@@ -1,6 +1,6 @@
 package dk.itu.spcl
 
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
@@ -13,10 +13,11 @@ object Infrastructure extends App {
   implicit val system = ActorSystem("approximator-system")
 
   // Start the web socket actors
-  private val rs = new WebSocketActorServer(Configuration.portWs)
-  rs.forResource("/connect", Some(system.actorOf(Props[WebSocketActor], "connect")))
-  rs.start()
-  sys.addShutdownHook({system.shutdown();rs.stop()})
+  private val webSocketActorServer = new WebSocketActorServer(Configuration.portWs)
+  val webSocketActor: ActorRef = system.actorOf(Props[WebSocketActor], "users")
+  webSocketActorServer.forResource("/users", Some(webSocketActor))
+  webSocketActorServer.start()
+  sys.addShutdownHook({system.shutdown();webSocketActorServer.stop()})
 
   // Create and start our service actor
   val service = system.actorOf(Props[PresenceServiceActor], "server")

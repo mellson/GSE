@@ -12,16 +12,15 @@ namespace ApproximatorClient
         public MainWindow()
         {
             InitializeComponent();
-            var ws = new WebSocket("ws://localhost:6696/connect");
-            ws.OnMessage += (sender, e) => Console.WriteLine(e.Data);
-            ws.Connect();                
-            ws.Send("BALUS");
+            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+            ws.OnMessage += (sender, e) => Console.WriteLine("Response from WebSocket" + e.Data);
+            ws.Connect();
 
+            // We can communicate back with the server if we need it
+            ws.Send("Hello From .NET Client");
 
-                //            new MouseSensor("User1");
-                //            new KeyboardSensor("User1");
-//                Console.ReadKey(true);
-            
+            new MouseSensor("User1");
+            new KeyboardSensor("User1");
         }
     }
 }

@@ -1,7 +1,11 @@
 package dk.itu.spcl.server
 
-import akka.actor.{Actor, ActorLogging}
+import akka.actor.Actor
+import dk.itu.spcl.approximator.{DecisionModule, SensorReadingWithTime, UserStatus}
 import org.java_websocket.WebSocket
+import org.joda.time.{DateTime, Seconds}
+import org.json4s.JsonDSL._
+import org.json4s.native.JsonMethods._
 import scala.collection._
 
 object WebSocketActor {
@@ -13,13 +17,30 @@ object WebSocketActor {
   case class Move(marker : Marker, longitude : String, latitude : String) extends FindMessage
 }
 
-class WebSocketActor extends Actor with ActorLogging {
+class WebSocketActor extends Actor {
   import dk.itu.spcl.server.WebSocketActor._
   import dk.itu.spcl.server.WebSocketActorServer._
 
   val clients = mutable.ListBuffer[WebSocket]()
   val markers = mutable.Map[Marker,Option[Move]]()
+
+  def sendStatus(status: UserStatus) = {
+    for (client <- clients)
+      client.send(status.toString)
+  }
+
   override def receive = {
+    // Update all clients connected via web socket with the latest sensor reading
+    case lastReading: SensorReadingWithTime =>
+      val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
+      val present = DecisionModule.getPresence(secondsSinceLastUpdate)
+      val availability = DecisionModule.getAvailability(secondsSinceLastUpdate)
+      val userStatus = UserStatus(lastReading.UserName, present, availability)
+      val json =
+        ("User" -> userStatus.UserName) ~ ("Present" -> userStatus.Present) ~ ("Availability" -> userStatus.Available)
+      for (client <- clients)
+        client.send(compact(render(json)))
+
     case Open(ws, hs) => {
       clients += ws
       for (marker <- markers if None != marker._2) {
@@ -36,14 +57,6 @@ class WebSocketActor extends Actor with ActorLogging {
 
     case Message(ws, msg) =>
       println(s"url ${ws.getResourceDescriptor} received msg '$msg'")
-
-      for (x <- 1 to 100) {
-        Thread.sleep(500)
-        for (client <- clients) {
-          client.send(msg)
-        }
-      }
-
 
     case Clear => {
       for (marker <- markers if None != marker._2) {
