@@ -4,7 +4,7 @@ import akka.actor.{ActorSystem, Props}
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
-import dk.itu.spcl.server.PresenceServiceActor
+import dk.itu.spcl.server.{WebSocketActor, PresenceServiceActor, WebSocketActorServer}
 import spray.can.Http
 
 import scala.concurrent.duration._
@@ -12,6 +12,12 @@ import scala.concurrent.duration._
 object Infrastructure extends App {
   // ActorSystem which hosts our application
   implicit val system = ActorSystem("approximator-system")
+
+  // Start the web socket actors
+  private val rs = new WebSocketActorServer(Configuration.portWs)
+  rs.forResource("/connect", Some(system.actorOf(Props[WebSocketActor], "connect")))
+  rs.start()
+  sys.addShutdownHook({system.shutdown();rs.stop()})
 
   // Create and start our service actor
   val service = system.actorOf(Props[PresenceServiceActor], "server")
