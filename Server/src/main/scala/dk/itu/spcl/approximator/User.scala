@@ -1,6 +1,7 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.approximator
 
 import akka.actor.Actor
+import dk.itu.spcl.server.{AskForLastUpdateMessage, GetReadings}
 import org.joda.time.DateTime
 
 class User extends Actor {

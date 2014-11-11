@@ -1,11 +1,13 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.approximator
 
+import akka.actor.ActorRef
+import akka.pattern.ask
+import akka.util.Timeout
+import dk.itu.spcl.server.AskForLastUpdateMessage
 import org.joda.time.{DateTime, Seconds}
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
-import akka.actor.ActorRef
-import akka.util.Timeout
-import akka.pattern.ask
 
 case class Status(Present: Boolean, Availability: Int)
 

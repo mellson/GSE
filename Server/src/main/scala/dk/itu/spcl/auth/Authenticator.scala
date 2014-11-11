@@ -1,7 +1,8 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.auth
 
-import spray.routing.authentication.{UserPass, BasicAuth}
+import spray.routing.authentication.{BasicAuth, UserPass}
 import spray.routing.directives.AuthMagnet
+
 import scala.concurrent._
 
 trait Authenticator {

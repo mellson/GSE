@@ -1,4 +1,4 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.auth
 
 object Repository {
   def hasUser(login: String): Option[AuthUser] = login match {

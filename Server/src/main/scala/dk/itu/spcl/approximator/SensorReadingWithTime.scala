@@ -1,4 +1,4 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.approximator
 
 import org.joda.time.DateTime
 

@@ -3,11 +3,14 @@ package dk.itu.spcl.server
 import akka.actor.{Actor, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
+import dk.itu.spcl.auth.Authenticator
+import dk.itu.spcl.json.CustomJsonFormats
+import dk.itu.spcl.approximator._
 import spray.routing._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
-import dk.itu.spcl.server.CustomJsonFormats._
+import CustomJsonFormats._
 
 class PresenceServiceActor extends PresenceService with Actor {
   def receive = runRoute(route)

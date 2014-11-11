@@ -1,4 +1,4 @@
-package dk.itu.spcl.server
+package dk.itu.spcl.auth
 
 class AuthInfo(val user: AuthUser) {
   def hasPermission(path: String) = path match {
