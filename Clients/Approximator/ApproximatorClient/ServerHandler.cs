@@ -3,8 +3,6 @@ using System.IO;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace ApproximatorClient
 {

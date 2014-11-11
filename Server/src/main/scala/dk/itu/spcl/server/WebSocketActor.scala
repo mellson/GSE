@@ -2,7 +2,6 @@ package dk.itu.spcl.server
 
 import akka.actor.{Actor, ActorLogging}
 import org.java_websocket.WebSocket
-
 import scala.collection._
 
 object WebSocketActor {
@@ -26,12 +25,26 @@ class WebSocketActor extends Actor with ActorLogging {
       for (marker <- markers if None != marker._2) {
         ws.send(message(marker._2.get))
       }
-      log.debug("registered monitor for url {}", ws.getResourceDescriptor)
+      println(s"registered monitor for url ${ws.getResourceDescriptor}")
     }
-    case Close(ws, code, reason, ext) => self ! Unregister(ws)
-    case Error(ws, ex) => self ! Unregister(ws)
+
+    case Close(ws, code, reason, ext) =>
+      self ! Unregister(ws)
+
+    case Error(ws, ex) =>
+      self ! Unregister(ws)
+
     case Message(ws, msg) =>
-      log.debug("url {} received msg '{}'", ws.getResourceDescriptor, msg)
+      println(s"url ${ws.getResourceDescriptor} received msg '$msg'")
+
+      for (x <- 1 to 100) {
+        Thread.sleep(500)
+        for (client <- clients) {
+          client.send(msg)
+        }
+      }
+
+
     case Clear => {
       for (marker <- markers if None != marker._2) {
         val msg = message(marker._1)
@@ -41,24 +54,27 @@ class WebSocketActor extends Actor with ActorLogging {
       }
       markers.clear
     }
+
     case Unregister(ws) => {
       if (null != ws) {
-        log.debug("unregister monitor")
+        println("unregister monitor " + ws)
         clients -= ws
       }
     }
+
     case Clear(marker) => {
-      log.debug("clear marker {} '{}'", marker.idx, marker.id)
+      println("clear marker {} '{}'", marker.idx, marker.id)
       val msg = message(marker)
       markers -= marker
       for (client <- clients) {
         client.send(msg)
       }
-      log.debug("sent to {} clients to clear marker '{}'", clients.size, msg)
+      println("sent to {} clients to clear marker '{}'", clients.size, msg)
     }
+
     case marker @ Marker(id, idx) => {
       markers += ((marker, None))
-      log.debug("create new marker {} '{}'", idx, id)
+      println("create new marker {} '{}'", idx, id)
     }
     case move @ Move(marker, lng, lat) => {
       markers += ((marker, Some(move)))
@@ -66,9 +82,10 @@ class WebSocketActor extends Actor with ActorLogging {
       for (client <- clients) {
         client.send(msg)
       }
-      log.debug("sent to {} clients the new move '{}'", clients.size, msg)
+      println("sent to {} clients the new move '{}'", clients.size, msg)
     }
   }
+
   private def message(move :Move) = s"""{"move":{"id":"${move.marker.id}","idx":"${move.marker.idx}","longitude":${move.longitude},"latitude":${move.latitude}}}"""
   private def message(marker :Marker) = s"""{"clear":{"id":"${marker.id}","idx":"${marker.idx}"}}"""
 }

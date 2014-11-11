@@ -1,4 +1,6 @@
-﻿using ApproximatorClient.Sensors;
+﻿using System;
+using ApproximatorClient.Sensors;
+using WebSocketSharp;
 
 namespace ApproximatorClient
 {
@@ -10,8 +12,16 @@ namespace ApproximatorClient
         public MainWindow()
         {
             InitializeComponent();
-            new MouseSensor("User1");
-            new KeyboardSensor("User1");
+            var ws = new WebSocket("ws://localhost:6696/connect");
+            ws.OnMessage += (sender, e) => Console.WriteLine(e.Data);
+            ws.Connect();                
+            ws.Send("BALUS");
+
+
+                //            new MouseSensor("User1");
+                //            new KeyboardSensor("User1");
+//                Console.ReadKey(true);
+            
         }
     }
 }

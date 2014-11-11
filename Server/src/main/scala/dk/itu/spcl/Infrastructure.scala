@@ -4,9 +4,8 @@ import akka.actor.{ActorSystem, Props}
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
-import dk.itu.spcl.server.{WebSocketActor, PresenceServiceActor, WebSocketActorServer}
+import dk.itu.spcl.server.{PresenceServiceActor, WebSocketActor, WebSocketActorServer}
 import spray.can.Http
-
 import scala.concurrent.duration._
 
 object Infrastructure extends App {
