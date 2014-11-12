@@ -41,13 +41,12 @@ class WebSocketActor extends Actor {
       for (client <- clients)
         client.send(compact(render(json)))
 
-    case Open(ws, hs) => {
+    case Open(ws, hs) =>
       clients += ws
       for (marker <- markers if None != marker._2) {
         ws.send(message(marker._2.get))
       }
       println(s"registered monitor for url ${ws.getResourceDescriptor}")
-    }
 
     case Close(ws, code, reason, ext) =>
       self ! Unregister(ws)
@@ -58,7 +57,7 @@ class WebSocketActor extends Actor {
     case Message(ws, msg) =>
       println(s"url ${ws.getResourceDescriptor} received msg '$msg'")
 
-    case Clear => {
+    case Clear =>
       for (marker <- markers if None != marker._2) {
         val msg = message(marker._1)
         for (client <- clients) {
@@ -66,16 +65,14 @@ class WebSocketActor extends Actor {
         }
       }
       markers.clear
-    }
 
-    case Unregister(ws) => {
+    case Unregister(ws) =>
       if (null != ws) {
         println("unregister monitor " + ws)
         clients -= ws
       }
-    }
 
-    case Clear(marker) => {
+    case Clear(marker) =>
       println("clear marker {} '{}'", marker.idx, marker.id)
       val msg = message(marker)
       markers -= marker
@@ -83,20 +80,18 @@ class WebSocketActor extends Actor {
         client.send(msg)
       }
       println("sent to {} clients to clear marker '{}'", clients.size, msg)
-    }
 
-    case marker @ Marker(id, idx) => {
+    case marker @ Marker(id, idx) =>
       markers += ((marker, None))
       println("create new marker {} '{}'", idx, id)
-    }
-    case move @ Move(marker, lng, lat) => {
+
+    case move @ Move(marker, lng, lat) =>
       markers += ((marker, Some(move)))
       val msg = message(move)
       for (client <- clients) {
         client.send(msg)
       }
       println("sent to {} clients the new move '{}'", clients.size, msg)
-    }
   }
 
   private def message(move :Move) = s"""{"move":{"id":"${move.marker.id}","idx":"${move.marker.idx}","longitude":${move.longitude},"latitude":${move.latitude}}}"""

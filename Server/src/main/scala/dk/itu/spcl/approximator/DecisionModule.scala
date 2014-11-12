@@ -5,7 +5,6 @@ import akka.pattern.ask
 import akka.util.Timeout
 import dk.itu.spcl.server.AskForLastUpdateMessage
 import org.joda.time.{DateTime, Seconds}
-
 import scala.concurrent.Await
 import scala.concurrent.duration._
 

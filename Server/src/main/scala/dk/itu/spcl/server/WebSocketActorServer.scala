@@ -1,14 +1,12 @@
 package dk.itu.spcl.server
 
 import java.net.InetSocketAddress
-
 import akka.actor.ActorRef
 import org.java_websocket.WebSocket
 import org.java_websocket.framing.CloseFrame
 import org.java_websocket.handshake.ClientHandshake
 import org.java_websocket.server.WebSocketServer
-
-import scala.collection.mutable.Map
+import scala.collection.mutable
 
 
 object WebSocketActorServer {
@@ -24,7 +22,7 @@ object WebSocketActorServer {
 }
 class WebSocketActorServer(val port : Int)
   extends WebSocketServer(new InetSocketAddress(port)) {
-  private val webSocketActors = Map[String, ActorRef]()
+  private val webSocketActors = mutable.Map[String, ActorRef]()
 
   final def forResource(descriptor : String, reactor : Option[ActorRef]) {
     reactor match {
