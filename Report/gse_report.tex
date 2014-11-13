@@ -128,9 +128,10 @@ MyTeam differs from other IM systems in that participants can get information ab
 MyTeam uses photos on a colored background to indicate availability.
 A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
 
-A system that also uses sensors to determine availability is MyVine.
+A system that also uses sensors to determine availability is MyVine\cite{fogarty2004myvine}.
 MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this.
-What differs the two systems, is MyVine’s use of holistic aggregated sensors instead of just two sensors.
+What differs the two systems, is MyVine’s use of holistic aggregated sensors (speech
+detection, location information, computer activity, and calendar information) instead of just two sensors(active badge proximity and keyboard and mouse).
 The two systems differs in two more ways.
 One is that MyVine is symmetric, which means the user has to be online in order to see other users availability.
 The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
@@ -304,17 +305,17 @@ According to Fogarty et al\cite{fogarty2005predicting} speaking present a situat
 ????
 
 \subsubsection{Process monitor}
-This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility. 
+This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility.
 The idea of the process monitor is to supply it with a list of processes (programs) that it should monitor.
-This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input. 
+This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input.
 Through this we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
 
 \subsubsection{Geolocation}
-This sensor works by looking up the machines registered ip address, or if available uses the machines build-in gps, and uses this to acquire an geographical address.
-Knowing the whereabouts of the machine neither infer presence nor interruptibility on its own. 
+This sensor works by looking up the machines registered ip address, or if available uses the machines build-in gps, and uses this to acquire a geographical address.
+Knowing the whereabouts of the machine neither infers presence nor interruptibility on its own.
 But it does supply the other sensors and the decision module with useful information regarding the geographical setting of the machine.
-The most simple use of this is to detect if the machine currently resides at the office, home, or another location. 
-But one of the more useful appliances would be in combination with the webcam. 
+The most simple use of this is to detect if the machine currently resides at the office, home, or another location.
+But one of the more useful appliances would be in combination with the webcam.
 If the webcam can detect action such as a person entering or leaving the room, this information could tells us whether the a person is in close proximity to the machine, but only that.
 Combined with even the coarse location of the machine, Approximator could infer that a person was in a specific office, in close proximity the machine.
 
@@ -337,7 +338,7 @@ But they can be used to detect other devices such as mobile devices or beacons.
 If we assume that a person always carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the persons proximity to the machine.
 Another usage is if the office the person works in have beacons installed at the workplace, ether as Bluetooth or WiFi beacons, then the machine can infer its current symbolic location.
 This can be used to infer presence by detecting if the mobile device is nearby.
-The issue here is if the person should forget their mobile device, ether nearby the machine or at home. 
+The issue here is if the person should forget their mobile device, ether nearby the machine or at home.
 In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
 
 
@@ -350,22 +351,25 @@ This section will provide information about how we approach this.
 \section{Evaluation}
 
 \subsection{Methodology}
-We applied the same methodology for evaluation as Fogarty et al use in their paper \cite{fogarty2005predicting} where we used a video recording of a test person in their work environment and marked the places where the test person claims to be interruptible or non-interruptible.
-Afterwards we presented the test person to a confidence questionnaire, to be able to rank the sequences in the video by how certain the test-person was or their judgement of their own interruptibility and by that finding sequences in the video where we could rely on the level of interruptibility.
+We applied the same methodology for evaluation as Fogarty et al \cite{fogarty2005predicting} where we used a video recording of a user in their work environment and had the user assess their interruptibility on 1 to 5 scale in specific sequences of the video.
+Afterwards we presented the user to a confidence questionnaire, to test the users confidence in their own assessments.
+We use this information to find the sequences in the video where the user is most confident and use these as base for our tests.
 
-We have gathered estimator-test-persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
+We have gathered test persons from our university grounds by inviting people through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
-Then we showed the video to x estimator-test-persons and asked them at specific situations in the video to tell us to which degree on a five point scale from 1 (non-interruptible) to 5 (interruptible) where they found the video-test-person as interruptible or non-interruptible.
+Then we showed the video to x test persons and asked them at specific situations in the video to which degree they found the user as interruptible or non-interruptible on a scale from 1 (non-interruptible) to 5 (interruptible)
 
-Following we compared estimator-test-persons answers and the values that Approximator had calculated to the values the video-test-person had reported.
-This was done by plotting the values into two confusion matrixes, one comparing the answers of video-test-person to answers of the estimator-test-persons, and one comparing the answers of the video-test-person to the results of Approximator.
-By finding correlations between hits in the video-test-person/estimator-test-persons and video-test-person/Approximator we could compare how Approximator performs in relation to human judgement, and we could also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
+Following we compared estimator-test-persons answers and the values that Approximator had calculated to the values had reported.
+This was done by plotting the values into two confusion matrices.
+One comparing the answers of user to answers of the test persons.
+And one comparing the answers of the test persons to the results of Approximator.
+By finding correlations between hits in the test-person/user and Approximator/user result, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
-When the matrix was complete we investigated which sensors fed the infrastructure with true information (information supporting a higher hit rate) and false information (misleading information resulting i lower hit rate).
+When the matrix was complete we investigated which sensors supplied the infrastructure with information supporting a higher hit rate and information resulting i lower hit rate.
 Based on this investigation we performed an ablation test on the sensors to improve our result.
-The experiment involving test-persons was not repeated as the circumstances in which the experiment was conducted had not changed.
+The experiment involving test persons was not repeated as the circumstances in which the experiment was conducted had not changed.
 Instead we had Approximator generate new interruptibility values based on the historic information provided from the subset of sensors leftover after the ablation test.
-This process was repeated until we found the combination of sensors that provided the most accurate information compared to the information given by the video-test-person.
+This process was repeated until we found the combination of sensors that provided the most accurate information compared to the information given by the user.
 
 \subsection{Results}
 
