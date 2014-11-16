@@ -24,7 +24,7 @@ extension UITableViewCell: GenericCell {
     }
 }
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, WebSocketDelegate {
     @IBOutlet weak var tableView: UITableView!
 	@IBAction func done(segue: UIStoryboardSegue) {}
     
@@ -44,20 +44,44 @@ class MainViewController: UIViewController {
 	}
     
     func fetchData() {
-        Async.userInitiated { [weak self] in
-            self?.apiClient.fetchUsers { success, users in
-                self?.dataSource.items = users ?? []
-                self?.tableView.reloadData()
-                
-                Async.userInitiated(after: 2.0) {
-                    self?.fetchData()
-                    return
-                }
-                
-                return
-            }
-            return
-        }
+//        Async.userInitiated { [weak self] in
+//            self?.apiClient.fetchUsers { success, users in
+//                self?.dataSource.items = users ?? []
+//                self?.tableView.reloadData()
+//                
+//                Async.userInitiated(after: 2.0) {
+//                    self?.fetchData()
+//                    return
+//                }
+//                
+//                return
+//            }
+//            return
+//        }
+        
+        var socket = WebSocket(url: NSURL(scheme: "ws", host: "spcl.cloudapp.net:6696", path: "/users")!)
+        socket.delegate = self
+        socket.connect()
+    }
+    
+    func websocketDidConnect() {
+        println("connected")
+    }
+    
+    func websocketDidReceiveMessage(text: String) {
+        println("message \(text)")
+    }
+    
+    func websocketDidDisconnect(error: NSError?) {
+    
+    }
+    
+    func websocketDidWriteError(error: NSError?) {
+    
+    }
+    
+    func websocketDidReceiveData(data: NSData) {
+    
     }
 	
 	deinit {
