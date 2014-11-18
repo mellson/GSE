@@ -354,25 +354,45 @@ This section will provide information about how we approach this.
 
 \section{Evaluation}
 
-\subsection{Methodology}
-We applied the same methodology for evaluation as Fogarty et al \cite{fogarty2005predicting} use in their paper.
-The methodology consists of four steps.
-The first step involves a recording of a user in their work setting, followed by the user annotating where they found themselves interruptible.
-The user then goes the annoted points and assessed their own interruptibility on a 1 to 5 scale at each point.
+\subsection{Method}
+We applied the same method for evaluation as Fogarty et al \cite{fogarty2005predicting} use in their paper.
+In our experiment we recorded one person in a work situation over a period of x hours.
+The person was a male/female of age xx with a background in software development with both work and academic experience.
+The video was shown to x males and x females in the ages from xx to xx and were all from the IT community.
+We wanted to make sure that the experiment and assessments are in correlation with the workflow of actual software development.
+It was therefore important that both the user observed, and the persons estimating interruptibility was from the IT community and have experience in software development.
+
+The method we applied consists of four steps.
+
+\begin{enumerate}
+  \item User Observation
+  \item Human Estimation
+  \item Data analysis
+  \item Ablation Test
+\end{enumerate}
+
+\subsubsection{User Observation}
+The first step involved a recording of a user in their work setting, followed by the user annotating where they found themselves interruptible.
+The user then went through the annotated points and assessed their own interruptibility on a 1 to 5 scale at each point.
 The user was afterwards presented for a confidence questionnaire, to test their confidence in their own assessments.
 We use this information to find the sequences in the video where the user is most confident and use these as base for our following tests.
 
-In the second step we invited test persons from our university grounds through personal relations and facebook fora related to university activities.
+\subsubsection{Human Estimation}
+In the second step we invited test persons from our university grounds. We made contact to them through personal relations and facebook fora related to university activities.
 We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
-Then we showed the video to x test persons and asked them at specific situations in the video to which degree they found the user as interruptible or non-interruptible on a scale from 1 (non-interruptible) to 5 (interruptible)
+Then we showed selected video sequences to x test persons and asked them to assess to which degree they found the user as interruptible or non-interruptible on a scale from 1 (non-interruptible) to 5 (interruptible).
+We chose the video sequences where the user was most confident in their own assessments.
+By using these sequences, we had a strong heuristic for when the user was interruptible, and use this for comparison in the next step.
 
+\subsubsection{Data analysis}
 Step three was done by comparing the results gathered from Approximator, the test persons, and the user.
 This was done by plotting the values into two confusion matrices.
 One comparing the answers of user to answers of the test persons.
 And one comparing the answers of the user to the results of Approximator.
 By finding correlations between hits in the test-person/user and Approximator/user results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
-In step four we investigated which sensors supplied the infrastructure with information supporting a higher hit rate and information resulting i lower hit rate.
+\subsubsection{Ablation Test}
+In step four we investigated which sensors supplied the infrastructure with information supporting a higher/lower hit rate.
 Based on this investigation we performed an ablation test on the sensors to improve our result.
 The experiment involving test persons was not repeated as the circumstances in which the experiment was conducted had not changed.
 Instead we had Approximator generate new interruptibility values based on the historic information provided from the subset of sensors leftover after the ablation test.
