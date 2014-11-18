@@ -1,11 +1,13 @@
 package dk.itu.spcl
 
 import akka.actor.{ActorRef, ActorSystem, Props}
+import akka.event.Logging
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
 import dk.itu.spcl.server.{PresenceServiceActor, WebSocketActor, WebSocketActorServer}
 import spray.can.Http
+
 import scala.concurrent.duration._
 
 object Infrastructure extends App {
@@ -22,7 +24,8 @@ object Infrastructure extends App {
   // Create and start our service actor
   val service = system.actorOf(Props[PresenceServiceActor], "server")
 
-  log.info("started banana")
+  // Global logger
+  val log = Logging(system, service)
 
   // Set a default timeout for the start, this keeps us from receiving dead letters during startup
   implicit val timeout = Timeout(5.seconds)

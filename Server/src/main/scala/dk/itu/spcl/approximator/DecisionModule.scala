@@ -3,6 +3,7 @@ package dk.itu.spcl.approximator
 import akka.actor.ActorRef
 import akka.pattern.ask
 import akka.util.Timeout
+import dk.itu.spcl.Infrastructure
 import dk.itu.spcl.server.AskForLastUpdateMessage
 import org.joda.time.{DateTime, Seconds}
 import scala.concurrent.Await
@@ -23,6 +24,8 @@ object DecisionModule {
   def getPresence(secondsSinceLastReading: Int): Boolean = secondsSinceLastReading < timeToNonPresent
 
   def getPresenceAndAvailability(actor: ActorRef): Status = {
+    Infrastructure.log.error("hej") // TODO remove
+
     val future = actor ? AskForLastUpdateMessage
     val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReadingWithTime]
     val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds

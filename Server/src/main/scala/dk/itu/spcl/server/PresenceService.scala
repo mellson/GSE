@@ -17,7 +17,7 @@ class PresenceServiceActor extends PresenceService with Actor {
 }
 
 // Defines our service behavior independently from the service actor
-trait PresenceService extends HttpServiceActor with Authenticator {
+trait PresenceService extends HttpServiceActor with Authenticator with akka.actor.ActorLogging {
   def ok(s: String) = Map("Ok" -> s)
   def error(s: String) = Map("Error" -> s)
 
@@ -61,6 +61,10 @@ trait PresenceService extends HttpServiceActor with Authenticator {
   }
 
   def getUserStatuses = {
+    val reading = SensorReading("userPath", "userName", "value")
+    log.debug(reading.toString)
+    println(reading) // TODO remove this again
+
     val userStatuses =
       for (user <- userIdMap) yield {
         val userName = user._1
