@@ -244,7 +244,7 @@ Commodity laptops can be many things, we define it as a machine with the followi
 \begin{enumerate}
   \item Mouse
   \item Keyboard
-  \item Microphone
+  \item Microphone - We have chosen not to use this sensor because we cannot control the noise level in the work environment.
   \item Lightsensor
   \item Operating System which supports running custom software
   \item Webcam
@@ -271,6 +271,11 @@ They also contain radios for Bluetooth, Wifi and Infrared.
 % Example: We exclude the webcam because Fogarty
 % shows that it is not needed when they have the
 % microphone
+
+We have chosen to omit the microphone sensor.
+There is a high risk of collectiong too much noise compared to the signal we need.
+The work environment would need to be very quiet for us to use a normal microphone as a reliable sensor.
+For this reason we have dropped the microphone sensor.
 
 \subsubsection{Keyboard and Mouse}
 By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second.
