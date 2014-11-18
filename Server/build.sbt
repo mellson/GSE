@@ -16,6 +16,7 @@ libraryDependencies ++= {
     "io.spray"               %%  "spray-can"     % SprayVersion,
     "io.spray"               %%  "spray-routing" % SprayVersion,
     "com.typesafe.akka"      %%  "akka-actor"    % AkkaVersion,
+    "com.typesafe.akka"      %%  "akka-slf4j"    % AkkaVersion,
     "io.spray"               %%  "spray-json"    % "1.3.1",
     "com.github.t3hnar"      %%  "scala-bcrypt"  % "2.4",
     "com.github.nscala-time" %%  "nscala-time"   % "1.4.0",

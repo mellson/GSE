@@ -22,6 +22,8 @@ object Infrastructure extends App {
   // Create and start our service actor
   val service = system.actorOf(Props[PresenceServiceActor], "server")
 
+  log.info("started banana")
+
   // Set a default timeout for the start, this keeps us from receiving dead letters during startup
   implicit val timeout = Timeout(5.seconds)
 

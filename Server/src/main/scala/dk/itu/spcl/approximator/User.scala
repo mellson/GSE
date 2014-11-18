@@ -23,7 +23,7 @@ class User extends Actor {
         readings = reading :: readings.take(9)
 
     case AskForLastUpdateMessage => sender ! lastReading
-      
+
     case GetReadings => sender ! readings
   }
 }
