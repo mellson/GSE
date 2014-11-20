@@ -148,7 +148,7 @@ namespace Gma.UserActivityMonitor
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
+        [DllImport("C:/Windows/System32/user32.dll", CharSet = CharSet.Auto,
             CallingConvention = CallingConvention.StdCall)]
         private static extern int CallNextHookEx(
             int idHook,
@@ -187,7 +187,7 @@ namespace Gma.UserActivityMonitor
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
+        [DllImport("C:/Windows/System32/user32.dll", CharSet = CharSet.Auto,
             CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         private static extern int SetWindowsHookEx(
             int idHook,
@@ -208,7 +208,7 @@ namespace Gma.UserActivityMonitor
         /// <remarks>
         /// http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winui/winui/windowsuserinterface/windowing/hooks/hookreference/hookfunctions/setwindowshookex.asp
         /// </remarks>
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
+        [DllImport("C:/Windows/System32/user32.dll", CharSet = CharSet.Auto,
             CallingConvention = CallingConvention.StdCall, SetLastError = true)]
         private static extern int UnhookWindowsHookEx(int idHook);
 
@@ -305,6 +305,9 @@ namespace Gma.UserActivityMonitor
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern short GetKeyState(int vKey);
 
+        // i introducted this to fix a bug with running the vode on x86
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Ansi)]
+        static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)]string lpFileName);
         #endregion
     }
 }

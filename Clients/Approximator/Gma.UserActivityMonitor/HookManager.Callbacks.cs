@@ -219,11 +219,11 @@ namespace Gma.UserActivityMonitor
                 //See comment of this field. To avoid GC to clean it up.
                 s_MouseDelegate = MouseHookProc;
                 //install hook
+                var mar = LoadLibrary("user32.dll"); //I changed this to uses kernel32 loadLibrary since DLLImport have some issues with x86
                 s_MouseHookHandle = SetWindowsHookEx(
                     WH_MOUSE_LL,
                     s_MouseDelegate,
-                    Marshal.GetHINSTANCE(
-                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                    mar,
                     0);
                 //If SetWindowsHookEx fails.
                 if (s_MouseHookHandle == 0)
@@ -384,11 +384,11 @@ namespace Gma.UserActivityMonitor
                 //See comment of this field. To avoid GC to clean it up.
                 s_KeyboardDelegate = KeyboardHookProc;
                 //install hook
+                var mar = LoadLibrary("user32.dll"); //I changed this to uses kernel32 loadLibrary since DLLImport have some issues with x86
                 s_KeyboardHookHandle = SetWindowsHookEx(
                     WH_KEYBOARD_LL,
                     s_KeyboardDelegate,
-                    Marshal.GetHINSTANCE(
-                        Assembly.GetExecutingAssembly().GetModules()[0]),
+                    mar,
                     0);
                 //If SetWindowsHookEx fails.
                 if (s_KeyboardHookHandle == 0)
