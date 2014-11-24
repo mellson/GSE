@@ -21,7 +21,7 @@ namespace ApproximatorClient
 
             new MouseSensor("User1");
             new KeyboardSensor("User1");
-            new FaceDetectionSensor("User1");
+            new FaceDetectionSensor("User1", cameraIndex:1);
         }
     }
 }

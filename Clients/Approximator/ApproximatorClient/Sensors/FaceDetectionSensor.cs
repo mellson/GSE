@@ -10,10 +10,11 @@ namespace ApproximatorClient.Sensors
 {
     class FaceDetectionSensor : AbstractSensor
     {
-        public FaceDetectionSensor(string username, string name = "FaceDetectionSensor")
+        public FaceDetectionSensor(string username, string name = "FaceDetectionSensor", int cameraIndex = 0)
         {
             SensorName = name;
             UserName = username;
+            CameraIndex = cameraIndex;
             UpdateReadingForSensorName(SensorName, UserName, "Init");
             var faceDetectionThread = new Thread(DetectFaces);
             faceDetectionThread.Start();
@@ -23,8 +24,7 @@ namespace ApproximatorClient.Sensors
         public void DetectFaces()
         {
             var face = new HaarCascade("OpenCV/haarcascade_frontalface_default.xml");
-            var grabber = new Capture(1);
-            grabber.QueryFrame();
+            var grabber = new Capture(CameraIndex);
             while (true)
             {
                 var currentFrame = grabber.QueryFrame();
@@ -34,6 +34,8 @@ namespace ApproximatorClient.Sensors
                 UpdateReadingForSensorName(SensorName, UserName, facesDetected[0].Length.ToString(CultureInfo.InvariantCulture));
                 Thread.Sleep(300);
             }
-        } 
+        }
+
+        public int CameraIndex { get; set; }
     }
 }
