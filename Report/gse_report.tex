@@ -95,7 +95,7 @@ Research by the Human Computer Interaction Institute at Carnegie Mellon Universi
 In their research they find that you can predict interruptibility with sensor inputs at an accuracy of 68\%.
 The researchers note that their results could ``motivate the development of systems that use these models to negotiate interruptions at socially appropriate times.''
 
-We will build upon their research and be inspired by their models in a practical pursuit of a presence and interruptibility-sharing system.
+We will build on their research and be inspired by their models in a practical pursuit of a presence and interruptibility-sharing system.
 The work presented in this paper represents two primary contributions.
 First, we demonstrate an implementation of a presence and interruptibility-sharing system for global software engineers.
 Second, we evaluate the system.
@@ -121,7 +121,7 @@ Later Fogarty et al. goes on to show that it is possible to construct a predicti
 Several systems have tried to build an awareness solution using sensors.
 The earliest work dates back to the active badge system \cite{want1992active}.
 A similar approach has been tried in the IM system MyTeam \cite{lai2003myteam}, where they use an active badge sensor in combination with the users computer activity.
-This solution builds upon the premise that success of communications is having prior knowledge about the availability of others before initiating contact.
+This solution builds on the premise that success of communications is having prior knowledge about the availability of others before initiating contact.
 Lack of this information may explain why over 60\% of business phone calls fail to reach the intended party \cite{whittaker1995rethinking}.
 MyTeam differs from other IM systems in that participants can get information about the availability of colleagues even if that person is not running the MyTeam client.
 MyTeam uses photos on a colored background to indicate availability.
@@ -168,8 +168,8 @@ Demonstrators pull interpreted presence and interruptibility from the infrastruc
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=\columnwidth]{figures/architecture.png}
-  \caption{SKETCH!!! System architecture.}
+  \includegraphics[width=\columnwidth]{figures/system_architecture.pdf}
+  \caption{System architecture}
   \label{fig:architecture}
 \end{figure}
 
@@ -218,6 +218,14 @@ For this project we have chosen Akka because it is Java based.
 This supports the technical knowledge in our group.
 
 We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/infrastructure_design.pdf}
+  \caption{Infrastructure Design}
+  \label{fig:infrastructure}
+\end{figure}
 
 It is possible to deploy Akka applications on a server which can run Java.
 For this project we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.

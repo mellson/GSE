@@ -6,6 +6,7 @@ import org.java_websocket.WebSocket
 import org.joda.time.{DateTime, Seconds}
 import org.json4s.JsonDSL._
 import org.json4s.native.JsonMethods._
+
 import scala.collection._
 
 object WebSocketActor {
@@ -21,28 +22,29 @@ class WebSocketActor extends Actor {
   import dk.itu.spcl.server.WebSocketActor._
   import dk.itu.spcl.server.WebSocketActorServer._
 
-  val clients = mutable.ListBuffer[WebSocket]()
+  type UserSocket = WebSocket
+  val users = mutable.ListBuffer[UserSocket]()
   val markers = mutable.Map[Marker,Option[Move]]()
 
   def sendStatus(status: UserStatus) = {
-    for (client <- clients)
-      client.send(status.toString)
+    for (user <- users)
+      user.send(status.toString)
   }
 
   override def receive = {
-    // Update all clients connected via web socket with the latest sensor reading
-    case lastReading: SensorReadingWithTime =>
-      val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
+    // Update all users connected via web socket with the latest sensor reading
+    case reading: SensorReadingWithTime =>
+      val secondsSinceLastUpdate = Seconds.secondsBetween(reading.date(), DateTime.now()).getSeconds
       val present = DecisionModule.getPresence(secondsSinceLastUpdate)
       val availability = DecisionModule.getAvailability(secondsSinceLastUpdate)
-      val userStatus = UserStatus(lastReading.UserName, present, availability)
-      val json =
+      val userStatus = UserStatus(reading.UserName, present, availability)
+      val json = // TODO fix this One Pass Logic
         ("User" -> userStatus.UserName) ~ ("Present" -> userStatus.Present) ~ ("Availability" -> userStatus.Available)
-      for (client <- clients)
-        client.send(compact(render(json)))
+      for (user <- users)
+        user.send(compact(render(json)))
 
     case Open(ws, hs) =>
-      clients += ws
+      users += ws
       for (marker <- markers if None != marker._2) {
         ws.send(message(marker._2.get))
       }
@@ -60,8 +62,8 @@ class WebSocketActor extends Actor {
     case Clear =>
       for (marker <- markers if None != marker._2) {
         val msg = message(marker._1)
-        for (client <- clients) {
-          client.send(msg)
+        for (user <- users) {
+          user.send(msg)
         }
       }
       markers.clear
@@ -69,17 +71,17 @@ class WebSocketActor extends Actor {
     case Unregister(ws) =>
       if (null != ws) {
         println("unregister monitor " + ws)
-        clients -= ws
+        users -= ws
       }
 
     case Clear(marker) =>
       println("clear marker {} '{}'", marker.idx, marker.id)
       val msg = message(marker)
       markers -= marker
-      for (client <- clients) {
-        client.send(msg)
+      for (user <- users) {
+        user.send(msg)
       }
-      println("sent to {} clients to clear marker '{}'", clients.size, msg)
+      println("sent to {} clients to clear marker '{}'", users.size, msg)
 
     case marker @ Marker(id, idx) =>
       markers += ((marker, None))
@@ -88,10 +90,10 @@ class WebSocketActor extends Actor {
     case move @ Move(marker, lng, lat) =>
       markers += ((marker, Some(move)))
       val msg = message(move)
-      for (client <- clients) {
-        client.send(msg)
+      for (user <- users) {
+        user.send(msg)
       }
-      println("sent to {} clients the new move '{}'", clients.size, msg)
+      println("sent to {} clients the new move '{}'", users.size, msg)
   }
 
   private def message(move :Move) = s"""{"move":{"id":"${move.marker.id}","idx":"${move.marker.idx}","longitude":${move.longitude},"latitude":${move.latitude}}}"""

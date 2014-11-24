@@ -5,7 +5,7 @@ import akka.event.Logging
 import akka.io.IO
 import akka.pattern.ask
 import akka.util.Timeout
-import dk.itu.spcl.server.{PresenceServiceActor, WebSocketActor, WebSocketActorServer}
+import dk.itu.spcl.server.{RestActor, WebSocketActor, WebSocketActorServer}
 import spray.can.Http
 
 import scala.concurrent.duration._
@@ -22,16 +22,16 @@ object Infrastructure extends App {
   sys.addShutdownHook({system.shutdown();webSocketActorServer.stop()})
 
   // Create and start our service actor
-  val service = system.actorOf(Props[PresenceServiceActor], "server")
+  val restActor = system.actorOf(Props[RestActor], "server")
 
   // Global logger
-  val log = Logging(system, service)
+  val log = Logging(system, restActor)
 
   // Set a default timeout for the start, this keeps us from receiving dead letters during startup
   implicit val timeout = Timeout(5.seconds)
 
   // start a new HTTP server on port 8080 with our service actor as the handler
-  IO(Http) ? Http.Bind(service, Configuration.host, port = Configuration.portHttp)
+  IO(Http) ? Http.Bind(restActor, Configuration.host, port = Configuration.portHttp)
 }
 
 object Configuration {

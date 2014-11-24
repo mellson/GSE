@@ -12,25 +12,25 @@ import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import CustomJsonFormats._
 
-class PresenceServiceActor extends PresenceService with Actor {
+class RestActor extends RestService with Actor {
   def receive = runRoute(route)
 }
 
 // Defines our service behavior independently from the service actor
-trait PresenceService extends HttpServiceActor with Authenticator with akka.actor.ActorLogging {
+trait RestService extends HttpServiceActor with Authenticator with akka.actor.ActorLogging {
   def ok(s: String) = Map("Ok" -> s)
   def error(s: String) = Map("Error" -> s)
 
-  var userIdMap:Map[String, (Int, ActorRef)] = Map.empty
+  var users:Map[String, (Int, ActorRef)] = Map.empty
   var idCounter = 0
   val userPath = "user"
 
-  def getPostStringFromUserId(sensorRegistration: SensorRegistration) = (sensorRegistration.UserName, userIdMap.get(sensorRegistration.UserName)) match {
+  def getPostStringFromUserId(sensorRegistration: SensorRegistration) = (sensorRegistration.UserName, users.get(sensorRegistration.UserName)) match {
     case ("", None) => error("You need to provide a user id")
     case (_, None)  =>
       val id = idCounter
-      val sensorCluster = actorRefFactory.actorOf(Props[User], sensorRegistration.UserName)
-      userIdMap += (sensorRegistration.UserName -> (id, sensorCluster))
+      val userActor = actorRefFactory.actorOf(Props[UserActor], sensorRegistration.UserName)
+      users += (sensorRegistration.UserName -> (id, userActor))
       idCounter += 1
       ok(s"$userPath/$id")
     case (_,Some(i: (Int, ActorRef)))  => ok(s"$userPath/${i._1}")
@@ -38,7 +38,7 @@ trait PresenceService extends HttpServiceActor with Authenticator with akka.acto
 
   def getSensorData(id: Int): List[SensorReadingWithTime] = {
     implicit val timeout = Timeout(5 seconds)
-    for (user <- userIdMap)
+    for (user <- users)
       if (user._2._1 == id) {
         val userActor = user._2._2
         val future = userActor ? GetReadings
@@ -48,8 +48,8 @@ trait PresenceService extends HttpServiceActor with Authenticator with akka.acto
     Nil
   }
 
-  def getSensorData(id: Int, sensorReading: SensorReading) = {
-    val user = userIdMap.get(sensorReading.UserName)
+  def putSensorData(id: Int, sensorReading: SensorReading) = {
+    val user = users.get(sensorReading.UserName)
     if (!user.isDefined)
       error("No user registered for this sensor")
     else if (user.isDefined && user.get._1 != id)
@@ -66,7 +66,7 @@ trait PresenceService extends HttpServiceActor with Authenticator with akka.acto
     println(reading) // TODO remove this again
 
     val userStatuses =
-      for (user <- userIdMap) yield {
+      for (user <- users) yield {
         val userName = user._1
         val userActor = user._2._2
         val status = DecisionModule.getPresenceAndAvailability(userActor)
@@ -92,7 +92,7 @@ trait PresenceService extends HttpServiceActor with Authenticator with akka.acto
       {
         put {
           entity(as[SensorReading]) { sensorReading =>
-            complete(getSensorData(id, sensorReading))
+            complete(putSensorData(id, sensorReading))
           }
         }
       }

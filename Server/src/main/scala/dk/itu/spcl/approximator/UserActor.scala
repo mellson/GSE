@@ -5,7 +5,7 @@ import dk.itu.spcl.Infrastructure
 import dk.itu.spcl.server.{AskForLastUpdateMessage, GetReadings}
 import org.joda.time.DateTime
 
-class User extends Actor {
+class UserActor extends Actor {
   var lastReading: SensorReadingWithTime = SensorReadingWithTime("DefaultSensor", "DefaultUser", DateTime.now.toString, "Init")
   var readings: List[SensorReadingWithTime] = Nil
 
