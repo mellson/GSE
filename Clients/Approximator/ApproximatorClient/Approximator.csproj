@@ -14,9 +14,10 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>5b621b99</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,16 +39,24 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Emgu.CV, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Emgu.CV.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.CV.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.GPU, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.CV.GPU.dll</HintPath>
+    </Reference>
+    <Reference Include="Emgu.CV.ML, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.CV.ML.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.CV.UI, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Emgu.CV.UI.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.CV.UI.dll</HintPath>
     </Reference>
     <Reference Include="Emgu.Util, Version=2.2.1.1150, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Resources\Emgu.Util.dll</HintPath>
+      <Private>True</Private>
+      <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.Util.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -138,88 +147,57 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\cv110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\haarcascades\haarcascade_frontalface_default.xml">
+      <Link>OpenCV\haarcascade_frontalface_default.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\cvaux110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\cvextern.dll">
+      <Link>OpenCV\cvextern.dll</Link>
     </Content>
-    <Content Include="Resources\cvextern.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_calib3d220.dll">
+      <Link>OpenCV\opencv_calib3d220.dll</Link>
     </Content>
-    <Content Include="Resources\cxcore110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_contrib220.dll">
+      <Link>OpenCV\opencv_contrib220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_core220.dll">
+      <Link>OpenCV\opencv_core220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.GPU.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_features2d220.dll">
+      <Link>OpenCV\opencv_features2d220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.ML.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_ffmpeg220.dll">
+      <Link>OpenCV\opencv_ffmpeg220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.UI.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_flann220.dll">
+      <Link>OpenCV\opencv_flann220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.UI.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_gpu220.dll">
+      <Link>OpenCV\opencv_gpu220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.CV.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_highgui220.dll">
+      <Link>OpenCV\opencv_highgui220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.Util.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_imgproc220.dll">
+      <Link>OpenCV\opencv_imgproc220.dll</Link>
     </Content>
-    <Content Include="Resources\Emgu.Util.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_legacy220.dll">
+      <Link>OpenCV\opencv_legacy220.dll</Link>
     </Content>
-    <Content Include="Resources\haarcascade_frontalface_default.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_ml220.dll">
+      <Link>OpenCV\opencv_ml220.dll</Link>
     </Content>
-    <Content Include="Resources\highgui110.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_objdetect220.dll">
+      <Link>OpenCV\opencv_objdetect220.dll</Link>
     </Content>
-    <Content Include="Resources\opencv_calib3d220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\opencv_video220.dll">
+      <Link>OpenCV\opencv_video220.dll</Link>
     </Content>
-    <Content Include="Resources\opencv_contrib220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_core220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_features2d220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_ffmpeg220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_flann220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_gpu220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_highgui220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_imgproc220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_legacy220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_ml220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_objdetect220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\opencv_video220.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\ZedGraph.dll">
+      <Link>OpenCV\ZedGraph.dll</Link>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
