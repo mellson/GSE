@@ -23,24 +23,14 @@ namespace ApproximatorClient.Sensors
         public void DetectFaces()
         {
             var face = new HaarCascade("OpenCV/haarcascade_frontalface_default.xml");
-            var grabber = new Capture();
+            var grabber = new Capture(1);
             grabber.QueryFrame();
-            while (true) 
+            while (true)
             {
-                var currentFrame = grabber.QueryFrame().Resize(320, 240, INTER.CV_INTER_CUBIC);
+                var currentFrame = grabber.QueryFrame();
                 var gray = currentFrame.Convert<Gray, Byte>();
-                var facesDetected = gray.DetectHaarCascade(
-                    face,
-                    1.2,
-                    10,
-                    HAAR_DETECTION_TYPE.DO_CANNY_PRUNING,
-                    new Size(20, 20));
+                var facesDetected = gray.DetectHaarCascade(face);
                 Console.WriteLine(@"Faces detected: {0}", facesDetected[0].Length);
-                foreach (var f in facesDetected[0])
-                {
-                    currentFrame.Copy(f.rect).Convert<Gray, byte>().Resize(100, 100, INTER.CV_INTER_CUBIC);
-                    currentFrame.Draw(f.rect, new Bgr(Color.Red), 2);
-                }
                 UpdateReadingForSensorName(SensorName, UserName, facesDetected[0].Length.ToString(CultureInfo.InvariantCulture));
                 Thread.Sleep(300);
             }
