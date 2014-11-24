@@ -86,17 +86,21 @@ class LocationController: NSObject, CLLocationManagerDelegate {
 	}
 	
 	private func startLocationUpdates() {
-		let defaults = NSUserDefaults.standardUserDefaults()
+//		let defaults = NSUserDefaults.standardUserDefaults()
+//		
+//		let latitude = defaults.doubleForKey(locationCoordinateLatDefaultKey)
+//		let longitude = defaults.doubleForKey(locationCoordinateLonDefaultKey)
+//		
+//		let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//		var region = CLCircularRegion(center: coordinate, radius: 200, identifier: "monitored_work_place")
+//		
+//		monitoredRegion = region
 		
-		let latitude = defaults.doubleForKey(locationCoordinateLatDefaultKey)
-		let longitude = defaults.doubleForKey(locationCoordinateLonDefaultKey)
-		
-		let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-		var region = CLCircularRegion(center: coordinate, radius: 200, identifier: "monitored_work_place")
-		
-		monitoredRegion = region
-		
-		locationManager.startMonitoringForRegion(region)
+//		locationManager.startMonitoringForRegion(region)
+        let uuid = NSUUID(UUIDString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")
+        let region = CLBeaconRegion(proximityUUID: uuid, identifier: "robocat.office")
+        
+        locationManager.startRangingBeaconsInRegion(region)
 	}
 	
 	// MARK: - CLLocationManagerDelegate
@@ -104,17 +108,18 @@ class LocationController: NSObject, CLLocationManagerDelegate {
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		attemptLocationAuthorization()
 	}
-	
-	func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
-		
-		switch state {
-		case .Inside:
-			didEnterRegion()
-		case .Outside:
-			didLeaveRegion()
-		default: break
-		}
-	}
+    
+    func locationManager(manager: CLLocationManager!, didDetermineState state: CLRegionState, forRegion region: CLRegion!) {
+        switch region.identifier {
+        case "robocat.office":
+            if state == .Inside {
+                didEnterRegion()
+            } else if state == .Outside {
+                didLeaveRegion()
+            }
+        default: break
+        }
+    }
 
 	private func didEnterRegion() {
 		NSNotificationCenter.defaultCenter().postNotificationName(didEnterWorkPlaceNotification, object: nil)
