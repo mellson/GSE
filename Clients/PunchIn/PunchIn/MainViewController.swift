@@ -12,7 +12,7 @@ extension UITableViewCell: GenericCell {
     typealias T = APIUser
     
     func configureWithItem(item: T) {
-        textLabel.text = item.username
+        textLabel?.text = item.username
         detailTextLabel?.text = availabilityString(item)
     }
     
@@ -30,10 +30,13 @@ class MainViewController: UIViewController, WebSocketDelegate {
     
     private var dataSource: ArrayDataSource!
     private let apiClient = APIClient()
+    private let locationController = LocationController()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
         
+        
+        self.locationController.resumeMonitoring()
         dataSource = ArrayDataSource(items: [], cellIdentifier: "usersCell")
         tableView.dataSource = dataSource
         
