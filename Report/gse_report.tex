@@ -289,6 +289,8 @@ If the camera can detect action such as a user entering or leaving the room, thi
 Combined with even the coarse location of the machine, Approximator could infer that a user was in a specific office, in close proximity the machine.
 
 \subsubsection{Calendar Sensor}
+This sensor can look at the users calendar and get information about events entered here.
+We can use these events to help us calculate interruptibility.
 
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
@@ -350,6 +352,17 @@ The sensor actually combines two parts of the system.
 The sensors are built into the client.
 This is done for easy of use for the end user.
 Merging the two parts makes it possible to get both parts on the users laptop with a single installation.
+
+\subsubsection{Easy of deployment}
+We have focused on creating an easy to deploy system.
+The infrastructure component can be deployed to any server capable of running the Java Virtual Machine (JVM).
+Currently it is possible to get the source code from GitHub\footnote{\url{https://github.com/mofus/GSE/tree/master/Server}}.
+The source code requires that Java and SBT is installed.
+With the source code on the server it is a simple run command which will compile, fetch dependencies and run the infrastructure.
+
+The client is even easier this is currently a Windows application which can be downloaded and run directly on any newer Windows installation.
+
+The client is also available as source from the GitHub repository should a user wish to rebuild for Mono.
 
 \section{Decision Logic}
 Raw sensor data does not say much about presence or availability.
