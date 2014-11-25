@@ -156,9 +156,10 @@ Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want t
  We will evaluate the system by replicating the test done by Fogarty et al.
  Our hope is that we can achieve the same 68\% precision rate using only the sensors in scope.
 
-\section{System Overview}
-The solution we propose is called Approximator.
-The system consist of three main parts:
+We call our proposed solution ''Approximator''.
+
+\subsection{System Overview}
+Approximator consist of three main parts:
 \begin{enumerate}
   \item Sensors collecting information about the user.
   \item An infrastructure aggregating and classifying sensor data.
@@ -168,8 +169,13 @@ The system consist of three main parts:
 The central component of Approximator is the infrastructure.
 The infrastructure is a server component that is deployed to a cloud service.
 The infrastructure exposes an API that sensors and clients use to communicate with.
-Sensors register themselves with the infrastructure and sends raw sensors data.
+
+A sensor is related to a given user.
+One user can have several sensors.
+Sensors register themselves with the infrastructure, which returns a specific endpoint for each user.
+The sensors sends raw sensors data to this endpoint.
 The infrastructure aggregates and interprets the raw sensor data to deduct presence and interruptibility of users.
+
 Client gets the interpreted presence and interruptibility from the infrastructure and visualizes this to the user.
 
 \begin{figure}[H]
@@ -186,17 +192,19 @@ To gather data about the users presence and availability we use sensors.
 This project has restricted itself to only look at sensors which are available in commodity laptops.
 Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
 \begin{itemize}
-  \item Mouse
+  \item Mouse or Trackpad
   \item Keyboard
   \item Microphone
-  \item Light
-  \item Operating System which supports running custom sensing software
-  \item Webcam
+  \item Camera
+  \item Ability to run custom sensing software
+  \item Lightsensor
   \item Bluetooth
   \item Wifi
 \end{itemize}
 
-The operating system
+The current version of Approximator is written in .NET.
+This makes it possible to run the client on several platforms.
+On windows the application
 
 The software we write
 
