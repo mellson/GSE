@@ -386,29 +386,36 @@ In order to compare the performance of Approximator to Fogartys results, we cond
 
 \subsection{Method}
 Our experiment was conducted in two stages.
-First we recorded two test users in their work environment with a camera, while Approximators sensors collected data.
+First we recorded two test subjects in their work environment with a camera, while Approximators sensors collected data.
 The second stage was conducted by inviting people from the software development community to a webpage we had set up for the purpose.
 On this webpage the participants were asked to assess interruptibility for the two test users based on short sequences of video, showing the test users in random selected situations in their work environment.
 
 \subsubsection{Stage One}
-The two test users was both males, and \textless age\textgreater and \textless age\textgreater years of age.
+The two test subjects was both males, and \textless age\textgreater and \textless age\textgreater years of age.
 They both worked for a security company where their primary task was to maintain and develop on the company system.
-Since the company also have offices in other countries, the test users often did parallel development with the out-of-country teams.
+Since the company also have offices in other countries, the test subjects often did parallel development with the out-of-country teams.
 They worked in shared offices, where they shared the office with 3-4 other employees, often people assigned to the same project or with a similar skillset.
 It was possible to close the door to these offices, but that rarely occurred.
 
-The test users was recorded with \textless insert camera specs here - along with dataformat\textgreater.
+The test subjects was recorded with \textless insert camera specs here - along with dataformat\textgreater.
 The camera was placed at an angle that did not allow for the content of their screen to be visible.
-The angle did however show as much of the office as possible, while showing the face of the test user.
+The angle did however show as much of the office as possible, while showing the face of the test subject.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/experiment_setup.png}
+  \caption{View of experiment setup}
+  \label{fig:experiment}
+\end{figure}
 
 Approximator was running on a Lenovo \textless insert specs\textgreater with a Windows 7 OS and a Lenovo \textless insert specs\textgreater also with Windows 7.
 Approximator utilized the keyboard, mouse and camera \textless possible more\textgreater as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
 This data was to used later in our process.
-Approximator was specially configured to prompt a visual bell for the test user at random intervals averaging at two times per hour.
-The test users was instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) either verbally or by show of fingers on one hand when prompted.
-The test users had no way of pausing the application \textless still to be finally determided\textgreater, but could request retroactively to have sequence deleted if necessary.
-The prompts where the test user was not present was removed from the dataset after the experiment.
-At other sequences the test users clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention. These were interpreted by us as a high-non-interruptible event.
+Approximator was specially configured to prompt a visual bell for the test subject at random intervals averaging at two times per hour.
+The test subjects was instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) either verbally or by show of fingers on one hand when prompted.
+The test subjects had no way of pausing the application \textless still to be finally determided\textgreater, but could request retroactively to have sequence deleted if necessary.
+The prompts where the test subjects was not present was removed from the dataset after the experiment.
+At other sequences the test subjects clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention. These were interpreted by us as a high-non-interruptible event.
 
 The experiment was conducted over a period of two workdays from 9 am to 4:30 pm, yielding a total of 30 hours of video and \textless number of prompt\textgreater prompts.
 
@@ -419,8 +426,15 @@ These questions consisted of gender, age, educational background, ethnicity and 
 This is to ensure that the users participating in the survey are familiar with the environmental setting of software development and also to ensure the validity of this paper.
 Before the user was presented for the sequences, they were instructed to imagine themselves in the office trying to interact with the user in the sequence, and based on a 1 (highly-interruptible) to 5 (highly-non-interruptible) scale assess how interruptible they were.
 
+\begin{figure}
+  \centering
+  \includegraphics[width=\columnwidth]{figures/webpage_screenshot.png}
+  \caption{Screenshot of survey webpage.}
+  \label{fig:webpage}
+\end{figure}
+
 The user was then presented with \textless insert number of samples\textgreater sequences of 15-30 seconds in length.
-These was the 15-30 seconds leading up to/or after the test user being prompted for self-report.
+These was the 15-30 seconds leading up to/or after the test subject being prompted for self-report.
 The user could replay the sequence as many times as they wanted until they felt they could give a valid assessment.
 But each sequence was played in full length before the user could rate it and proceed to the next.
 
