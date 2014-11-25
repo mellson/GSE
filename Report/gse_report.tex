@@ -158,6 +158,11 @@ Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want t
 
 We call our proposed solution ''Approximator''.
 
+\subsection{Presence and Interruptibility}
+We define presence as the notion of being in close proximity to the laptop. A user is present if they are close to their machine.
+
+We define interruptibility as the degree to which the user can be disturbed. A user is highly interruptible if they are not doing anything and ready to work. A user is not interruptible if they are deeply engaged in a task requiring their full attention.
+
 \subsection{System Overview}
 Approximator consist of three main parts:
 \begin{enumerate}
@@ -204,32 +209,12 @@ Commodity laptops can be many things, we define it as a machine with the followi
 
 The current version of Approximator is written in .NET.
 This makes it possible to run the client on several platforms.
-On windows the application
-
-The software we write
-
-% Something about modern laptops
-
-% What sensors are available in a modern laptop?
-% Which sensors should we use given Fogarty?
-% Which sensors can we exclude?
-% - Inputs
-% - Keyboard
-% - Mouse
-% - Microphone?
-% Which sensors do we choose to include and how?
-% Which sensors do we choose to exclude and why?
-% Example: We exclude the webcam because Fogarty
-% shows that it is not needed when they have the
-% microphone
-
-We have chosen to omit the microphone sensor.
-There is a high risk of collecting too much noise compared to the signal we need.
-The work environment would need to be very quiet for us to use a normal microphone as a reliable sensor.
-For this reason we have dropped the microphone sensor.
+On windows the application will run natively,
+and on Linux and Mac OS the application can run with Mono.
+The version presented in this report is only running on Windows.
 
 \subsubsection{Keyboard and Mouse}
-By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send last recorded activity every second.
+By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send the last recorded activity every second.
 With this information we can infer presence due to the fact that there is someone triggering these events.
 
 The issue with using keyboard and mouse as sensors, is that even though they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
@@ -256,6 +241,12 @@ As described with the keyboard and mouse sensors, a person can perform activitie
 
 Beside the detection of presence, the microphone provides a tool for inferring interruptibility.
 According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
+
+We have chosen to omit the microphone sensor.
+There is a high risk of collecting too much noise compared to the signal we need.
+The work environment would need to be very quiet for us to use a normal microphone as a reliable sensor.
+For this reason we have dropped the microphone sensor.
+
 \subsubsection{Lightsensor}
 ????
 
