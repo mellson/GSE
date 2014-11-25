@@ -201,10 +201,10 @@ Commodity laptops can be many things, we define it as a machine with the followi
   \item Keyboard
   \item Microphone
   \item Camera
-  \item Ability to run custom sensing software
-  \item Lightsensor
   \item Bluetooth
   \item Wifi
+  \item Lightsensor
+  \item Ability to run custom sensing software
 \end{itemize}
 
 The current version of Approximator is written in .NET.
@@ -247,8 +247,31 @@ There is a high risk of collecting too much noise compared to the signal we need
 The work environment would need to be very quiet for us to use a normal microphone as a reliable sensor.
 For this reason we have dropped the microphone sensor.
 
+\subsubsection{Camera}
+Like the microphone the camera enables Approximator to sense the presence of a user without the user having to interact with the machine, but differs in the way it does so.
+In the setting of a room a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in this room that they are located.
+
+The camera can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, as well as an indicator of non-presence.
+Unlike the other sensors, the camera can sense if a user is sitting in front of the machine, even if the user is not directly interacting with the machine.
+But even though the camera can infer non-presence, there are still some issues.
+If a user is located in their office but not visible to the camera, the sensor will report non-presence.
+
+The camera could apply face-recognition in order to determine the identity of the user present.
+It could also be used to detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that can be used to measure interruptibility.
+
+\subsubsection{Bluetooth and Wi-Fi}
+These sensors can detect other devices such as mobile devices or beacons.
+If we assume that a user carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the users proximity to the machine.
+Another usage is if the office the user works in have beacons installed at the workplace, ether as Bluetooth or WiFi beacons, then the machine can infer its current symbolic location.
+This can be used to infer presence by detecting if the mobile device is nearby.
+The issue here is if the user should forget their mobile device, ether nearby the machine or at home.
+In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
+
 \subsubsection{Lightsensor}
-????
+The light sensor is measuring the ambient light of the environment.
+This can be used to sense if the laptop is in a dark or light room.
+We have decided against this sensor for now because we think we will only get redundant inputs.
+The conclusions we can draw from this sensor is already provided by the other inputs.
 
 \subsubsection{Process monitor}
 This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility.
@@ -256,36 +279,14 @@ The idea of the process monitor is to supply it with a list of processes (progra
 This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input.
 Through this we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
 
-\subsubsection{Geolocation}
-This sensor works by looking up the machines registered ip address, or if available uses the machines build-in gps, and uses this to acquire a geographical address.
+\subsubsection{Geo-location}
+This sensor works by looking up the machines registered IP address, or if available uses the machines built-in GPS, and uses this to acquire a geographical address.
 Knowing the whereabouts of the machine neither infers presence nor interruptibility on its own.
 But it does supply the other sensors and the decision module with useful information regarding the geographical setting of the machine.
 The most simple use of this is to detect if the machine currently resides at the office, home, or another location.
-But one of the more useful appliances would be in combination with the webcam.
-If the webcam can detect action such as a user entering or leaving the room, this information could tells us whether the a user is in close proximity to the machine, but only that.
+But one of the more useful appliances would be in combination with the camera.
+If the camera can detect action such as a user entering or leaving the room, this information could tells us whether the a user is in close proximity to the machine, but only that.
 Combined with even the coarse location of the machine, Approximator could infer that a user was in a specific office, in close proximity the machine.
-
-\subsubsection{Webcam}
-Like the microphone the webcam enables Approximator to sense the presence of a user without the user having to interact with the machine, but differs in the way it does so.
-In the setting of a room a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in this room that they are located.
-
-The webcam (based on the assumption that the webcam is facing the same way as the viewfield of the screen) can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, but also an indicator of non-presence.
-Unlike the other sensors, the webcam can sense if a user is sitting in front of the machine, even if the user is not directly interacting with the machine.
-But even though the webcam can infer non-presence, there are still some issues.
-For example, if a user is located in his/her office but not facing the machine e.g. sitting in a chair across the office, the user will be present and possible available, but the webcam will not be able to detect a user but only movement.
-
-The webcam can also apply face-recognition in order to determine the identity of the user present.
-It could also be possible to detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that can be used to measure interruptibility.
-But of course for these things to work, the actions must be performed within the view-field of the webcam.
-
-\subsubsection{Bluetooth, Wifi and Infrared}
-These sensors can not be used to infer presence nor interruptibility on its own.
-But they can be used to detect other devices such as mobile devices or beacons.
-If we assume that a user always carries his/her mobile device with them, then the bluetooth or wifi beacon from this device can be used to infer if the users proximity to the machine.
-Another usage is if the office the user works in have beacons installed at the workplace, ether as Bluetooth or WiFi beacons, then the machine can infer its current symbolic location.
-This can be used to infer presence by detecting if the mobile device is nearby.
-The issue here is if the user should forget their mobile device, ether nearby the machine or at home.
-In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
 
 \subsubsection{Calendar Sensor}
 
@@ -388,7 +389,7 @@ The camera was placed at an angle that did not allow for the content of their sc
 The angle did however show as much of the office as possible, while showing the face of the test user.
 
 Approximator was running on a Lenovo \textless insert specs\textgreater with a Windows 7 OS and a Lenovo \textless insert specs\textgreater also with Windows 7.
-Approximator utilized the keyboard, mouse and webcam \textless possible more\textgreater as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
+Approximator utilized the keyboard, mouse and camera \textless possible more\textgreater as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
 This data was to used later in our process.
 Approximator was specially configured to prompt a visual bell for the test user at random intervals averaging at two times per hour.
 The test users was instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) either verbally or by show of fingers on one hand when prompted.
