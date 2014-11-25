@@ -151,13 +151,13 @@ This makes the system unable to run on commodity laptops.
 \section{Approximator}
 Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
 
- We scope our project to using sensors found in modern laptop.
+ We scope our project to using sensors found in commodity laptops.
 
  We will evaluate the system by replicating the test done by Fogarty et al.
  Our hope is that we can achieve the same 68\% precision rate using only the sensors in scope.
 
-\subsection{Overall System Architecture}
-The solution we envision is called Approximator.
+\section{System Overview}
+The solution we propose is called Approximator.
 The system consist of three main parts:
 \begin{enumerate}
   \item Sensors collecting information about the user.
@@ -181,36 +181,24 @@ Client gets the interpreted presence and interruptibility from the infrastructur
 
 The next sections will cover each part of the solution in detail.
 
-% The entire system is build around the infrastructure
-% The Infrastructure lives in the cloud and is based on the actor model.
-% Each sensor registers itself with the infrastructure and sends raw sensor data
-% The infrastructure aggregates and interprets the data.
-% Demonstrators poll presence and availability information from the infrastructure
-% and present it to the users
-% Data can be either polled/posted from/to the server or streamed
-% Streams provide real-time updates in presence availabiltiy.
-% This is possible because of the highly scalable infrastructure
-% Where each User has a cluster of sensors nodes
-
 \subsection{Sensors}
 To gather data about the users presence and availability we use sensors.
 This project has restricted itself to only look at sensors which are available in commodity laptops.
 Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
-\begin{enumerate}
+\begin{itemize}
   \item Mouse
   \item Keyboard
-  \item Microphone - We have chosen not to use this sensor because we cannot control the noise level in the work environment.
-  \item Lightsensor
-  \item Operating System which supports running custom software
+  \item Microphone
+  \item Light
+  \item Operating System which supports running custom sensing software
   \item Webcam
   \item Bluetooth
   \item Wifi
-  \item More???
-\end{enumerate}
+\end{itemize}
 
-Modern laptops are every pervasive system developers dream, filled with all kinds of sensors that can be used to sense the environment.
-Every modenr laptop is equiped with sensors like microphones, webcameras, trackpads, keyboards and light sensors.
-They also contain radios for Bluetooth, Wifi and Infrared.
+The operating system
+
+The software we write
 
 % Something about modern laptops
 
@@ -444,7 +432,7 @@ This paper bases its research background and evalutation of the work done in \ci
 
 We chose to focus our paper on the sensors available in a modern laptop for the ease of use and deployability.
 Most people today also carry smart phones and newer devices such as fitness trackers and smart watches are gaining popularity.
-These devices could supply additional useful data to our infrastructure to enhance the prediction of interruptibility by providing more finegrained position and movement. 
+These devices could supply additional useful data to our infrastructure to enhance the prediction of interruptibility by providing more finegrained position and movement.
 We leave these devices for future work as they constrain deployability and are not all common case.
 
 
