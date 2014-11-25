@@ -378,45 +378,56 @@ TODO - find suitable classication model.
 
 \section{Evaluation}
 
-\subsection{Method}
-We applied the same method for evaluation as Fogarty et al \cite{fogarty2005predicting} use in their paper.
-In our experiment we recorded one person in a work situation over a period of x hours.
-The person was a male/female of age xx with a background in software development with both work and academic experience.
-The video was shown to x males and x females in the ages from xx to xx and were all from the IT community.
-We wanted to make sure that the experiment and assessments are in correlation with the workflow of actual software development.
-It was therefore important that both the user observed, and the persons estimating interruptibility was from the IT community and have experience in software development.
+\section{Method}
+In order to compare the performance of Approximator to Fogartys results, we conducted our experiments using the same method as Fogarty.
+Our experiment was conducted in two stages.
+First we recorded two test persons in their work environment with a camera, while Approximators sensors collected data.
+The second stage was conducted by inviting people from the software development community to a webpage we had set up for the purpose.
+On this webpage the participants were presented for short sequences of video, showing the test subject in random selected situations in their work environment.
 
-The method we applied consists of four steps.
+\subsubsection{Stage One}
+The two test persons was both males, and \textless age\textgreater and \textless age\textgreater years of age, and both worked for a security company where their primary task was to maintain and develop on the company system.
+Since the company also have offices in other countries, the test persons often did parallel development with the out-of-country teams.
+They worked in shared offices, where they shared the office with 3-4 other employees, often people assigned to the same project or with a similar skillset.
+It was possible to close the door to these offices, but that rarely occurred.
 
-\begin{enumerate}
-  \item User Observation
-  \item Human Estimation
-  \item Data analysis
-  \item Ablation Test
-\end{enumerate}
+The test persons was recorded with <insert camera specs here - along with dataformat\textgreater.
+The camera was placed at an angle that did not allow for the content of their screen to be visible.
+The angle did however show as much of the office as possible, while showing the face of the test person.
 
-\subsubsection{User Observation}
-The first step involved a recording of a user in their work setting, followed by the user annotating where they found themselves interruptible.
-The user then went through the annotated points and assessed their own interruptibility on a 1 to 5 scale at each point.
-The user was afterwards presented for a confidence questionnaire, to test their confidence in their own assessments.
-We use this information to find the sequences in the video where the user is most confident and use these as base for our following tests.
+Approximator was running on a Lenovo \textless insert specs\textgreater with a Windows 7 OS and a Lenovo \textless insert specs\textgreater also with Windows 7.
+Approximator utilized the keyboard, mouse and webcam \textless possible more\textgreater as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
+Approximator was specially configured to prompt a visual bell for the test person at random intervals averaging at two times per hour.
+The test persons was instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) either verbally or by show of fingers on one hand when prompted.
+The test persons had no way of pausing the application \textless still to be finally determided\textgreater, but could request retroactively to have sequence deleted if necessary.
+The prompts where the test person was not present was removed from the dataset after the experiment.
+At other sequences the test persons clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention. These were interpreted by us as a high-non-interruptible event.
 
-\subsubsection{Human Estimation}
-In the second step we invited test persons from our university grounds. We made contact to them through personal relations and facebook fora related to university activities.
-We chose students from the university because it facilitated fast testing since the students were on campus and could easily participate in the study.
-Then we showed selected video sequences to x test persons and asked them to assess to which degree they found the user as interruptible or non-interruptible on a scale from 1 (non-interruptible) to 5 (interruptible).
-We chose the video sequences where the user was most confident in their own assessments.
-By using these sequences, we had a strong heuristic for when the user was interruptible, and use this for comparison in the next step.
+The experiment was conducted over a period of two workdays from 9 am to 4:30 pm, yielding a total of 30 hours of video and \textless number of prompt\textgreater prompts.
+
+\subsubsection{Stage Two}
+At this point we created a webpage with the explicit purpose of peer reviewing the video we had collected. The link was sent out to persons from the software development community, who then partook in the survey on their own machine and in their own setting.
+When the persons entered the site, they were first required to enter their demographic information.
+These questions consisted of gender, age, educational background, ethnicity and experience with software development \textless maybe more\textgreater.
+This is to insure that the persons participating in the survey are familiar with the environmental setting of software development and also to insure the validity of this paper.
+Before the person was presented for the sequences, they were instructed to imagine themselves in the office trying to interact with the person in the sequence, and based on a 1 (highly-interruptible) to 5 (highly-non-interruptible) scale assess how interruptible they were.
+
+The person was then presented with \textless insert number of samples\textgreater sequences of 15-30 seconds in length.
+These was the 15-30 seconds leading up to/or after the test person being prompted for self-report.
+The person could replay the sequence as many times as they wanted until they felt they could give a valid assessment.
+But each sequence was played in full length before the person could rate it and proceed to the next.
+
+A total of \textless insert number of people\textgreater participated in the survey where \textless elaborate on demographics of the participants\textgreater.
 
 \subsubsection{Data analysis}
-Step three was done by comparing the results gathered from Approximator, the test persons, and the user.
+When the experiment was concluded, we compared the results gathered from Approximator, the test persons, and the user.
 This was done by plotting the values into two confusion matrices.
 One comparing the answers of user to answers of the test persons.
 And one comparing the answers of the user to the results of Approximator.
 By finding correlations between hits in the test-person/user and Approximator/user results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
 \subsubsection{Ablation Test}
-In step four we investigated which sensors supplied the infrastructure with information supporting a higher/lower hit rate.
+When the confusion matrices was constructed, we investigated which sensors supplied the infrastructure with information supporting a higher/lower hit rate.
 Based on this investigation we performed an ablation test on the sensors to improve our result.
 The experiment involving test persons was not repeated as the circumstances in which the experiment was conducted had not changed.
 Instead we had Approximator generate new interruptibility values based on the historic information provided from the subset of sensors leftover after the ablation test.
