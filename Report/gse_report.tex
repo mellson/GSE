@@ -149,29 +149,37 @@ However to get these inputs several external sensors are needed.
 This makes the system unable to run on commodity laptops.
 
 \section{Approximator}
+Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
 
-Based on the related work we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
-Our solution is called Approximator.
-To support this system we design and build an a scalable infrastructure that can be easily deployed with cloud services.
-The infrastructure facilitates the presence and interrubtibility by reading raw sensor input and intepreting presence and interrubtibility from that.
-Building on the research of Fogarty et al.\cite{fogarty2005predicting} we will predict interruptability from raw sensor input but only using sensors found in modern laptops. We will also evaluate the system in the same way to find whether Approximator can sustain the same 68\% precision rate.
+ We scope our project to using sensors found in modern laptop.
+
+ We will evaluate the system by replicating the test done by Fogarty et al.
+ Our hope is that we can achieve the same 68\% precision rate using only the sensors in scope.
 
 \subsection{Overall System Architecture}
+The solution we envision is called Approximator.
+The system consist of three main parts:
+\begin{enumerate}
+  \item Sensors collecting information about the user.
+  \item An infrastructure aggregating and classifying sensor data.
+  \item A client showing classified presence and interruptibility information.
+\end{enumerate}
 
 The central component of Approximator is the infrastructure.
 The infrastructure is a server component that is deployed to a cloud service.
-The infrastructure exposes a REST API that Sensors and Demonstrators use to communicate through.
+The infrastructure exposes an API that sensors and clients use to communicate with.
 Sensors register themselves with the infrastructure and sends raw sensors data.
 The infrastructure aggregates and interprets the raw sensor data to deduct presence and interruptibility of users.
-Demonstrators pull interpreted presence and interruptibility from the infrastructure to expose it to users.
-
+Client gets the interpreted presence and interruptibility from the infrastructure and visualizes this to the user.
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\columnwidth]{figures/system_architecture.pdf}
-  \caption{System architecture}
+  \caption{High level system architecture}
   \label{fig:architecture}
 \end{figure}
+
+The next sections will cover each part of the solution in detail.
 
 % The entire system is build around the infrastructure
 % The Infrastructure lives in the cloud and is based on the actor model.
@@ -183,67 +191,6 @@ Demonstrators pull interpreted presence and interruptibility from the infrastruc
 % Streams provide real-time updates in presence availabiltiy.
 % This is possible because of the highly scalable infrastructure
 % Where each User has a cluster of sensors nodes
-
-\subsection{Infrastructure}
-To provide presence and availability information to cloud workers we need a few things.
-Firstly we need to gather data input from the working environment.
-Secondly we need to aggregate this data and combine it for each user.
-Lastly we need to look at the data and through analyzises provide presence and availability information.
-
-All these tasks are combined in our infrastructure which can read input from sensors and analyze this with a decision module.
-
-The work flow of the infrastructure is:
-\begin{enumerate}
-  \item Gather data
-  \item Aggregate data
-  \item Analyze data
-  \item Provide data
-\end{enumerate}
-
-\subsubsection{Design}
-The infrastructure is built to support many sensors for each user.
-This modelling can lead to a very high amount of sensors connecting to the system.
-To support this scalability need we base our system on the actor model by Carl Hewitt \cite{hewitt1973universal}.
-
-Many software applications are written using the object oriented modelling.
-The actor model is an alternative way to model computer programs.
-In the actor model the unit of work is an actor.
-In object oriented programming the unit of work is an object.
-Actors communicate by sending messages to each other.
-Actors does not share state, making it possible to run actors in parallel and even on different machines.
-This makes the actor model a good candidate for building highly scalable applications.
-
-There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
-For this project we have chosen Akka because it is Java based.
-This supports the technical knowledge in our group.
-
-We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
-
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=\columnwidth]{figures/infrastructure_design.pdf}
-  \caption{Infrastructure Design}
-  \label{fig:infrastructure}
-\end{figure}
-
-It is possible to deploy Akka applications on a server which can run Java.
-For this project we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
-Having the infrastructure running at a cloud provider makes it reachable from the standard internet.
-This enables us to build sensors and demonstrators that can run anywhere, as long as they have an internet connection they can reach our infrastructure.
-
-\subsubsection{Data}
-Gathering data happens by sensors providing data.
-To communicate with our infrastructure a sensor needs to register with the service.
-When a sensor registers itself it provides a username.
-This username is used to aggregate a group of sensors together around the notion of user.
-
-\subsubsection{Decision Logic}
-Raw sensor data does not say much about presence or availability.
-We need to analyze the data to make sense of it.
-The infrastructure has a decision module which can do this.
-
-When a client asks the service to provide data the decision module translates the data before serving it through the REST API.
 
 \subsection{Sensors}
 To gather data about the users presence and availability we use sensors.
@@ -271,9 +218,9 @@ They also contain radios for Bluetooth, Wifi and Infrared.
 % Which sensors should we use given Fogarty?
 % Which sensors can we exclude?
 % - Inputs
-%	- Keyboard
-%	- Mouse
-%	- Microphone?
+% - Keyboard
+% - Mouse
+% - Microphone?
 % Which sensors do we choose to include and how?
 % Which sensors do we choose to exclude and why?
 % Example: We exclude the webcam because Fogarty
@@ -353,10 +300,83 @@ This can be used to infer presence by detecting if the mobile device is nearby.
 The issue here is if the person should forget their mobile device, ether nearby the machine or at home.
 In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
 
+\subsubsection{Calendar Sensor}
 
-\subsection{Decision Logic}
+\subsection{Infrastructure}
+To provide presence and availability information to cloud workers we need a few things.
+Firstly we need to gather data input from the working environment.
+Secondly we need to aggregate this data and combine it for each user.
+Lastly we need to look at the data and through analyzises provide presence and availability information.
+
+All these tasks are combined in our infrastructure which can read input from sensors and analyze this with a decision module.
+
+The work flow of the infrastructure is:
+\begin{enumerate}
+  \item Gather data
+  \item Aggregate data
+  \item Analyze data
+  \item Provide data
+\end{enumerate}
+
+\subsubsection{Design}
+The infrastructure is built to support many sensors for each user.
+This modelling can lead to a very high amount of sensors connecting to the system.
+To support this scalability need we base our system on the actor model by Carl Hewitt \cite{hewitt1973universal}.
+
+Many software applications are written using the object oriented modelling.
+The actor model is an alternative way to model computer programs.
+In the actor model the unit of work is an actor.
+In object oriented programming the unit of work is an object.
+Actors communicate by sending messages to each other.
+Actors does not share state, making it possible to run actors in parallel and even on different machines.
+This makes the actor model a good candidate for building highly scalable applications.
+
+There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
+For this project we have chosen Akka because it is Java based.
+This supports the technical knowledge in our group.
+
+We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/infrastructure_design.pdf}
+  \caption{Infrastructure Design}
+  \label{fig:infrastructure}
+\end{figure}
+
+It is possible to deploy Akka applications on a server which can run Java.
+For this project we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
+Having the infrastructure running at a cloud provider makes it reachable from the standard internet.
+This enables us to build sensors and demonstrators that can run anywhere, as long as they have an internet connection they can reach our infrastructure.
+
+\subsubsection{Data}
+Gathering data happens by sensors providing data.
+To communicate with our infrastructure a sensor needs to register with the service.
+When a sensor registers itself it provides a username.
+This username is used to aggregate a group of sensors together around the notion of user.
+
+\subsection{Client}
+Windows based user installable application.
+The sensor actually combines two parts of the system.
+The sensors are built into the client.
+This is done for easy of use for the end user.
+Merging the two parts makes it possible to get both parts on the users laptop with a single installation.
+
+\section{Decision Logic}
+Raw sensor data does not say much about presence or availability.
+We need to analyze the data to make sense of it.
+The infrastructure has a decision module which can do this.
+
+When a client asks the service to provide data the decision module translates the data before serving it through the REST API.
+
 While each sensor by itself does not provide useable information, we can actually get quite accurate reading by aggregating the sensors and feeding them into a decision module.
 This section will provide information about how we approach this.
+
+\subsection{Classification}
+We use a X classification of our sensor data.
+The analysis is done in one pass.
+TODO - find suitable classication model.
 
 % - Screenshot of app with presence + interruptibility
 
