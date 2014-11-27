@@ -32,7 +32,9 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
       val userActor = actorRefFactory.actorOf(Props[UserActor], sensorRegistration.UserName)
       users += (sensorRegistration.UserName -> (id, userActor))
       idCounter += 1
-      ok(s"$userPath/$id")
+      val endpoint = s"$userPath/$id"
+      println(s"Created endpoint: $endpoint for user: ${sensorRegistration.UserName}")
+      ok(endpoint)
     case (_,Some(i: (Int, ActorRef)))  => ok(s"$userPath/${i._1}")
   }
 
@@ -56,6 +58,7 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
       error("Wrong id")
     else {
       user.get._2 ! sensorReading
+      println(sensorReading)
       ok(s"Received sensor data")
     }
   }
