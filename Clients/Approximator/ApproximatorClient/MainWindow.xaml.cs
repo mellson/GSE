@@ -13,7 +13,7 @@ namespace ApproximatorClient
         {
             InitializeComponent();
             var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
-            ws.OnMessage += (sender, e) => Console.WriteLine("Response from WebSocket" + e.Data);
+//            ws.OnMessage += (sender, e) => Console.WriteLine(@"Response from WebSocket" + e.Data);
             ws.Connect();
 
             // We can communicate back with the server if we need it

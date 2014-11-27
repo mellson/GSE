@@ -13,10 +13,11 @@ namespace ApproximatorClient
         private const string BaseUrl = @"http://spcl.cloudapp.net/";
         private const string Method = "PUT";
         private const string ContentType = "application/json";
+
         //Retrives the endpoint that the sensor sends data to
         public static void SetupConnection(SensorRegistration registration)
         {
-            const string endPoint = BaseUrl + "register";            
+            const string endPoint = BaseUrl + "register";
             var request = WebRequest.Create(endPoint);
             request.Method = Method;
             request.ContentType = ContentType;
@@ -28,16 +29,17 @@ namespace ApproximatorClient
                 streamWriter.Close();
             }
             var httpResponse = request.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            var stream = httpResponse.GetResponseStream();
+            if (stream == null) return;
+            using (var streamReader = new StreamReader(stream))
             {
                 var result = streamReader.ReadToEnd();
                 var resultDict = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
                 SensorEndpointUrls.Add(registration.SensorName, BaseUrl + resultDict["Ok"]);
             }
-            
         }
         
-        // Upload to infrastructure and return true if the upload was successfull
+        // Upload to infrastructure and return true if the upload was successful
         public static bool UploadJson(string json)
         {
             SensorReading sensorReading = null;
@@ -57,18 +59,18 @@ namespace ApproximatorClient
                     streamWriter.Close();
                 }
                 var httpResponse = request.GetResponse();
-                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                {
-                    var result = streamReader.ReadToEnd();
-                    Console.WriteLine(result);
-                }
+                var stream = httpResponse.GetResponseStream();
+                if (stream != null)
+                    using (var streamReader = new StreamReader(stream))
+                    {
+                        var result = streamReader.ReadToEnd();
+//                        Console.WriteLine(result);
+                    }
             }
             catch (Exception e)
             {
                 if (sensorReading != null) SensorEndpointUrls.Remove(sensorReading.SensorName);
-                Console.WriteLine("ERROR");
-                Console.WriteLine("Message: {0}", e.Message);
-                Console.WriteLine("Exiting");
+                Console.WriteLine(@"Message: {0}", e.Message);
                 return false;
             }
             return true;
