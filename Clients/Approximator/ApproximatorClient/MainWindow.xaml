@@ -3,6 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="152*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Name="indicator" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="319" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="517"/>
+
     </Grid>
 </Window>
