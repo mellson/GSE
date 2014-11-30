@@ -15,6 +15,7 @@ namespace ApproximatorClient.Sensors
             CameraIndex = cameraIndex;
             UpdateReadingForSensorName(SensorName, UserName, "Init");
             var faceDetectionThread = new Thread(DetectFaces);
+            faceDetectionThread.IsBackground = true;
             faceDetectionThread.Start();
             StartUploading();
         }
