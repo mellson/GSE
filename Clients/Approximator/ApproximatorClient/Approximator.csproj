@@ -53,6 +53,10 @@
     <Reference Include="Emgu.Util">
       <HintPath>..\packages\EmguCV.221.x86.1.0\lib\Emgu.Util.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -194,6 +198,9 @@
     </Content>
     <Content Include="..\packages\EmguCV.221.x86.1.0\opencv\ZedGraph.dll">
       <Link>OpenCV\ZedGraph.dll</Link>
+    </Content>
+    <Content Include="Resources\Notify.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup />

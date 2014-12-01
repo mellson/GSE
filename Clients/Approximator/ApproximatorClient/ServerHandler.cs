@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using log4net;
 
 namespace ApproximatorClient
 {
@@ -13,6 +14,7 @@ namespace ApproximatorClient
         private const string BaseUrl = @"http://spcl.cloudapp.net/";
         private const string Method = "PUT";
         private const string ContentType = "application/json";
+        private static readonly ILog dataLog = LogManager.GetLogger("DataLogger");
 
         //Retrives the endpoint that the sensor sends data to
         public static void SetupConnection(SensorRegistration registration)
@@ -45,7 +47,7 @@ namespace ApproximatorClient
             SensorReading sensorReading = null;
             try
             {
-                Console.Out.WriteLine(json);
+                dataLog.Info(json);
                 sensorReading = JsonConvert.DeserializeObject<SensorReading>(json);
                 if (!SensorEndpointUrls.ContainsKey(sensorReading.SensorName)) SetupConnection(sensorReading.GetSensorRegistration());
                 var endPoint = SensorEndpointUrls[sensorReading.SensorName];
@@ -70,7 +72,7 @@ namespace ApproximatorClient
             catch (Exception e)
             {
                 if (sensorReading != null) SensorEndpointUrls.Remove(sensorReading.SensorName);
-                Console.WriteLine(@"Message: {0}", e.Message);
+                dataLog.InfoFormat(@"Message: {0}", e.Message);
                 return false;
             }
             return true;
