@@ -32,7 +32,7 @@
 % since its job is to redefine many LaTeX commands.
 \usepackage[pdftex]{hyperref}
 \hypersetup{
-pdftitle={Approximator - A system for presence and interruptibility-sharing},
+pdftitle={Deciding presence and interruptibility using only a laptop},
 pdfauthor={Kristian S. M. Andersen, Anders Bech Mellson and Mads Daniel Christensen},
 pdfkeywords={spce, gse, presence, awareness},
 bookmarksnumbered,
@@ -52,7 +52,7 @@ breaklinks=true,
 % End of preamble. Here it comes the document.
 \begin{document}
 
-\title{Approximator - A system for presence and interruptibility-sharing}
+\title{Deciding presence and interruptibility using only a laptop}
 \numberofauthors{3}
 \author{
   \alignauthor Anders Bech Mellson\\
@@ -103,7 +103,7 @@ This is done with a test where we compare the accuracy of our availability predi
 
 % Sharam: the last paragraph in the introduction section should provide a very quick overview of how the rest of the paper is structured.
 We first discover related work in the field of interruptibility and presence-sharing that can inform the design proces of our system.
-We then introduce Approximator, our solution for interruptibility sensing and sharing. 
+We then introduce Approximator, our solution for interruptibility sensing and sharing.
 We go on to describe and select the sensors used for Approximator.
 Finally we evaluate the system against human estimation of interruptibility.
 
@@ -162,8 +162,8 @@ This makes the system unable to run on commodity laptops.
 
 \subsubsection{Approximator}
 Approximator differs from MyTeam, SenSey, InterruptMe and self-reporting solutions by being a context-aware application that is easy to deploy and works by utilizing only the sensors that can be found within a standard laptop.
-MyTeam, SenSay and InterruptMe all are, or rely, on external sensors in order to archive context-awareness. 
-MyVine on the other hand, utilizes a combination of integrated sensors and contextual information to infer context-awareness. 
+MyTeam, SenSay and InterruptMe all are, or rely, on external sensors in order to archive context-awareness.
+MyVine on the other hand, utilizes a combination of integrated sensors and contextual information to infer context-awareness.
 MyVine requires information such as computer programs associated with work and access to the persons calendar.
 In Approximator we rely only on automatic non-parameterized sensors, meaning that the sensors we use does not require prior knowledge of the person using the machine.
 Based on this approach we will investigate how Approximator performs in comparison to human judgement using Fogartys method.
@@ -215,25 +215,14 @@ The next sections will cover each part of the solution in detail.
 \subsection{Sensors}
 To gather data about the users presence and availability we use sensors.
 This project has been restricted to only look at sensors which are available in commodity laptops.
-Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
+We define a commodity laptop to be a device you can buy at any computer store.
+The device should be able to run your operating system of choice.
+It should have a camera, an input device, a microphone and radios such as WiFi and Bluetooth built-in.
 
-%TODO remove list and write about why we think these are sensors.
-\begin{itemize}
-  \item Keyboard and Mouse
-  \item Microphone
-  \item Camera
-  \item Bluetooth and Wi-Fi
-  \item Lightsensor
-  \item Process monitor
-  \item Geo-location
-  \item Calendar Sensor
-\end{itemize}
-
-The current version of Approximator is written in .NET.
-This makes it possible to run the client on several platforms.
-On windows the application will run natively,
-and on Linux and Mac OS the application can run with Mono.
-The version presented in this report is only running on Windows.
+%TODO check the section and make sure we do what we say here.
+In this section we will have a look at some of the sensing capabilities of a commodity laptop.
+We will discuss the strengths and weaknesses of these sensors.
+As well as providing some reasoning for choosing the sensors we have used in our client.
 
 \subsubsection{Keyboard and Mouse}
 By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send the last recorded activity every second.
