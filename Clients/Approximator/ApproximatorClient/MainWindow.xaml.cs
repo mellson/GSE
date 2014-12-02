@@ -28,7 +28,7 @@ namespace ApproximatorClient
             // We can communicate back with the server if we need it
             ws.Send("Hello From .NET Client");
 
-            var userName = Environment.UserName;
+            var userName = Environment.UserName.Replace(" ","");
             new MouseSensor(userName, ws);
             new KeyboardSensor(userName, ws);
             new FaceDetectionSensor(userName, ws, cameraIndex: 1);
