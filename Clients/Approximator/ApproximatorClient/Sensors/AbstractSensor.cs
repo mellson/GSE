@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using Newtonsoft.Json;
+using WebSocketSharp;
 
 namespace ApproximatorClient.Sensors
 {
@@ -8,12 +9,18 @@ namespace ApproximatorClient.Sensors
     {
         internal string SensorName;
         internal string UserName;
+        internal WebSocket WebSocket;
         internal SensorReading LastReading;
         internal TimeSpan UploadInterval = TimeSpan.FromMilliseconds(200);
 
-        internal static bool UploadToServer(string json)
+        internal static bool UploadToRest(string json)
         {
             return ServerHandler.UploadJson(json);
+        }
+
+        internal void UploadToWebSocket(string json)
+        {
+            WebSocket.Send(json);
         }
 
         internal void UpdateReadingForSensorName(string name, string username, string value)
@@ -37,7 +44,7 @@ namespace ApproximatorClient.Sensors
         {
             if (_lastUploadedReading.Equals(LastReading)) return;
             _lastUploadedReading = LastReading;
-            UploadToServer(JsonConvert.SerializeObject(LastReading));
+            UploadToRest(JsonConvert.SerializeObject(LastReading));
         }
     }
 }

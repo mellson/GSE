@@ -20,7 +20,8 @@ namespace ApproximatorClient
         public MainWindow()
         {
             InitializeComponent();
-            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+//            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+            var ws = new WebSocket("ws://localhost:6696/users");
             ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
             ws.Connect();
 
@@ -28,9 +29,9 @@ namespace ApproximatorClient
             ws.Send("Hello From .NET Client");
 
             var userName = Environment.UserName;
-            new MouseSensor(userName);
-            new KeyboardSensor(userName);
-            new FaceDetectionSensor(userName, cameraIndex: 0);
+            new MouseSensor(userName, ws);
+            new KeyboardSensor(userName, ws);
+            new FaceDetectionSensor(userName, ws, cameraIndex: 1);
             var visualBellThread = new Thread(VisualBell) {IsBackground = true};
             visualBellThread.Start();
         }

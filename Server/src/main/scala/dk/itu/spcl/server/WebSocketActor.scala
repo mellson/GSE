@@ -57,7 +57,8 @@ class WebSocketActor extends Actor {
       self ! Unregister(ws)
 
     case Message(ws, msg) =>
-      println(s"url ${ws.getResourceDescriptor} received msg '$msg'")
+      val time = DateTime.now.toString
+      println(s"$time $msg")
 
     case Clear =>
       for (marker <- markers if None != marker._2) {

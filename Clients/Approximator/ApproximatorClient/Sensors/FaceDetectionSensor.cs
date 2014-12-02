@@ -3,19 +3,20 @@ using System.Linq;
 using System.Threading;
 using Emgu.CV;
 using Emgu.CV.Structure;
+using WebSocketSharp;
 
 namespace ApproximatorClient.Sensors
 {
     class FaceDetectionSensor : AbstractSensor
     {
-        public FaceDetectionSensor(string username, string name = "FaceDetectionSensor", int cameraIndex = 0)
+        public FaceDetectionSensor(string username, WebSocket webSocket, string name = "FaceDetectionSensor", int cameraIndex = 0)
         {
             SensorName = name;
             UserName = username;
             CameraIndex = cameraIndex;
+            WebSocket = webSocket;
             UpdateReadingForSensorName(SensorName, UserName, "Init");
-            var faceDetectionThread = new Thread(DetectFaces);
-            faceDetectionThread.IsBackground = true;
+            var faceDetectionThread = new Thread(DetectFaces) {IsBackground = true};
             faceDetectionThread.Start();
             StartUploading();
         }
@@ -41,7 +42,7 @@ namespace ApproximatorClient.Sensors
                     statusString = userInFrontOfScreen ? "Present with profile face" : statusString;
                 }
                 UpdateReadingForSensorName(SensorName, UserName, statusString);
-                Thread.Sleep(100);
+                Thread.Sleep(500);
             }
         }
 
