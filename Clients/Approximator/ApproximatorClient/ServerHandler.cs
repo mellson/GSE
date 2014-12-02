@@ -10,8 +10,8 @@ namespace ApproximatorClient
     class ServerHandler
     {
         private static readonly Dictionary<string,string> SensorEndpointUrls = new Dictionary<string,string>();
-        private const string BaseUrl = @"http://localhost:8080/";
-//        private const string BaseUrl = @"http://spcl.cloudapp.net/";
+//        private const string BaseUrl = @"http://localhost:8080/";
+        private const string BaseUrl = @"http://spcl.cloudapp.net/";
         private const string Method = "PUT";
         private const string ContentType = "application/json";
         private static readonly ILog dataLog = LogManager.GetLogger("DataLogger");

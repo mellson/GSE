@@ -20,8 +20,8 @@ namespace ApproximatorClient
         public MainWindow()
         {
             InitializeComponent();
-//            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
-            var ws = new WebSocket("ws://localhost:6696/users");
+            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+//            var ws = new WebSocket("ws://localhost:6696/users");
             ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
             ws.Connect();
 
