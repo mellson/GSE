@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Globalization;
+using System.Linq;
 using System.Threading;
-using System.Drawing;
-using Emgu.CV.CvEnum;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
@@ -17,22 +15,33 @@ namespace ApproximatorClient.Sensors
             CameraIndex = cameraIndex;
             UpdateReadingForSensorName(SensorName, UserName, "Init");
             var faceDetectionThread = new Thread(DetectFaces);
+            faceDetectionThread.IsBackground = true;
             faceDetectionThread.Start();
             StartUploading();
         }
 
         public void DetectFaces()
         {
-            var face = new HaarCascade("OpenCV/haarcascade_frontalface_default.xml");
+            var frontalFace = new HaarCascade("OpenCV/haarcascade_frontalface_default.xml");
+            var profileFace = new HaarCascade("OpenCV/haarcascade_profileface.xml");
             var grabber = new Capture(CameraIndex);
             while (true)
             {
                 var currentFrame = grabber.QueryFrame();
                 var gray = currentFrame.Convert<Gray, Byte>();
-                var facesDetected = gray.DetectHaarCascade(face);
-                Console.WriteLine(@"Faces detected: {0}", facesDetected[0].Length);
-                UpdateReadingForSensorName(SensorName, UserName, facesDetected[0].Length.ToString(CultureInfo.InvariantCulture));
-                Thread.Sleep(300);
+                var facesDetected = gray.DetectHaarCascade(frontalFace);
+                var userInFrontOfScreen = facesDetected[0].Any();
+                var statusString = "Not Present";
+                if (userInFrontOfScreen)
+                    statusString = "Present with frontal face";
+                else
+                {
+                    facesDetected = gray.DetectHaarCascade(profileFace);
+                    userInFrontOfScreen = facesDetected[0].Any();
+                    statusString = userInFrontOfScreen ? "Present with profile face" : statusString;
+                }
+                UpdateReadingForSensorName(SensorName, UserName, statusString);
+                Thread.Sleep(100);
             }
         }
 

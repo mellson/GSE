@@ -6,10 +6,10 @@ namespace ApproximatorClient.Sensors
 {
     public abstract class AbstractSensor
     {
-        private const double SecondsBetweenUploads = 1;
         internal string SensorName;
         internal string UserName;
         internal SensorReading LastReading;
+        internal TimeSpan UploadInterval = TimeSpan.FromMilliseconds(200);
 
         internal static bool UploadToServer(string json)
         {
@@ -28,14 +28,14 @@ namespace ApproximatorClient.Sensors
 
         public void StartUploading()
         {
-            var updateEverySecond = Observable.Interval(TimeSpan.FromSeconds(SecondsBetweenUploads));
+            var updateEverySecond = Observable.Interval(UploadInterval);
             updateEverySecond.Subscribe(UploadHelper);
         }
 
-        private SensorReading _lastUploadedReading;
+        private SensorReading _lastUploadedReading = new SensorReading();
         private void UploadHelper(long number)
         {
-            if (_lastUploadedReading == LastReading) return;
+            if (_lastUploadedReading.Equals(LastReading)) return;
             _lastUploadedReading = LastReading;
             UploadToServer(JsonConvert.SerializeObject(LastReading));
         }

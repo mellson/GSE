@@ -17,7 +17,7 @@ namespace ApproximatorClient.Sensors
 
         private void MouseMoved(object sender, MouseEventArgs e)
         {
-            UpdateReadingForSensorName(SensorName, UserName, String.Format("X:{0},Y:{1}",e.X,e.Y));
+            UpdateReadingForSensorName(SensorName, UserName, "Mouse Moved");
         }
     }
 }

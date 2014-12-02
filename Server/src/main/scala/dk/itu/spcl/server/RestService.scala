@@ -3,14 +3,15 @@ package dk.itu.spcl.server
 import akka.actor.{Actor, ActorRef, Props}
 import akka.pattern.ask
 import akka.util.Timeout
+import dk.itu.spcl.approximator._
 import dk.itu.spcl.auth.Authenticator
 import dk.itu.spcl.json.CustomJsonFormats
-import dk.itu.spcl.approximator._
+import dk.itu.spcl.json.CustomJsonFormats._
 import spray.routing._
+
 import scala.concurrent.Await
-import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
-import CustomJsonFormats._
+import scala.concurrent.duration._
 
 class RestActor extends RestService with Actor {
   def receive = runRoute(route)
@@ -32,7 +33,9 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
       val userActor = actorRefFactory.actorOf(Props[UserActor], sensorRegistration.UserName)
       users += (sensorRegistration.UserName -> (id, userActor))
       idCounter += 1
-      ok(s"$userPath/$id")
+      val endpoint = s"$userPath/$id"
+      println(s"Created endpoint: $endpoint for user: ${sensorRegistration.UserName}")
+      ok(endpoint)
     case (_,Some(i: (Int, ActorRef)))  => ok(s"$userPath/${i._1}")
   }
 

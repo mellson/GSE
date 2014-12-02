@@ -16,6 +16,8 @@ class UserActor extends Actor {
       // Update all clients connected via web socket with this latest sensor reading
       Infrastructure.webSocketActor ! reading
 
+      println(reading)
+
       lastReading = reading
       if (readings.length < 10)
         readings = reading :: readings
