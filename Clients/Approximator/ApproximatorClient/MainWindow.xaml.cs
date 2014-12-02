@@ -9,30 +9,25 @@ using WebSocketSharp;
 
 namespace ApproximatorClient
 {
-    /// <summary>
-    ///     Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow
     {
         private static readonly ILog PromptLog = LogManager.GetLogger("PromptLogger");
         private static readonly ILog DataLog = LogManager.GetLogger("DataLogger");
+        private readonly WebSocket _ws;
+        private readonly string _userName;
 
         public MainWindow()
         {
             InitializeComponent();
-            var ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
-//            var ws = new WebSocket("ws://localhost:6696/users");
-            ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
-            ws.Connect();
-
-            // We can communicate back with the server if we need it
-            ws.Send("Hello From .NET Client");
-
-            var userName = Environment.UserName.Replace(" ","");
-            new MouseSensor(userName, ws);
-            new KeyboardSensor(userName, ws);
-            new FaceDetectionSensor(userName, ws, cameraIndex: 1);
-            var visualBellThread = new Thread(VisualBell) {IsBackground = true};
+            _ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+            _ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
+            _ws.Connect();
+            _userName = Environment.UserName.Replace(" ","");
+            _ws.Send("Connected .NET Client for user " + _userName);
+            new MouseSensor(_userName, _ws);
+            new KeyboardSensor(_userName, _ws);
+            new FaceDetectionSensor(_userName, _ws, cameraIndex: 0);
+            var visualBellThread = new Thread(VisualBell) { IsBackground = true };
             visualBellThread.Start();
         }
 
@@ -45,7 +40,6 @@ namespace ApproximatorClient
                 Dispatcher.Invoke(new Action(() => Top = 0));
                 Dispatcher.Invoke(new Action(() => Left = SystemParameters.PrimaryScreenWidth - Width));
                 Dispatcher.Invoke(new Action(() => Topmost = true));
-
                 for (var i = 0; i <= 20; i++)
                 {
                     Dispatcher.Invoke(i%2 == 0
@@ -55,10 +49,12 @@ namespace ApproximatorClient
                         sound.Play();
                     Thread.Sleep(200);
                 }
-
                 Dispatcher.Invoke(new Action(() => Topmost = false));
-                PromptLog.Info("Prompted user");
-                Thread.Sleep(random.Next(60000*20, 60000*40)); //wait between 20-40 minutes
+                PromptLog.Info("Prompted user: " + _userName);
+                _ws.Send("Prompted user: " + _userName);
+                const int minutes20 = 60000*20;
+                const int minutes40 = 60000*40;
+                Thread.Sleep(random.Next(minutes20, minutes40)); // sleep for a random interval between 20-40 minutes
             }
         }
     }
