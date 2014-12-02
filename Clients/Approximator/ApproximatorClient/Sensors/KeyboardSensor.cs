@@ -17,7 +17,7 @@ namespace ApproximatorClient.Sensors
 
         private void HookManagerOnKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
-            UpdateReadingForSensorName(SensorName, UserName, keyEventArgs.KeyValue.ToString(CultureInfo.InvariantCulture));
+            UpdateReadingForSensorName(SensorName, UserName, "Key Pressed");
         }
     }
 }
