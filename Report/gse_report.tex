@@ -186,7 +186,7 @@ Client gets the interpreted presence and interruptibility from the infrastructur
 \begin{figure}[H]
   \centering
   \includegraphics[width=\columnwidth]{figures/system_architecture.pdf}
-  \caption{High level system architecture}
+  \caption{Infrastructure encapsulated in a communication layer.}
   \label{fig:architecture}
 \end{figure}
 
@@ -197,14 +197,14 @@ To gather data about the users presence and availability we use sensors.
 This project has restricted itself to only look at sensors which are available in commodity laptops.
 Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
 \begin{itemize}
-  \item Mouse or Trackpad
-  \item Keyboard
+  \item Keyboard and Mouse
   \item Microphone
   \item Camera
-  \item Bluetooth
-  \item Wifi
+  \item Bluetooth and Wi-Fi
   \item Lightsensor
-  \item Ability to run custom sensing software
+  \item Process monitor
+  \item Geo-location
+  \item Calendar Sensor
 \end{itemize}
 
 The current version of Approximator is written in .NET.
