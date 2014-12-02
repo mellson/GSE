@@ -115,15 +115,18 @@ But the approach has some drawbacks.
 Users can feel self-conscious about the image of themselves being broadcasted.
 Not only that but keeping high quality media streams running all day can also be expensive since it consumes a large amount of bandwidth.
 
+\subsection{Self reporting systems}
 Distributed teams can use instant messaging (IM) applications to communicate.
 Research on IM usage \cite{nardi2000interaction} \cite{handel2002chat} \cite{tang2001connexus} has shown that IM is not only used for chatting, it is also used to negotiate availability.
 Most IM systems rely on the user manually setting their status or on simple activity data, such as mouse movement.
 This does not always reflect the availability of the user.
 
+\subsection{Context-aware systems}
 Fogarty et al. has shown that sensors can be used to extract satisfying accuracy data about a user.
 They have used this data to construct a statistical model \cite{fogarty2004examining}.
 Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a user working \cite{fogarty2005predicting}.
 
+\subsubsection{MyTeam}
 Several systems have tried to build an awareness solution using sensors.
 The earliest work dates back to the active badge system \cite{want1992active}.
 A similar approach has been tried in the IM system MyTeam \cite{lai2003myteam}, where they use an active badge sensor in combination with the users computer activity.
@@ -133,6 +136,7 @@ MyTeam differs from other IM systems in that participants can get information ab
 MyTeam uses photos on a colored background to indicate availability.
 A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
 
+\subsubsection{MyVine}
 A system that also uses sensors to determine availability is MyVine\cite{fogarty2004myvine}.
 MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this.
 What differs the two systems, is MyVine’s use of holistic aggregated sensors (speech
@@ -142,17 +146,27 @@ One is that MyVine is symmetric, which means the user has to be online in order 
 The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
 MyVine has a problem with misinterpretations of speech as an indication of being unavailable, while users has observed the speech as an indication of availability.
 
+\subsubsection{SenSay}
 The SenSay context-aware mobile phone \cite{siewiorek2003sensay} use accelerometer, light, and microphone sensor inputs to determine the availability of the user.
 The phone dynamically adapts it’s volume, vibration etc to match the user's current context.
 A novel feature about the phone is that the caller can communicate the urgency of their call.
 SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should be in.
 The system requires the user to carry additional sensors besides the phone, which is not ideal from a user perspective.
 
+\subsubsection{InterruptMe}
 In \cite{hincapie2011design} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient.
 Informed by the evaluation of other systems InterruptMe is presented.
 InterruptMe uses implicit inputs from the user to present availability information.
 However to get these inputs several external sensors are needed.
 This makes the system unable to run on commodity laptops.
+
+\subsubsection{Approximator}
+Approximator differs from MyTeam, SenSey, InterruptMe and self-reporting solutions by being a context-aware application that is easy to deploy and works by utilizing only the sensors that can be found within a standard laptop.
+MyTeam, SenSay and InterruptMe all are, or rely, on external sensors in order to archive context-awareness. 
+MyVine on the other hand, utilizes a combination of integrated sensors and contextual information to infer context-awareness. 
+MyVine requires information such as computer programs associated with work and access to the persons calendar.
+In Approximator we rely only on automatic non-parameterized sensors, meaning that the sensors we use does not require prior knowledge of the person using the machine.
+Based on this approach we will investigate how Approximator performs in comparison to human judgement using Fogartys method.
 
 \section{Approximator}
 Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
@@ -200,7 +214,7 @@ The next sections will cover each part of the solution in detail.
 
 \subsection{Sensors}
 To gather data about the users presence and availability we use sensors.
-This project has restricted itself to only look at sensors which are available in commodity laptops.
+This project has been restricted to only look at sensors which are available in commodity laptops.
 Commodity laptops can be many things, we define it as a machine with the following sensing capabilities:
 
 %TODO remove list and write about why we think these are sensors.
