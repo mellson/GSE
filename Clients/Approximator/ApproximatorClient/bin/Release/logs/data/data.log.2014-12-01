@@ -1,0 +1,159 @@
+2014-12-01 21:22:28,280 [15] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:22:28,280 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:22:28,280 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:22:40,531 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"13"}
+2014-12-01 21:22:40,537 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,599 [15] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-01 21:22:40,604 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1637,Y:219"}
+2014-12-01 21:22:40,768 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,782 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,783 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,783 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,784 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:40,898 [15] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1554,Y:196"}
+2014-12-01 21:22:41,035 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:41,098 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1563,Y:202"}
+2014-12-01 21:22:41,284 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:41,298 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1573,Y:209"}
+2014-12-01 21:22:41,525 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:41,907 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1537,Y:248"}
+2014-12-01 21:22:41,987 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:42,107 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:926,Y:488"}
+2014-12-01 21:22:42,227 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:42,720 [19] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"8"}
+2014-12-01 21:22:42,797 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:43,120 [19] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"38"}
+2014-12-01 21:22:43,228 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:43,532 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"13"}
+2014-12-01 21:22:43,606 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:43,732 [18] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"40"}
+2014-12-01 21:22:43,842 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:44,145 [18] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"13"}
+2014-12-01 21:22:44,219 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:44,947 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1160,Y:494"}
+2014-12-01 21:22:45,031 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:48,598 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"164"}
+2014-12-01 21:22:48,685 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:48,798 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"115"}
+2014-12-01 21:22:48,922 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:49,612 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1158,Y:405"}
+2014-12-01 21:22:49,685 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:49,812 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1347,Y:161"}
+2014-12-01 21:22:49,923 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:50,040 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1352,Y:152"}
+2014-12-01 21:22:50,166 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:50,240 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1371,Y:144"}
+2014-12-01 21:22:50,400 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:50,840 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1319,Y:140"}
+2014-12-01 21:22:50,920 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:51,052 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1180,Y:183"}
+2014-12-01 21:22:51,161 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:51,252 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:851,Y:170"}
+2014-12-01 21:22:51,394 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:51,452 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:609,Y:119"}
+2014-12-01 21:22:51,631 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:51,866 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:329,Y:250"}
+2014-12-01 21:22:51,952 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:52,466 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:377,Y:142"}
+2014-12-01 21:22:52,545 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:52,666 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:429,Y:62"}
+2014-12-01 21:22:52,798 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:52,879 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:500,Y:49"}
+2014-12-01 21:22:53,036 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:53,079 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:488,Y:86"}
+2014-12-01 21:22:53,297 [15] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:523,Y:70"}
+2014-12-01 21:22:53,307 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:53,498 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:568,Y:42"}
+2014-12-01 21:22:53,521 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:53,698 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:562,Y:49"}
+2014-12-01 21:22:53,756 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:53,898 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:555,Y:59"}
+2014-12-01 21:22:53,990 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:22:53,991 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:30:38,716 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:30:38,716 [15] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:30:38,716 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:31:12,769 [15] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:31:12,769 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:31:12,769 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"Init"}
+2014-12-01 21:31:16,989 [15] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-01 21:31:16,993 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:17,224 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:17,225 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:17,226 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:17,388 [19] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"9"}
+2014-12-01 21:31:17,527 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:18,401 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:811,Y:128"}
+2014-12-01 21:31:18,543 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:18,601 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:562,Y:65"}
+2014-12-01 21:31:18,738 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:18,801 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:540,Y:60"}
+2014-12-01 21:31:18,983 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:19,001 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:547,Y:60"}
+2014-12-01 21:31:19,218 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:19,658 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"67"}
+2014-12-01 21:31:19,744 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:20,076 [19] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"51"}
+2014-12-01 21:31:20,159 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:20,691 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"32"}
+2014-12-01 21:31:20,771 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:21,904 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"83"}
+2014-12-01 21:31:21,995 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:22,104 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"69"}
+2014-12-01 21:31:22,303 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:22,317 [18] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"32"}
+2014-12-01 21:31:22,600 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:22,917 [17] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"82"}
+2014-12-01 21:31:23,001 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:23,130 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"78"}
+2014-12-01 21:31:23,241 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:23,330 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"68"}
+2014-12-01 21:31:23,483 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:24,343 [18] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"40"}
+2014-12-01 21:31:24,442 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:24,743 [19] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"13"}
+2014-12-01 21:31:24,829 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:25,356 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:291,Y:161"}
+2014-12-01 21:31:25,454 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:25,556 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:133,Y:210"}
+2014-12-01 21:31:25,692 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:25,756 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:162,Y:216"}
+2014-12-01 21:31:25,931 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:25,969 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:265,Y:253"}
+2014-12-01 21:31:26,169 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:268,Y:247"}
+2014-12-01 21:31:26,170 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:26,369 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:269,Y:246"}
+2014-12-01 21:31:26,410 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:26,654 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:29,618 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:593,Y:452"}
+2014-12-01 21:31:29,694 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:29,818 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:673,Y:512"}
+2014-12-01 21:31:29,935 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:33,270 [18] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"9"}
+2014-12-01 21:31:33,351 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:33,871 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:392,Y:283"}
+2014-12-01 21:31:33,956 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:34,484 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:369,Y:274"}
+2014-12-01 21:31:34,566 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:34,684 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:280,Y:263"}
+2014-12-01 21:31:34,811 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:34,884 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:281,Y:262"}
+2014-12-01 21:31:35,041 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:35,497 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:292,Y:252"}
+2014-12-01 21:31:35,571 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:35,697 [19] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:293,Y:250"}
+2014-12-01 21:31:35,806 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:36,097 [16] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"13"}
+2014-12-01 21:31:36,176 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:37,123 [18] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:443,Y:155"}
+2014-12-01 21:31:37,206 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:37,323 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:472,Y:141"}
+2014-12-01 21:31:37,453 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:37,523 [15] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:536,Y:100"}
+2014-12-01 21:31:37,714 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:37,723 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:535,Y:87"}
+2014-12-01 21:31:37,923 [16] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:552,Y:54"}
+2014-12-01 21:31:37,931 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:38,136 [17] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:555,Y:54"}
+2014-12-01 21:31:38,161 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
+2014-12-01 21:31:38,396 [9] INFO  DataLogger - Response from WebSocket{"User":"mac","Present":true,"Availability":100}
