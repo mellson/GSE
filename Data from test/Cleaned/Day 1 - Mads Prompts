@@ -12,3 +12,4 @@
 2014-12-03 15:29:51,696 [6] INFO  PromptLogger - Prompted user: mac
 2014-12-03 16:02:17,442 [6] INFO  PromptLogger - Prompted user: mac
 2014-12-03 16:36:26,362 [6] INFO  PromptLogger - Prompted user: mac
+logs:Clients/Approximator/ApproximatorClient/bin/Release/logs/prompt/prompt.log
