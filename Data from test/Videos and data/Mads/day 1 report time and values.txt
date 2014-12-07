@@ -1,0 +1,27 @@
+1. 	0:07:30:546		Registered value: 	1
+
+2. 	0:43:45:686		Registered value: 	2
+
+3. 	1:19:03:705		Registered value: 	5
+
+4. 	1:47:44:025		Registered value: 	4
+
+5. 	ca 2.26.55.545 (person not present)
+
+6. 	2:53:22:905		Registered value: 	2
+
+7. 	3:31.01.785		Registered value: 	4
+
+8. 	ca 4:06:01:785 (person not present)
+
+9. 	4:43:08:025		Registered value: 	5
+
+10. 5:07:13:785		Registered value: 	2
+
+11. 5:43:02:265		Registered value: 	1
+
+12. 6:13:55:545		Registered value: 	4
+
+13. 6:46:20:985		Registered value: 	5
+
+14.	7:20:29:656		Registered value: 	1

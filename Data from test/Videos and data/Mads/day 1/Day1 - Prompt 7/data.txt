@@ -1,0 +1,100 @@
+2014-12-03 12:46:26,613 [8] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"38"}
+2014-12-03 12:46:28,429 [11] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:46:29,042 [12] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:46:31,068 [12] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:46:31,481 [10] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:46:38,573 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"37"}
+2014-12-03 12:46:39,999 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"161"}
+2014-12-03 12:46:40,199 [11] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"36"}
+2014-12-03 12:46:41,212 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"66"}
+2014-12-03 12:46:41,612 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"84"}
+2014-12-03 12:46:41,826 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"8"}
+2014-12-03 12:46:42,026 [10] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"79"}
+2014-12-03 12:46:42,226 [10] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"84"}
+2014-12-03 12:46:42,426 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"79"}
+2014-12-03 12:46:42,626 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"188"}
+2014-12-03 12:46:42,839 [11] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:46:42,839 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"162"}
+2014-12-03 12:46:43,239 [11] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"45"}
+2014-12-03 12:46:43,439 [8] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"8"}
+2014-12-03 12:46:44,052 [11] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:46:44,253 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"45"}
+2014-12-03 12:46:44,866 [11] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"77"}
+2014-12-03 12:46:45,267 [12] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"162"}
+2014-12-03 12:46:45,467 [9] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"83"}
+2014-12-03 12:46:46,080 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1541,Y:648"}
+2014-12-03 12:46:46,280 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1529,Y:680"}
+2014-12-03 12:46:46,480 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1530,Y:772"}
+2014-12-03 12:46:46,692 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1537,Y:772"}
+2014-12-03 12:46:47,092 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1512,Y:772"}
+2014-12-03 12:46:47,292 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1614,Y:695"}
+2014-12-03 12:46:47,492 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1615,Y:715"}
+2014-12-03 12:46:47,704 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1006,Y:705"}
+2014-12-03 12:46:47,904 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:572,Y:104"}
+2014-12-03 12:46:48,104 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:377,Y:-1"}
+2014-12-03 12:46:48,304 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:199,Y:61"}
+2014-12-03 12:46:48,517 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:98,Y:74"}
+2014-12-03 12:46:48,717 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:87,Y:61"}
+2014-12-03 12:46:49,117 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:194,Y:226"}
+2014-12-03 12:46:49,328 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:580,Y:431"}
+2014-12-03 12:46:49,528 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:602,Y:427"}
+2014-12-03 12:46:49,928 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:613,Y:483"}
+2014-12-03 12:46:50,141 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:661,Y:513"}
+2014-12-03 12:46:50,341 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:660,Y:523"}
+2014-12-03 12:46:50,341 [10] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:46:50,941 [9] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:46:50,941 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:550,Y:278"}
+2014-12-03 12:46:51,155 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:543,Y:228"}
+2014-12-03 12:46:51,355 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:543,Y:225"}
+2014-12-03 12:46:51,558 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:543,Y:257"}
+2014-12-03 12:46:51,758 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:637,Y:529"}
+2014-12-03 12:46:51,959 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:615,Y:417"}
+2014-12-03 12:46:52,159 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1139,Y:500"}
+2014-12-03 12:46:52,373 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1620,Y:591"}
+2014-12-03 12:46:52,573 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1591,Y:633"}
+2014-12-03 12:46:52,774 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1474,Y:639"}
+2014-12-03 12:46:52,974 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:599,Y:458"}
+2014-12-03 12:46:53,176 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:589,Y:321"}
+2014-12-03 12:46:53,376 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:475,Y:109"}
+2014-12-03 12:46:53,589 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:513,Y:230"}
+2014-12-03 12:46:53,790 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:523,Y:247"}
+2014-12-03 12:46:59,056 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1054,Y:-47"}
+2014-12-03 12:46:59,256 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1294,Y:6"}
+2014-12-03 12:46:59,469 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1741,Y:31"}
+2014-12-03 12:46:59,669 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1759,Y:5"}
+2014-12-03 12:46:59,669 [8] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:47:00,069 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1764,Y:33"}
+2014-12-03 12:47:00,282 [9] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:47:00,482 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1551,Y:344"}
+2014-12-03 12:47:00,682 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1552,Y:322"}
+2014-12-03 12:47:01,082 [12] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:47:01,082 [9] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"162"}
+2014-12-03 12:47:01,296 [9] INFO  DataLogger - {"SensorName":"KeyboardSensor","UserName":"mac","Value":"83"}
+2014-12-03 12:47:01,496 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:1447,Y:342"}
+2014-12-03 12:47:01,696 [9] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:47:01,696 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:143,Y:173"}
+2014-12-03 12:47:01,897 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:44,Y:54"}
+2014-12-03 12:47:02,097 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:83,Y:74"}
+2014-12-03 12:47:02,298 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:89,Y:64"}
+2014-12-03 12:47:02,721 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:507,Y:409"}
+2014-12-03 12:47:02,934 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:528,Y:387"}
+2014-12-03 12:47:03,734 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:528,Y:385"}
+2014-12-03 12:47:03,947 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:521,Y:165"}
+2014-12-03 12:47:04,147 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:538,Y:225"}
+2014-12-03 12:47:04,348 [9] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
+2014-12-03 12:47:04,549 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:549,Y:232"}
+2014-12-03 12:47:04,750 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:785,Y:394"}
+2014-12-03 12:47:04,963 [9] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Present with frontal face"}
+2014-12-03 12:47:04,963 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:785,Y:396"}
+2014-12-03 12:47:05,164 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:663,Y:420"}
+2014-12-03 12:47:05,364 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:760,Y:407"}
+2014-12-03 12:47:05,564 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:807,Y:407"}
+2014-12-03 12:47:05,764 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:809,Y:408"}
+2014-12-03 12:47:05,964 [12] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:682,Y:490"}
+2014-12-03 12:47:06,177 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:628,Y:718"}
+2014-12-03 12:47:06,377 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:641,Y:868"}
+2014-12-03 12:47:06,578 [11] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:659,Y:829"}
+2014-12-03 12:47:06,778 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:659,Y:828"}
+2014-12-03 12:47:07,391 [8] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:659,Y:824"}
+2014-12-03 12:47:07,591 [9] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:647,Y:827"}
+2014-12-03 12:47:07,791 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:646,Y:827"}
