@@ -1,0 +1,82 @@
+@import "normalize";
+@import "bourbon";
+
+$max-width: 920px;
+// $visual-grid: true !default;
+// $visual-grid-color: #333 !default;
+
+@import "neat";
+@import "animations";
+@import "mixins";
+
+$bold: "Helvetica Neue", Helvetica, sans-serif;
+$book: "Helvetica Neue", Helvetica, sans-serif;
+
+.clearboth {
+	clear: both;
+}
+
+.hidden {
+	display: none;
+}
+
+a {
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+body, p, a, span, {
+	color: #282828;
+}
+
+p, a, span {
+	font-family: $book;
+}
+
+h1, h2 {
+	font-family: $bold;
+}
+
+h3 {
+	font-family: $book;
+}
+
+img {
+	max-width:100% !important;
+	height:auto;
+    display:inline-block;
+}
+
+h1 {
+	font-size: 36pt;
+	font-weight: 600;
+}
+
+h2 {
+	font-size: 34pt;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+h3 {
+	font-size: 26pt;
+	line-height: 28pt;
+	font-weight: 300;
+}
+
+p {
+	font-size: 15pt;
+	line-height: 24pt;
+	font-weight: 200;
+}
+
+.int {
+	@include outer-container;
+}
+
+.cont  {
+	width: 100%;
+}
