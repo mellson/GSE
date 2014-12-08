@@ -1,5 +1,3 @@
-# 35 clips / 7 = 5 
-
 surveySeries = {
 	"a": [1, 3, 5, 7, 9, 11, 13],
 	"b": [2, 4, 6, 8, 10, 12, 14],
@@ -15,14 +13,12 @@ surveyResult = {
 	"playing": false
 }
 
+surveyToShow = null
+
 videoSource = (clip) ->
 	return '<video width="640" height="480" autoplay preload>
-			<source src="videos/'+clip+'.mp4" type="video/mp4">
-		</video>'
-
-# Each series have 7 clips and there are 5 series
-# Each survey will select 3 random clips from the series
-# for confidence testing
+				<source src="videos/'+clip+'.mp4" type="video/mp4">
+			</video>'
 
 randomNumber = (min, max) ->
 	return Math.floor(Math.random() * (max - min + 1) + min)
@@ -132,10 +128,10 @@ $(document).ready ->
 	$('#print').click (e) ->
 		strings = surveyResult.answers.map (a) -> a.toString()
 		email = $('#email').val()
-		$('#results').html(email + "," + strings.join ", ")
+		$('#results').html(email + ",[" + surveyResult.survey + "], " + strings.join ", ")
 
 	$('#start').click (e) ->
-		startSurvey(surveySeries.a)
+		startSurvey(surveyToShow)
 
 	$('#prepare').click (e) ->
 		survey = null
@@ -146,5 +142,8 @@ $(document).ready ->
 			when "d" then survey = surveySeries.d
 			when "e" then survey = surveySeries.e
 
-		startSurvey(survey) if survey != null
+		surveyToShow = survey
+
+		$('.howto-container').show()
+		$('.setup-container').hide()
 
