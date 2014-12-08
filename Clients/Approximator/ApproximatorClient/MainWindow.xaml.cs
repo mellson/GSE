@@ -13,22 +13,39 @@ namespace ApproximatorClient
     {
         private static readonly ILog PromptLog = LogManager.GetLogger("PromptLogger");
         private static readonly ILog DataLog = LogManager.GetLogger("DataLogger");
-        private readonly WebSocket _ws;
-        private readonly string _userName;
+        private WebSocket _ws;
+        private string _userName;
 
         public MainWindow()
         {
             InitializeComponent();
-            _ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
-            _ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
-            _ws.Connect();
-            _userName = Environment.UserName.Replace(" ","");
-            _ws.Send("Connected .NET Client for user " + _userName);
+            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-1-Data.txt";
+            new Replayer(pathToLog);
+//            ConnectWebSocket();
+//            StartSensing();
+//            StartPrompting();
+        }
+
+        private void StartSensing()
+        {
             new MouseSensor(_userName, _ws);
             new KeyboardSensor(_userName, _ws);
             new FaceDetectionSensor(_userName, _ws, cameraIndex: 0);
-            var visualBellThread = new Thread(VisualBell) { IsBackground = true };
+        }
+
+        private void StartPrompting()
+        {
+            var visualBellThread = new Thread(VisualBell) {IsBackground = true};
             visualBellThread.Start();
+        }
+
+        private void ConnectWebSocket()
+        {
+            _ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+            _ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
+            _ws.Connect();
+            _userName = Environment.UserName.Replace(" ", "");
+            _ws.Send("Connected .NET Client for user " + _userName);
         }
 
         public void VisualBell()
