@@ -1,8 +1,94 @@
 <!-- @include _header -->
 
-<div class="header-container cont">
-	<div class="header int">
-	
+<div class="setup-container cont">
+	<div class="setup int">
+		<select name="survey" id="which">
+			<option value="a">A</option>
+			<option value="b">B</option>
+			<option value="c">C</option>
+			<option value="d">D</option>
+			<option value="e">E</option>
+		</select>
+		<input type="button" name="prepare" id="prepare" value="Prepare survey" class="btn">
+	</div>
+</div>
+
+<div class="howto-container cont">
+	<div class="howto int">
+		<strong>How to:</strong>
+		<p>You will be shown 10 video clips of a person working. Each clip is 30 seconds long. Imagine that you are a collegaue of the person in the clip that you wan't to approach to talk. The matter is not urgent and you don't want to disturb your collegaue unecessarely.</p>
+		<p>For each clip in the survey, please rate the person in the video on a scale from 1 to 5 where 1 means "Can be disturbed" and 5 means "can <strong>not</strong> be disturbed".</p>
+
+		<input type="button" name="start" id="start" value="Start survey" class="btn">
+	</div>
+</div>
+
+<div id="video-survey">
+	<div class="video-container cont">
+		<div class="video int">
+			<h2>Clip <span id="current_clip">1</span> of <span id="total_clips">10</span></h2>
+			<div id="video">
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="explain-container cont">
+		<div class="explain int">
+			<div class="left">
+				Can be disturbed
+			</div>
+
+			<div class="right">
+				Can <strong>not</strong> be disturbed
+			</div>
+		</div>
+	</div>
+
+	<div class="content-container cont">
+		<div class="content int">
+			<div class="estimation">
+				<form action="#" method="post" id="form">
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_1" value="1">
+						<label for="prediction_1">1</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_2" value="2">
+						<label for="prediction_2">2</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_3" value="3">
+						<label for="prediction_3">3</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_4" value="4">
+						<label for="prediction_4">4</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_5" value="5">
+						<label for="prediction_5">5</label>
+					</div>
+				</form>
+
+				<input type="submit" name="done" id="done" value="Next clip" class="btn">
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div id="end-survey">
+	<div class="content-container cont">
+		<div class="content int">
+			<h2>Thanks for participating</h2>
+			<p>Enter your email below for the chance of winning a clipcard for Coffee or Tea to Analog.</p>
+			<input type="email" name="email" id="email" value="" placeholder="your@email.com">
+			<br>
+			<input type="submit" name="print" id="print" value="See results" class="btn">	
+			<div id="results">
+				
+			</div>
+		</div>
 	</div>
 </div>
 

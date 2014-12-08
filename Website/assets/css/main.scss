@@ -1,7 +1,7 @@
 @import "normalize";
 @import "bourbon";
 
-$max-width: 920px;
+$max-width: 640px;
 // $visual-grid: true !default;
 // $visual-grid-color: #333 !default;
 
@@ -68,8 +68,8 @@ h3 {
 }
 
 p {
-	font-size: 15pt;
-	line-height: 24pt;
+	font-size: 12pt;
+	line-height: 18pt;
 	font-weight: 200;
 }
 
@@ -79,4 +79,61 @@ p {
 
 .cont  {
 	width: 100%;
+}
+
+.estimation, .video {
+	width: 640px;
+	margin: 0 auto;
+}
+
+.video {
+	margin-top: 40px;
+	text-align: center;
+	
+	video {
+		background-color: #000;
+	}
+
+	h2, span {
+		// color: #fff;
+	}
+}
+
+.howto {
+	margin-top: 40px;
+}
+
+.explain {
+	margin-top: 40px;
+
+	.left, .right {
+		@include span-columns(6 of 12);
+	}
+
+	.left { text-align: left; }
+	.right {
+		text-align: right;
+		@include omega;
+	}
+}
+
+.estimation {
+	margin-top: 10px;
+	margin-bottom: 120px;
+	text-align: center;
+
+	.input {
+		float: left;
+		width: 20%;
+
+	}
+}
+
+.btn {
+	background-color: #282828;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	padding: 22px 42px;
+	margin-top: 30px;
 }
