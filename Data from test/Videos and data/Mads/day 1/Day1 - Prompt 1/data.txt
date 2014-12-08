@@ -1,3 +1,4 @@
+Prompted user
 2014-12-03 09:23:30,524 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"Init"}
 2014-12-03 09:23:33,212 [10] INFO  DataLogger - {"SensorName":"MouseSensor","UserName":"mac","Value":"X:297,Y:832"}
 2014-12-03 09:23:33,448 [8] INFO  DataLogger - {"SensorName":"FaceDetectionSensor","UserName":"mac","Value":"Not Present"}
