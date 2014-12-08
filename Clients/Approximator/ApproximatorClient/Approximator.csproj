@@ -131,6 +131,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Replayer.cs" />
     <Compile Include="SensorReading.cs" />
     <Compile Include="Sensors\AbstractSensor.cs" />
     <Compile Include="Sensors\FaceDetectionSensor.cs" />
