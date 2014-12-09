@@ -134,6 +134,12 @@
   };
 
   canProceed = function() {
+    if ($('#form input[name="prediction"]:checked').val() === void 0) {
+      return false;
+    }
+    if (surveyResult.playing === true) {
+      return false;
+    }
     return true;
   };
 

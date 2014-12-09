@@ -101,8 +101,8 @@ selectAnswer = (answer) ->
 	$('#prediction_' + answer).prop("checked", true)
 
 canProceed = ->
-	# return false if $('#form input[name="prediction"]:checked').val() == undefined
-	# return false if surveyResult.playing == true
+	return false if $('#form input[name="prediction"]:checked').val() == undefined
+	return false if surveyResult.playing == true
 	return true
 
 isConfident = (result) ->
