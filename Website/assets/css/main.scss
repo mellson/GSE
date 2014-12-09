@@ -12,6 +12,10 @@ $max-width: 640px;
 $bold: "Helvetica Neue", Helvetica, sans-serif;
 $book: "Helvetica Neue", Helvetica, sans-serif;
 
+#results div {
+	display: block;
+}
+
 .clearboth {
 	clear: both;
 }

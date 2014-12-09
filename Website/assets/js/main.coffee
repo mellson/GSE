@@ -10,13 +10,13 @@ surveyResult = {
 	"answers": [],
 	"survey" : surveySeries.a,
 	"nextClips": surveySeries.a,
-	"playing": false
+	"playing": false,
 }
 
 surveyToShow = null
 
 videoSource = (clip) ->
-	return '<video width="640" height="480" autoplay preload>
+	return '<video width="640" height="480" autoplay preload controls>
 				<source src="videos/'+clip+'.mp4" type="video/mp4">
 			</video>'
 
@@ -101,7 +101,7 @@ selectAnswer = (answer) ->
 	$('#prediction_' + answer).prop("checked", true)
 
 canProceed = ->
-	return false if $('#form input[name="prediction"]:checked').val() == undefined
+	# return false if $('#form input[name="prediction"]:checked').val() == undefined
 	# return false if surveyResult.playing == true
 	return true
 
@@ -145,9 +145,23 @@ $(document).ready ->
 		strings = surveyResult.answers.map (a) -> a.toString()
 		email = $('#email').val()
 		valid = if isConfident(surveyResult) then "valid" else "invalid"
-		$('#results').html(email + ",[" + surveyResult.survey + "], " + strings.join(", ") + ", " + valid)
+
+		$('#p_age').html(surveyResult.age)
+		$('#p_sex').html(surveyResult.sex)
+		$('#p_country').html(surveyResult.country)
+		$('#p_email').html(email)
+		$('#p_set').html("[" + surveyResult.survey + "]")
+		$('#p_confidence').html(valid)
+
+		$('#p_a' + i.toString()).html(surveyResult.answers[i]) for i in [0..surveyResult.answers.length-1]
 
 	$('#start').click (e) ->
+		surveyResult.age = parseInt($('#age').val())
+		surveyResult.sex = $('#sex').val()
+		surveyResult.country = $('#country').val()
+
+		surveyResult
+
 		startSurvey(surveyToShow)
 
 	$('#prepare').click (e) ->
