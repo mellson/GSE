@@ -18,7 +18,7 @@ class UserActor extends Actor {
       lastReading = reading
 
       // Keep all reading from the last 30 seconds
-      readings = reading :: readings.filter(time => time.date().minusSeconds(30).isBeforeNow)
+      readings = reading :: readings.filter(time => time.date().plusSeconds(30).isBeforeNow)
 
       // Update all clients connected via web socket with this latest sensor reading
       Infrastructure.webSocketActor ! readings
