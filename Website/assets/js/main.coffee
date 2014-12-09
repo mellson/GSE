@@ -105,6 +105,22 @@ canProceed = ->
 	# return false if surveyResult.playing == true
 	return true
 
+isConfident = (result) ->
+	answers = result.answers
+	checks = result.survey.slice(7, 10)
+
+	dist = answerDistance(answers, checks, i) for i in [1..3]
+	discarded = 0
+
+	for d in dist
+		if d >= 2
+			discarded++
+
+	return discarded < 2
+
+answerDistance = (answers, checks, i) ->
+	return Math.abs(answers[i] - checks[i])
+
 $(document).ready ->
 	$('#end-survey').hide()
 	$('#video-survey').hide()
@@ -128,7 +144,8 @@ $(document).ready ->
 	$('#print').click (e) ->
 		strings = surveyResult.answers.map (a) -> a.toString()
 		email = $('#email').val()
-		$('#results').html(email + ",[" + surveyResult.survey + "], " + strings.join ", ")
+		valid = if isConfident(surveyResult) then "valid" else "invalid"
+		$('#results').html(email + ",[" + surveyResult.survey + "], " + strings.join(", ") + ", " + valid)
 
 	$('#start').click (e) ->
 		startSurvey(surveyToShow)
