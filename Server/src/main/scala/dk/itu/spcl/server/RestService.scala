@@ -73,7 +73,7 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
         val userName = user._1
         val userActor = user._2._2
         val status = DecisionModule.getPresenceAndAvailability(userActor)
-        UserStatus(userName, status.Present, status.Availability)
+        UserStatus(userName, status.Availability)
       }
     userStatuses.toList
   }

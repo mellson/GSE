@@ -31,17 +31,16 @@ class WebSocketActor extends Actor {
       user.send(status.toString)
   }
 
+  var latestInterruptibility = 0
   override def receive = {
-    // Update all users connected via web socket with the latest sensor reading
-    case reading: SensorReadingWithTime =>
-      val secondsSinceLastUpdate = Seconds.secondsBetween(reading.date(), DateTime.now()).getSeconds
-      val present = DecisionModule.getPresence(secondsSinceLastUpdate)
-      val availability = DecisionModule.getAvailability(secondsSinceLastUpdate)
-      val userStatus = UserStatus(reading.UserName, present, availability)
-      val json = // TODO fix this One Pass Logic
-        ("User" -> userStatus.UserName) ~ ("Present" -> userStatus.Present) ~ ("Availability" -> userStatus.Available)
-      for (user <- users)
-        user.send(compact(render(json)))
+    case readings: List[SensorReadingWithTime] =>
+      val interruptibility = DecisionModule.getInterruptibility(readings)
+      if (interruptibility != latestInterruptibility) {
+        latestInterruptibility = interruptibility
+        val userStatus = UserStatus(readings.head.UserName, interruptibility)
+        val json =  ("User" -> userStatus.UserName) ~ ("Interruptibility" -> userStatus.Interruptibility)
+        for (user <- users) user.send(compact(render(json)))
+      }
 
     case Open(ws, hs) =>
       users += ws

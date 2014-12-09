@@ -4,7 +4,7 @@ import akka.actor.ActorRef
 import akka.pattern.ask
 import akka.util.Timeout
 import dk.itu.spcl.Infrastructure
-import dk.itu.spcl.server.AskForLastUpdateMessage
+import dk.itu.spcl.server.{GetReadings, AskForLastUpdateMessage}
 import org.joda.time.{DateTime, Seconds}
 import scala.concurrent.Await
 import scala.concurrent.duration._
@@ -32,5 +32,33 @@ object DecisionModule {
     val present = getPresence(secondsSinceLastUpdate)
     val availability = getAvailability(secondsSinceLastUpdate)
     Status(present, availability)
+  }
+
+  def getInterruptibility(readings: List[SensorReadingWithTime]): Int = {
+    val mouseReadings = readings.filter(r => r.SensorName.contains("MouseSensor"))
+    val keyboardReadings = readings.filter(r => r.SensorName.contains("KeyboardSensor"))
+    val facedetectionReadings = readings.filter(r => r.SensorName.contains("FaceDetectionSensor") && r.Value.contains("Present with"))
+
+    // How many readings within the last 30 seconds to be high intensity
+    val highIntensityRate = 50
+
+    // maximum interruptibility
+    val maximumInterruptibility = 5
+
+    val mousePercentage = mouseReadings.length / (readings.length * 1.0)
+    val keyboardPercentage = keyboardReadings.length / (readings.length * 1.0)
+    val facedetectionPercentage = facedetectionReadings.length / (readings.length * 1.0)
+
+    val keyValue = keyboardPercentage * maximumInterruptibility
+    val faceValue = facedetectionPercentage * maximumInterruptibility
+    val combinedValue = keyValue + faceValue
+
+    combinedValue.ceil.toInt
+  }
+
+  def getInterruptibility(actor: ActorRef): Int = {
+    val future = actor ? GetReadings
+    val readings = Await.result(future, timeout.duration).asInstanceOf[List[SensorReadingWithTime]]
+    getInterruptibility(readings)
   }
 }
