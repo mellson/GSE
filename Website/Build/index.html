@@ -1,0 +1,176 @@
+    
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Approximator Survey ~ A system for presence and interruptibility-sharing</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        
+        <!-- Hammer reload -->
+          <script>
+            setInterval(function(){
+              try {
+                if(typeof ws != 'undefined' && ws.readyState == 1){return true;}
+                ws = new WebSocket('ws://'+(location.host || 'localhost').split(':')[0]+':35353')
+                ws.onopen = function(){ws.onclose = function(){document.location.reload()}}
+                ws.onmessage = function(){
+                  var links = document.getElementsByTagName('link'); 
+                    for (var i = 0; i < links.length;i++) { 
+                    var link = links[i]; 
+                    if (link.rel === 'stylesheet' && !link.href.match(/typekit/)) { 
+                      href = link.href.replace(/((&|\?)hammer=)[^&]+/,''); 
+                      link.href = href + (href.indexOf('?')>=0?'&':'?') + 'hammer='+(new Date().valueOf());
+                    }
+                  }
+                }
+              }catch(e){}
+            }, 1000)
+          </script>
+        <!-- /Hammer reload -->
+      
+        <link rel='stylesheet' href='assets/css/main.css'>
+        <!--[if lt IE 9]>
+        <link rel='stylesheet' href='assets/css/ie8.css'>
+        <![endif]-->
+
+    </head>
+    <body class="not-ios">
+        <div class="container">
+
+<div class="setup-container cont">
+	<div class="setup int">
+		<select name="survey" id="which">
+			<option value="a">A</option>
+			<option value="b">B</option>
+			<option value="c">C</option>
+			<option value="d">D</option>
+			<option value="e">E</option>
+		</select>
+		<input type="button" name="prepare" id="prepare" value="Prepare survey" class="btn">
+	</div>
+</div>
+
+<div class="howto-container cont">
+	<div class="howto int">
+		<strong>How to:</strong>
+		<p>You will be shown 10 video clips of a person working. Each clip is 30 seconds long. Imagine that you are a collegaue of the person in the clip that you wan't to approach to talk. The matter is not urgent and you don't want to disturb your collegaue unecessarely.</p>
+		<p>For each clip in the survey, please rate the person in the video on a scale from 1 to 5 where 1 means "Can be disturbed" and 5 means "can <strong>not</strong> be disturbed".</p>
+
+		<label for="age">Age</label><br>
+		<input type="number" name="age" id="age" value="" placeholder="">
+
+		<br><br>
+
+		<label for="sex">sex</label><br>
+		<select name="sex" id="sex">
+			<option value="male">Male</option>
+			<option value="female">Female</option>
+		</select>
+
+		<br>
+
+		<label for="country">Country of Origin</label><br>
+		<input type="text" id="country" name="country" value="" placeholder="">
+
+		<br><br>
+
+		<input type="button" name="start" id="start" value="Start survey" class="btn">
+	</div>
+</div>
+
+<div id="video-survey">
+	<div class="video-container cont">
+		<div class="video int">
+			<h2>Clip <span id="current_clip">1</span> of <span id="total_clips">10</span></h2>
+			<div id="video">
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="explain-container cont">
+		<div class="explain int">
+			<div class="left">
+				Can be disturbed
+			</div>
+
+			<div class="right">
+				Can <strong>not</strong> be disturbed
+			</div>
+		</div>
+	</div>
+
+	<div class="content-container cont">
+		<div class="content int">
+			<div class="estimation">
+				<form action="#" method="post" id="form">
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_1" value="1">
+						<label for="prediction_1">1</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_2" value="2">
+						<label for="prediction_2">2</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_3" value="3">
+						<label for="prediction_3">3</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_4" value="4">
+						<label for="prediction_4">4</label>
+					</div>
+					<div class="input">
+						<input type="radio" name="prediction" id="prediction_5" value="5">
+						<label for="prediction_5">5</label>
+					</div>
+				</form>
+
+				<input type="submit" name="done" id="done" value="Next clip" class="btn">
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div id="end-survey">
+	<div class="content-container cont">
+		<div class="content int">
+			<h2>Thanks for participating</h2>
+			<p>Enter your email below for the chance of winning a clipcard for Coffee or Tea to Analog.</p>
+			<input type="email" name="email" id="email" value="" placeholder="your@email.com">
+			<br>
+			<input type="submit" name="print" id="print" value="See results" class="btn">	
+			<div id="results">
+				<div id="p_age"></div>
+				<div id="p_sex"></div>
+				<div id="p_country"></div>
+				<div id="p_email"></div>
+				<div id="p_set"></div>
+				<div id="p_confidence"></div>
+				<div id="p_a1"></div>
+				<div id="p_a2"></div>
+				<div id="p_a3"></div>
+				<div id="p_a4"></div>
+				<div id="p_a5"></div>
+				<div id="p_a6"></div>
+				<div id="p_a7"></div>
+				<div id="p_a8"></div>
+				<div id="p_a9"></div>
+				<div id="p_a10"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+            <div class="footer-container cont">
+                <div class="footer int">
+                </div>
+            </div>
+        <script src='assets/js/jquery.js'></script>
+<script src='assets/js/retina.js'></script>
+<script src='assets/js/main.js'></script>
+    </body>
+</html>

@@ -153,7 +153,7 @@ $(document).ready ->
 		$('#p_set').html("[" + surveyResult.survey + "]")
 		$('#p_confidence').html(valid)
 
-		$('#p_a' + i.toString()).html(surveyResult.answers[i]) for i in [0..surveyResult.answers.length-1]
+		$('#p_a' + i.toString()).html(surveyResult.answers[i-1]) for i in [1..surveyResult.answers.length]
 
 	$('#start').click (e) ->
 		surveyResult.age = parseInt($('#age').val())
