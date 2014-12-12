@@ -3,9 +3,9 @@ package dk.itu.spcl.approximator
 import akka.actor.ActorRef
 import akka.pattern.ask
 import akka.util.Timeout
-import dk.itu.spcl.Infrastructure
-import dk.itu.spcl.server.{GetReadings, AskForLastUpdateMessage}
+import dk.itu.spcl.server.{AskForLastUpdateMessage, GetReadings}
 import org.joda.time.{DateTime, Seconds}
+
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
@@ -24,8 +24,6 @@ object DecisionModule {
   def getPresence(secondsSinceLastReading: Int): Boolean = secondsSinceLastReading < timeToNonPresent
 
   def getPresenceAndAvailability(actor: ActorRef): Status = {
-    Infrastructure.log.error("hej") // TODO remove
-
     val future = actor ? AskForLastUpdateMessage
     val lastReading = Await.result(future, timeout.duration).asInstanceOf[SensorReadingWithTime]
     val secondsSinceLastUpdate = Seconds.secondsBetween(lastReading.date(), DateTime.now()).getSeconds
@@ -33,37 +31,69 @@ object DecisionModule {
     val availability = getAvailability(secondsSinceLastUpdate)
     Status(present, availability)
   }
+  
+  def mouseReading(reading: SensorReadingWithTime) = reading.SensorName.contains("MouseSensor")
+  def keyboardReading(reading: SensorReadingWithTime) = reading.SensorName.contains("KeyboardSensor")
+  def faceDetectionReading(reading: SensorReadingWithTime) = reading.SensorName.contains("FaceDetectionSensor") && reading.Value.contains("Present with")
 
-  def getInterruptibility(readings: List[SensorReadingWithTime]): Int = {
-    val mouseReadings = readings.filter(r => r.SensorName.contains("MouseSensor"))
-    val keyboardReadings = readings.filter(r => r.SensorName.contains("KeyboardSensor"))
-    val facedetectionReadings = readings.filter(r => r.SensorName.contains("FaceDetectionSensor") && r.Value.contains("Present with"))
+  def faceDetectionValue(readings: List[SensorReadingWithTime]): Int =  {
+    readings.reverse.take(5).length
+  }
 
-    // How many readings within the last 30 seconds to be high intensity
-    val highIntensityRate = 50
+  def scenario1(readings: List[SensorReadingWithTime], maxReadings: Int): Boolean = {
+    val t1 = readings.length < (maxReadings / 5)
+    val t2 = readings count faceDetectionReading
+    t1 && t2 > 0
+  }
+  
+  def scenario2(readings: List[SensorReadingWithTime]): Boolean = {
+    val mouseReadings = readings count mouseReading
+    val keyboardReadings = readings count keyboardReading
+    val faceDetectionReadings = readings count faceDetectionReading
+    keyboardReadings > mouseReadings / 2 && keyboardReadings > faceDetectionReadings
+  }
 
-    // maximum interruptibility
-    val maximumInterruptibility = 5
+  def mouseActivity(mouseReadings: Int, maxReadings: Int): Int = {
+    val veryLowMouseReading = 5
+    def mouseActivityHelper(tempReading: Int): Int = tempReading <= veryLowMouseReading match {
+      case true  => 0
+      case false => 1 + mouseActivityHelper(tempReading - maxReadings / 5)
+    }
+    mouseActivityHelper(mouseReadings)
+  }
 
-    val mousePercentage = mouseReadings.length / (readings.length * 1.0)
-    val keyboardPercentage = keyboardReadings.length / (readings.length * 1.0)
-    val facedetectionPercentage = facedetectionReadings.length / (readings.length * 1.0)
+  var scenarioHelper = ""
+  def getInterruptibility(samplingFreqMs: Int, samplingWindowMs: Int, readings: List[SensorReadingWithTime]): Int = {
+    var interruptibility = 1
 
-    val keyValue = keyboardPercentage * maximumInterruptibility
-    val faceValue = facedetectionPercentage * maximumInterruptibility
-    val combinedValue = keyValue + faceValue
+    // Scenario 1 => Reading / skyping etc
+    val maxReadings = samplingWindowMs / samplingFreqMs
+    if (scenario1(readings, maxReadings)) {
+      if (scenarioHelper != "scenario 1") {
+        scenarioHelper = "scenario 1"
+        println(scenarioHelper)
+      }
+      interruptibility = 5
+    }
 
+    // Scenario 2 => User is coding / writing etc
+    if (scenario2(readings)) {
+      if (scenarioHelper != "scenario 2") {
+        scenarioHelper = "scenario 2"
+        println(scenarioHelper)
+      }
+      interruptibility = 5
+    }
 
+    if (interruptibility > 1)
+      interruptibility = interruptibility - mouseActivity(readings count mouseReading, maxReadings)
 
-    if (combinedValue < 1)
-      1
-    else
-      combinedValue.ceil.toInt
+    interruptibility
   }
 
   def getInterruptibility(actor: ActorRef): Int = {
     val future = actor ? GetReadings
     val readings = Await.result(future, timeout.duration).asInstanceOf[List[SensorReadingWithTime]]
-    getInterruptibility(readings)
+    getInterruptibility(200, 30000, readings)
   }
 }

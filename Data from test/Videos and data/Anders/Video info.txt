@@ -1,13 +1,13 @@
-ABM-01: Interruptibility 3 <- Mostly mouse input, some keyboard input.
-ABM-02: Interruptibility 4 <- Mostly keyboard input.
-ABM-03: Interruptibility 1 <- Mostly mouse input.
-ABM-04: Interruptibility 5 <- Camera present, very little mouse input. (Skype call)
-ABM-05: Interruptibility 4 <- Mouse input leading up to short period of keyboard input. (Restarting work)
-ABM-06: Interruptibility 1 <- Mostly mouse input.
-ABM-07: Interruptibility 3 <- Equal mix of mouse and keyboard input.
-ABM-08: Interruptibility 1 <- Mostly mouse input.
-ABM-09: Interruptibility 4 <- Mostly keyboard input.
-ABM-10: Interruptibility 5 <- Present on camera. (Reading)
-ABM-11: Interruptibility 2 <- Little input, mostly mouse data.
-ABM-12: Interruptibility 5 <- Mainly keyboard input.
-ABM-13: Interruptibility 2 <- Mainly mouse input.
+1, 2 ABM-01: Interruptibility 3 <- Mostly mouse input, some keyboard input.
+4, 0 ABM-02: Interruptibility 4 <- Mostly keyboard input.
+1, 0 ABM-03: Interruptibility 1 <- Mostly mouse input.
+4, 1 ABM-04: Interruptibility 5 <- Camera present, very little mouse input. (Skype call)
+1, 3 ABM-05: Interruptibility 4 <- Mouse input leading up to short period of keyboard input. (Restarting work)
+1, 0 ABM-06: Interruptibility 1 <- Mostly mouse input.
+4, 1 ABM-07: Interruptibility 3 <- Equal mix of mouse and keyboard input.
+1, 0 ABM-08: Interruptibility 1 <- Mostly mouse input.
+5, 1 ABM-09: Interruptibility 4 <- Mostly keyboard input.
+5, 0 ABM-10: Interruptibility 5 <- Present on camera. (Reading)
+1, 1 ABM-11: Interruptibility 2 <- Little input, mostly mouse data.
+5, 0 ABM-12: Interruptibility 5 <- Mainly keyboard input.
+1, 1 ABM-13: Interruptibility 2 <- Mainly mouse input.

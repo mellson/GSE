@@ -19,11 +19,13 @@ namespace ApproximatorClient
         public MainWindow()
         {
             //InitializeComponent();
-            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-4-Data.txt";
+            //var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-13-Data.txt";
+            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Mads\day 1\Day1 - Prompt 3\dataCleaned.txt";
 //            ConnectWebSocket();
             new Replayer(pathToLog);
 //            StartSensing();
 //            StartPrompting();
+            Application.Current.Shutdown();
         }
 
         private void StartSensing()

@@ -34,7 +34,7 @@ class WebSocketActor extends Actor {
   var latestInterruptibility = 0
   override def receive = {
     case readings: List[SensorReadingWithTime] =>
-      val interruptibility = DecisionModule.getInterruptibility(readings)
+      val interruptibility = DecisionModule.getInterruptibility(200, 30000, readings)
       if (interruptibility != latestInterruptibility) {
         latestInterruptibility = interruptibility
         println(s"Interruptibility $interruptibility")

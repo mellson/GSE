@@ -406,6 +406,14 @@ This could be because the user is reading, having a conversation or something si
 
 We try to catch this in our algorithm by saying that if all the readings are less than one fifth of the theoretical maximum number of readings and the face detection sensor has seen a face as one of the last inputs then we are in this scenario.
 
+\subsection{Flaws}
+We currently operate with a moving window of 30 seconds.
+Maybe this is not the optimal value for all scenarios.
+
+An algorithm which could be tailored directly at a given users needs would be preferable.
+This could be achieved by having a learning period where the user needs to answer interruptibility questions at random intervals.
+This way the algorithm could build up some training data to use for future evaluations.
+
 \section{Evaluation}
 In order to compare the performance of Approximator to Fogartys results, we conducted our experiments using the same method as Fogarty.
 
