@@ -50,7 +50,7 @@ object DecisionModule {
     val mouseReadings = readings count mouseReading
     val keyboardReadings = readings count keyboardReading
     val faceDetectionReadings = readings count faceDetectionReading
-    keyboardReadings > mouseReadings / 2 && keyboardReadings > faceDetectionReadings
+    keyboardReadings > mouseReadings / 10 && keyboardReadings > faceDetectionReadings
   }
 
   def mouseActivity(mouseReadings: Int, maxReadings: Int): Int = {

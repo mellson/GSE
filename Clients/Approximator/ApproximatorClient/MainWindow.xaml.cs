@@ -47,7 +47,7 @@ namespace ApproximatorClient
             var andersExpected = new List<int> {3, 4, 1, 5, 4, 1, 3, 1, 4, 5, 2, 5, 2};
             var madsExpected = new List<int> {1, 2, 5, 4, 2, 4, 5, 2, 1, 4, 5, 1};
 
-            var totalDifference = 0;
+            var andersDifference = 0;
 
             // Here we iterate through them against the server checking the server algorithm
             var index = 1;
@@ -58,7 +58,7 @@ namespace ApproximatorClient
                 var result = ServerHandler.GetInterruptibilityAndClearReadings(sensorReading);
                 var interruptibility = Int32.Parse(result);
                 var difference = Math.Abs(expected - interruptibility);
-                totalDifference += difference;
+                andersDifference += difference;
                 var resultText =
                     String.Format(
                     "Anders prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
@@ -67,6 +67,10 @@ namespace ApproximatorClient
                 index++;
             }
 
+            var andersResults = String.Format("Out of {0} readings for Anders, there was a difference of {1}", andersExpected.Count, andersDifference);
+            File.AppendAllText(filePath, andersResults + Environment.NewLine + Environment.NewLine);
+
+            var madsDifference = 0;
             index = 1;
             foreach (var expected in madsExpected)
             {
@@ -75,7 +79,7 @@ namespace ApproximatorClient
                 var result = ServerHandler.GetInterruptibilityAndClearReadings(sensorReading);
                 var interruptibility = Int32.Parse(result);
                 var difference = Math.Abs(expected - interruptibility);
-                totalDifference += difference;
+                madsDifference += difference;
                 var resultText =
                     String.Format(
                     "Mads prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
@@ -84,7 +88,10 @@ namespace ApproximatorClient
                 index++;
             }
 
-            var results = String.Format("Out of {0} total readings, there was a total difference of {1}", andersExpected.Count + madsExpected.Count, totalDifference);
+            var madsResults = String.Format("Out of {0} readings for Mads, there was a difference of {1}", madsExpected.Count, madsDifference);
+            File.AppendAllText(filePath, madsResults + Environment.NewLine + Environment.NewLine);
+
+            var results = String.Format("Out of {0} total readings, there was a total difference of {1}", andersExpected.Count + madsExpected.Count, andersDifference + madsDifference);
             File.AppendAllText(filePath, results + Environment.NewLine);
         }
 
