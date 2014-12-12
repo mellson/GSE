@@ -3,7 +3,7 @@ package dk.itu.spcl.server
 import akka.actor.Actor
 import dk.itu.spcl.approximator.{DecisionModule, SensorReadingWithTime, UserStatus}
 import org.java_websocket.WebSocket
-import org.joda.time.{DateTime, Seconds}
+import org.joda.time.DateTime
 import org.json4s.JsonDSL._
 import org.json4s.native.JsonMethods._
 
@@ -37,6 +37,7 @@ class WebSocketActor extends Actor {
       val interruptibility = DecisionModule.getInterruptibility(readings)
       if (interruptibility != latestInterruptibility) {
         latestInterruptibility = interruptibility
+        println(s"Interruptibility $interruptibility")
         val userStatus = UserStatus(readings.head.UserName, interruptibility)
         val json =  ("User" -> userStatus.UserName) ~ ("Interruptibility" -> userStatus.Interruptibility)
         for (user <- users) user.send(compact(render(json)))

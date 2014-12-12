@@ -390,7 +390,21 @@ We use a X classification of our sensor data.
 The analysis is done in one pass.
 TODO - find suitable classication model.
 
-% - Screenshot of app with presence + interruptibility
+\subsection{Face detection}
+One of the parameters in our algorithm relies on accurate face detection.
+This is essentially a flawed input as we can never reliably get the users face.
+
+In the current iteration we can get acceptable results to make it an interesting approach.
+The detection we use is profile and frontal face detection.
+This works to some degree, but is not 100\% accurate.
+
+In our algorithm we filter out all the negative face detections.
+This leaves us with all the readings where a face is present.
+
+We try to catch the scenario of a user sitting in front of the computer using it without the mouse and keyboard as main input.
+This could be because the user is reading, having a conversation or something similar.
+
+We try to catch this in our algorithm by saying that if all the readings are less than one fifth of the theoretical maximum number of readings and the face detection sensor has seen a face as one of the last inputs then we are in this scenario.
 
 \section{Evaluation}
 In order to compare the performance of Approximator to Fogartys results, we conducted our experiments using the same method as Fogarty.

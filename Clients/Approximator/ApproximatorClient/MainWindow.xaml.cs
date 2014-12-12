@@ -18,10 +18,10 @@ namespace ApproximatorClient
 
         public MainWindow()
         {
-            InitializeComponent();
-            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-1-Data.txt";
-            new Replayer(pathToLog);
+            //InitializeComponent();
+            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-4-Data.txt";
 //            ConnectWebSocket();
+            new Replayer(pathToLog);
 //            StartSensing();
 //            StartPrompting();
         }
@@ -41,7 +41,8 @@ namespace ApproximatorClient
 
         private void ConnectWebSocket()
         {
-            _ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+//            _ws = new WebSocket("ws://spcl.cloudapp.net:6696/users");
+            _ws = new WebSocket("ws://localhost:6696/users");
             _ws.OnMessage += (sender, e) => DataLog.Info(@"Response from WebSocket" + e.Data);
             _ws.Connect();
             _userName = Environment.UserName.Replace(" ", "");

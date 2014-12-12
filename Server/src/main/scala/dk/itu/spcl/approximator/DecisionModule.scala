@@ -53,7 +53,12 @@ object DecisionModule {
     val faceValue = facedetectionPercentage * maximumInterruptibility
     val combinedValue = keyValue + faceValue
 
-    combinedValue.ceil.toInt
+
+
+    if (combinedValue < 1)
+      1
+    else
+      combinedValue.ceil.toInt
   }
 
   def getInterruptibility(actor: ActorRef): Int = {

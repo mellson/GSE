@@ -41,6 +41,7 @@ namespace ApproximatorClient
                 if (difference > 0)
                     readings[i].SleepUntilNextReading = difference;
             }
+            
             foreach (var reading in readings)
             {
                 if (reading.Prompt)

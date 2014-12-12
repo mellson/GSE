@@ -13,12 +13,12 @@ class UserActor extends Actor {
     case sensorReading: SensorReading =>
       val reading = SensorReadingWithTime(sensorReading.SensorName, sensorReading.UserName, DateTime.now.toString, sensorReading.Value)
 
-      println(reading)
+      //println(reading)
 
       lastReading = reading
 
       // Keep all reading from the last 30 seconds
-      readings = reading :: readings.filter(time => time.date().plusSeconds(30).isBeforeNow)
+      readings = reading :: readings.filter(time => time.date().plusSeconds(30).isAfterNow)
 
       // Update all clients connected via web socket with this latest sensor reading
       Infrastructure.webSocketActor ! readings
