@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Media;
 using System.Threading;
 using System.Windows;
@@ -19,13 +21,71 @@ namespace ApproximatorClient
         public MainWindow()
         {
             //InitializeComponent();
-            //var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-13-Data.txt";
-            var pathToLog = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Mads\day 1\Day1 - Prompt 3\dataCleaned.txt";
-//            ConnectWebSocket();
-            new Replayer(pathToLog);
+
+            TestAlgorithm();
+
+            //            ConnectWebSocket();
 //            StartSensing();
 //            StartPrompting();
             Application.Current.Shutdown();
+        }
+
+        private static void TestAlgorithm()
+        {
+            // Setup logging file
+            const string filePath = @"AlgorithmTest.txt";
+            if (File.Exists(filePath)) File.Delete(filePath);
+            if (!File.Exists(filePath))
+            {
+                var createText = "Algorithm Test" + Environment.NewLine;
+                File.WriteAllText(filePath, createText);
+                var appendText = "==============" + Environment.NewLine + Environment.NewLine;
+                File.AppendAllText(filePath, appendText);
+            }
+
+            // These are the ground truth values reported during the test
+            var andersExpected = new List<int> {3, 4, 1, 5, 4, 1, 3, 1, 4, 5, 2, 5, 2};
+            var madsExpected = new List<int> {1, 2, 5, 4, 2, 4, 5, 2, 1, 4, 5, 1};
+
+            var totalDifference = 0;
+
+            // Here we iterate through them against the server checking the server algorithm
+            var index = 1;
+            foreach (var expected in andersExpected)
+            {
+                var path = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Anders\ABM-" + index + "-Data.txt";
+                var sensorReading = Replayer.ReplayPath(path);
+                var result = ServerHandler.GetInterruptibilityAndClearReadings(sensorReading);
+                var interruptibility = Int32.Parse(result);
+                var difference = Math.Abs(expected - interruptibility);
+                totalDifference += difference;
+                var resultText =
+                    String.Format(
+                    "Anders prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
+                        index, interruptibility, expected, difference);
+                File.AppendAllText(filePath, resultText + Environment.NewLine);
+                index++;
+            }
+
+            index = 1;
+            foreach (var expected in madsExpected)
+            {
+                var path = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Mads\day 1\prompt" + index + ".txt";
+                var sensorReading = Replayer.ReplayPath(path);
+                var result = ServerHandler.GetInterruptibilityAndClearReadings(sensorReading);
+                var interruptibility = Int32.Parse(result);
+                var difference = Math.Abs(expected - interruptibility);
+                totalDifference += difference;
+                var resultText =
+                    String.Format(
+                    "Mads prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
+                        index, interruptibility, expected, difference);
+                File.AppendAllText(filePath, resultText + Environment.NewLine);
+                index++;
+            }
+
+            var results = String.Format("Out of {0} total readings, there was a total difference of {1}", andersExpected.Count + madsExpected.Count, totalDifference);
+            File.AppendAllText(filePath, results + Environment.NewLine);
         }
 
         private void StartSensing()

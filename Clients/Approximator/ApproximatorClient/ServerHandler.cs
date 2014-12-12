@@ -77,5 +77,21 @@ namespace ApproximatorClient
             }
             return true;
         }
+
+        public static string GetInterruptibilityAndClearReadings(SensorReading sensorReading)
+        {
+            if (!SensorEndpointUrls.ContainsKey(sensorReading.SensorName)) SetupConnection(sensorReading.GetSensorRegistration());
+            var endPoint = SensorEndpointUrls[sensorReading.SensorName];
+            var request = WebRequest.Create(endPoint);
+            var response = request.GetResponse();
+            var dataStream = response.GetResponseStream();
+            string result = null;
+            if (dataStream != null)
+                using (var streamReader = new StreamReader(dataStream))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+            return result;
+        }
     }
 }

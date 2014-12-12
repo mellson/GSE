@@ -5,11 +5,17 @@ import dk.itu.spcl.Infrastructure
 import dk.itu.spcl.server.{AskForLastUpdateMessage, GetReadings}
 import org.joda.time.DateTime
 
+case object ClearReadings
+
 class UserActor extends Actor {
   var lastReading: SensorReadingWithTime = SensorReadingWithTime("DefaultSensor", "DefaultUser", DateTime.now.toString, "Init")
   var readings: List[SensorReadingWithTime] = Nil
 
   override def receive: Receive = {
+    case ClearReadings =>
+      println("Cleared Readings")
+      readings = Nil
+
     case sensorReading: SensorReading =>
       val reading = SensorReadingWithTime(sensorReading.SensorName, sensorReading.UserName, DateTime.now.toString, sensorReading.Value)
 

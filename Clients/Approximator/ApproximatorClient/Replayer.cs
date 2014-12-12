@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using ApproximatorClient.Sensors;
 using Newtonsoft.Json;
 
 namespace ApproximatorClient
@@ -10,12 +9,13 @@ namespace ApproximatorClient
 
     class Replayer
     {
-        public Replayer(string pathToLog)
+        public static SensorReading ReplayPath(string pathToLog)
         {
             DateTime? startTime = null;
             const string startString = "SensorReadingWithTime(";
             var readings = new List<Reading>();
             var log = File.ReadLines(pathToLog);
+            SensorReading sensorReading = null;
             foreach (var s in log)
             {
                 if (s.StartsWith(startString))
@@ -41,7 +41,7 @@ namespace ApproximatorClient
                 if (difference > 0)
                     readings[i].SleepUntilNextReading = difference;
             }
-            
+
             foreach (var reading in readings)
             {
                 if (reading.Prompt)
@@ -49,7 +49,7 @@ namespace ApproximatorClient
                     Console.Out.WriteLine("Prompted user");
                     continue;
                 }
-                var sensorReading = new SensorReading
+                sensorReading = new SensorReading
                 {
                     SensorName = reading.Sensor,
                     UserName = reading.User,
@@ -58,6 +58,7 @@ namespace ApproximatorClient
                 ServerHandler.UploadJson(JsonConvert.SerializeObject(sensorReading));
                 Thread.Sleep(reading.SleepUntilNextReading);
             }
+            return sensorReading;
         }
     }
 

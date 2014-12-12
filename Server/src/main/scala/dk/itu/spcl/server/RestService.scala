@@ -39,6 +39,16 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
     case (_,Some(i: (Int, ActorRef)))  => ok(s"$userPath/${i._1}")
   }
 
+  def getInterruptibilityAndClearData(id: Int): String = {
+    implicit val timeout = Timeout(5 seconds)
+    val userActor = users.find(user => user._2._1 == id).get._2._2
+    val future = userActor ? GetReadings
+    val readings = Await.result(future, timeout.duration).asInstanceOf[List[SensorReadingWithTime]]
+    val interruptibility = DecisionModule.getInterruptibility(200, 30000, readings)
+    userActor ! ClearReadings
+    s"$interruptibility"
+  }
+
   def getSensorData(id: Int): List[SensorReadingWithTime] = {
     implicit val timeout = Timeout(5 seconds)
     for (user <- users)
@@ -66,7 +76,6 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
   def getUserStatuses = {
     val reading = SensorReading("userPath", "userName", "value")
     log.debug(reading.toString)
-    println(reading) // TODO remove this again
 
     val userStatuses =
       for (user <- users) yield {
@@ -103,7 +112,7 @@ trait RestService extends HttpServiceActor with Authenticator with akka.actor.Ac
       path(userPath / IntNumber) { id =>
       {
         get {
-          complete(getSensorData(id))
+          complete(getInterruptibilityAndClearData(id))
         }
       }
       } ~
