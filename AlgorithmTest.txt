@@ -1,0 +1,33 @@
+Algorithm Test
+==============
+
+Anders prompt 1. Interruptibility was 1, we expected it to be 3. The difference is 2.
+Anders prompt 2. Interruptibility was 4, we expected it to be 4. The difference is 0.
+Anders prompt 3. Interruptibility was 2, we expected it to be 1. The difference is 1.
+Anders prompt 4. Interruptibility was 4, we expected it to be 5. The difference is 1.
+Anders prompt 5. Interruptibility was 3, we expected it to be 4. The difference is 1.
+Anders prompt 6. Interruptibility was 1, we expected it to be 1. The difference is 0.
+Anders prompt 7. Interruptibility was 4, we expected it to be 3. The difference is 1.
+Anders prompt 8. Interruptibility was 1, we expected it to be 1. The difference is 0.
+Anders prompt 9. Interruptibility was 5, we expected it to be 4. The difference is 1.
+Anders prompt 10. Interruptibility was 5, we expected it to be 5. The difference is 0.
+Anders prompt 11. Interruptibility was 3, we expected it to be 2. The difference is 1.
+Anders prompt 12. Interruptibility was 5, we expected it to be 5. The difference is 0.
+Anders prompt 13. Interruptibility was 1, we expected it to be 2. The difference is 1.
+Out of 13 readings for Anders, there was a difference of 9
+
+Mads prompt 1. Interruptibility was 1, we expected it to be 1. The difference is 0.
+Mads prompt 2. Interruptibility was 1, we expected it to be 2. The difference is 1.
+Mads prompt 3. Interruptibility was 1, we expected it to be 5. The difference is 4.
+Mads prompt 4. Interruptibility was 1, we expected it to be 4. The difference is 3.
+Mads prompt 5. Interruptibility was 1, we expected it to be 2. The difference is 1.
+Mads prompt 6. Interruptibility was 1, we expected it to be 4. The difference is 3.
+Mads prompt 7. Interruptibility was 1, we expected it to be 5. The difference is 4.
+Mads prompt 8. Interruptibility was 1, we expected it to be 2. The difference is 1.
+Mads prompt 9. Interruptibility was 1, we expected it to be 1. The difference is 0.
+Mads prompt 10. Interruptibility was 1, we expected it to be 4. The difference is 3.
+Mads prompt 11. Interruptibility was 1, we expected it to be 5. The difference is 4.
+Mads prompt 12. Interruptibility was 1, we expected it to be 1. The difference is 0.
+Out of 12 readings for Mads, there was a difference of 24
+
+Out of 25 total readings, there was a total difference of 33
