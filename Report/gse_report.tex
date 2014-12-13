@@ -376,43 +376,77 @@ The client is even easier this is currently a Windows application which can be d
 The client is also available as source from the GitHub repository should a user wish to rebuild for Mono.
 
 \section{Decision Logic}
+We want to identify a software engineer’s interruptibility value using the sensors in a laptop.
+To achieve this we have three sensors providing data; keyboard, mouse and camera (face detection).
+
 Raw sensor data does not say much about presence or availability.
 We need to analyze the data to make sense of it.
-The infrastructure has a decision module which can do this.
+We have put a decision module in our infrastructure that can calculate interruptibility values from the sensor inputs.
 
-When a client asks the service to provide data the decision module translates the data before serving it through the REST API.
+\subsection{Building a model}
+We have done manual a classification of our sensor data.
+We recorded two test subjects, user A and user B, in their working environment.
+User A showed a clear coalition between patterns in the sensor data and the reported interruptibility.
+We identified three major scenarios from looking at the data.
+We have listed the three scenarios here.
 
-While each sensor by itself does not provide useable information, we can actually get quite accurate reading by aggregating the sensors and feeding them into a decision module.
-This section will provide information about how we approach this.
+\begin{itemize}
+  \item \textbf{Scenario 1 – High Interruptibility}
+  \begin{itemize}
+    \item Identified primarily with the camera sensor
+    \item Few data points compared to the other scenarios
+    \item Example tasks
+    \begin{itemize}
+      \item Reading
+      \item Conference call
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
-\subsection{Classification}
-We use a X classification of our sensor data.
-The analysis is done in one pass.
-TODO - find suitable classication model.
+\begin{itemize}
+  \item \textbf{Scenario 2 – High Interruptibility}
+  \begin{itemize}
+    \item Identified primarily with the keyboard sensor
+    \item Example tasks
+    \begin{itemize}
+      \item Writing
+      \item Coding
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
-\subsection{Face detection}
-One of the parameters in our algorithm relies on accurate face detection.
-This is essentially a flawed input as we can never reliably get the users face.
+\begin{itemize}
+  \item \textbf{Scenario 3 – Low Interruptibility}
+  \begin{itemize}
+    \item Identified primarily with the mouse sensor
+    \item Example tasks
+    \begin{itemize}
+      \item Browsing
+      \item Switching context between work sessions
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
-In the current iteration we can get acceptable results to make it an interesting approach.
-The detection we use is profile and frontal face detection.
-This works to some degree, but is not 100\% accurate.
+User B however did not show any clear indication of patterns that could identify a given scenario.
+This could be because software engineers work in different ways.
+There is also a chance that user B is an outlier and therefore not representing the generic software engineer.
+Our test could benefit from another run with many more test subjects.
 
-In our algorithm we filter out all the negative face detections.
-This leaves us with all the readings where a face is present.
+\subsection{Scenario detection}
+\textbf{Scenario 1} is detected using face detection.
+If a user is sitting in front of the computer our face, detection will detect the user as being present.
+Detection happens with a frontal or a profile detection depending on the angle the camera sees the users face.
 
 We try to catch the scenario of a user sitting in front of the computer using it without the mouse and keyboard as main input.
 This could be because the user is reading, having a conversation or something similar.
 
-We try to catch this in our algorithm by saying that if all the readings are less than one fifth of the theoretical maximum number of readings and the face detection sensor has seen a face as one of the last inputs then we are in this scenario.
+The keyboard sensor identifies \textbf{scenario 2}.
+When a user is typing away, we think it must be because the user is concentrating on work.
+This work can be writing, coding or other keyboard heavy tasks.
 
-\subsection{Flaws}
-We currently operate with a moving window of 30 seconds.
-Maybe this is not the optimal value for all scenarios.
-
-An algorithm which could be tailored directly at a given users needs would be preferable.
-This could be achieved by having a learning period where the user needs to answer interruptibility questions at random intervals.
-This way the algorithm could build up some training data to use for future evaluations.
+When a user is moving the mouse a lot, we identify it as \textbf{scenario 3}.
+We think that heavy mouse activity is usually an indicator for casual activity.
+This could be browsing, moving files or simply a switch of context between work sessions.
 
 \section{Evaluation}
 In order to compare the performance of Approximator to Fogartys results, we conducted our experiments using the same method as Fogarty.
@@ -501,22 +535,35 @@ Factors like culture, age and ethnicity may significantly impact the results.
 
 This paper bases its research background and evalutation of the work done in \cite{fogarty2005predicting} but has a number of different factors. This paper and \cite{fogarty2005predicting} are written over 10 years apart. \cite{fogarty2005predicting} relied heavily on factores like closed office doors and talking on the phone. Today open office spaces with are much more common than in 2003 and talking on the phone is less common in favor of other means of communication like email, and chat. More notably \cite{fogarty2005predicting} based their studies on knowledge workers in an University administration department while we based our paper on software developers in a CSCW setting.
 
-\subsection{Future Work}
+We had hoped that both our test subjects would show the same coalition in their data.
+This was unfortunately not the case.
+If a similar project is to succeed, we need a better algorithm for detecting patterns.
+An algorithm which could be tailored directly at a given users’ needs would be preferable.
+One approach is to construct an algorithm with a learning period.
+In the learning period, the user needs to answer interruptibility questions at random intervals.
+This way the algorithm could build up some training data to use for future evaluations.
 
+\subsection{Future Work}
 We chose to focus our paper on the sensors available in a modern laptop for the ease of use and deployability.
 Most people today also carry smart phones and newer devices such as fitness trackers and smart watches are gaining popularity.
 These devices could supply additional useful data to our infrastructure to enhance the prediction of interruptibility by providing more finegrained position and movement.
 We leave these devices for future work as they constrain deployability and are not all common case.
 
-
 \section{Conclusion}
+We set out believing that it was possible to detect a software engineer’s interruptibility value using only the sensors in a laptop.
+It turned out that it was possible for one of our two test subjects.
+This finding opens more questions than it answers. Is our approach still valid have we tested on more subjects?
+
+We conclude that our initial idea is valid.
+However, our project did not include enough test subjects to say anything definite about the feasibility across all software engineers.
 
 \section{Acknowledgements}
+We would like to thank Paolo Tell for supervising and guiding us throughout the project.
+We are also grateful for the great feedback from Thomas Olof Pederson and Shahram Jalaliniya.
+Lastly, we would like to thank all the people who helped do our evaluation.
 
 \balance
 \bibliographystyle{acm-sigchi}
 \bibliography{ubicomp}
 
-% \section{Appendix}
-% Ontology\url{http://d.pr/11X6n}
 \end{document}
