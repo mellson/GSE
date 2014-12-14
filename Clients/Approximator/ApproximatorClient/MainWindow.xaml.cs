@@ -45,7 +45,8 @@ namespace ApproximatorClient
 
             // These are the ground truth values reported during the test
             var andersExpected = new List<int> {3, 4, 1, 5, 4, 1, 3, 1, 4, 5, 2, 5, 2};
-            var madsExpected = new List<int> {1, 2, 5, 4, 2, 4, 5, 2, 1, 4, 5, 1};
+            var madsExpected1 = new List<int> {1, 2, 5, 4, 2, 4, 5, 2, 1, 4, 5, 1};
+            var madsExpected2 = new List<int> {1, 4, 1, 5, 4, 1, 4, 2, 5, 3};
 
             var andersDifference = 0;
 
@@ -72,7 +73,7 @@ namespace ApproximatorClient
 
             var madsDifference = 0;
             index = 1;
-            foreach (var expected in madsExpected)
+            foreach (var expected in madsExpected1)
             {
                 var path = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Mads\day 1\prompt" + index + ".txt";
                 var sensorReading = Replayer.ReplayPath(path);
@@ -82,16 +83,32 @@ namespace ApproximatorClient
                 madsDifference += difference;
                 var resultText =
                     String.Format(
-                    "Mads prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
+                    "Mads day 1 prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
+                        index, interruptibility, expected, difference);
+                File.AppendAllText(filePath, resultText + Environment.NewLine);
+                index++;
+            }
+            index = 1;
+            foreach (var expected in madsExpected2)
+            {
+                var path = @"C:\Users\Anders\Desktop\Git\GSE\Data from test\Videos and data\Mads\day 2\prompt" + index + ".txt";
+                var sensorReading = Replayer.ReplayPath(path);
+                var result = ServerHandler.GetInterruptibilityAndClearReadings(sensorReading);
+                var interruptibility = Int32.Parse(result);
+                var difference = Math.Abs(expected - interruptibility);
+                madsDifference += difference;
+                var resultText =
+                    String.Format(
+                    "Mads day 2 prompt {0}. Interruptibility was {1}, we expected it to be {2}. The difference is {3}.",
                         index, interruptibility, expected, difference);
                 File.AppendAllText(filePath, resultText + Environment.NewLine);
                 index++;
             }
 
-            var madsResults = String.Format("Out of {0} readings for Mads, there was a difference of {1}", madsExpected.Count, madsDifference);
+            var madsResults = String.Format("Out of {0} readings for Mads, there was a difference of {1}", madsExpected1.Count + madsExpected2.Count, madsDifference);
             File.AppendAllText(filePath, madsResults + Environment.NewLine + Environment.NewLine);
 
-            var results = String.Format("Out of {0} total readings, there was a total difference of {1}", andersExpected.Count + madsExpected.Count, andersDifference + madsDifference);
+            var results = String.Format("Out of {0} total readings, there was a total difference of {1}", andersExpected.Count + madsExpected1.Count + madsExpected2.Count, andersDifference + madsDifference);
             File.AppendAllText(filePath, results + Environment.NewLine);
         }
 
