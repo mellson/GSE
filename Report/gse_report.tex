@@ -377,21 +377,21 @@ The client is also available as source from the GitHub repository should a user 
 
 \section{Decision Logic}
 We want to identify a software engineer’s interruptibility value using the sensors in a laptop.
-To achieve this we have three sensors providing data; keyboard, mouse and camera (face detection).
+To achieve this there are three sensors providing data; keyboard, mouse and camera (face detection).
 
 Raw sensor data does not say much about presence or availability.
-We need to analyze the data to make sense of it.
-We have put a decision module in our infrastructure that can calculate interruptibility values from the sensor inputs.
+The captured sensor data must be analyzed in order to make sense of it.
+The infrastructure has a decision module which can calculate interruptibility values from the sensor inputs.
 
 \subsection{Building a model}
-We have done manual a classification of our sensor data.
-We recorded two test subjects, user A and user B, in their working environment.
+A manual classification approach has been used to classify the collected data.
+Two test subjects, user A and user B, was recorded in their work environment.
 User A showed a clear coalition between patterns in the sensor data and the reported interruptibility.
-We identified three major scenarios from looking at the data.
-We have listed the three scenarios here.
+Three major scenarios was identified by looking at the data.
+The three scenarios are listed below.
 
 \begin{itemize}
-  \item \textbf{Scenario 1 – High Interruptibility}
+  \item \textbf{Scenario 1 – Highly Non-Interruptible}
   \begin{itemize}
     \item Identified primarily with the camera sensor
     \item Few data points compared to the other scenarios
@@ -404,7 +404,7 @@ We have listed the three scenarios here.
 \end{itemize}
 
 \begin{itemize}
-  \item \textbf{Scenario 2 – High Interruptibility}
+  \item \textbf{Scenario 2 – Highly Non-Interruptible}
   \begin{itemize}
     \item Identified primarily with the keyboard sensor
     \item Example tasks
@@ -416,7 +416,7 @@ We have listed the three scenarios here.
 \end{itemize}
 
 \begin{itemize}
-  \item \textbf{Scenario 3 – Low Interruptibility}
+  \item \textbf{Scenario 3 – Highly Interruptible}
   \begin{itemize}
     \item Identified primarily with the mouse sensor
     \item Example tasks
@@ -431,7 +431,7 @@ User B however did not show any clear indication of patterns that could identify
 This could be because software engineers work in different ways.
 There is also a chance that user B is an outlier and therefore not representing the generic software engineer.
 Maybe it is user A who is an outlier, we do not know.
-Our test could benefit from another run with many more test subjects.
+It would have been much more clear if any of these theories was true if more test subjects had been involved.
 
 \subsection{Scenario detection}
 \textbf{Scenario 1} is detected using face detection.
