@@ -441,7 +441,7 @@ This could be browsing, moving files or simply a switch of context between work 
 
 
 \section{Evaluation}
-In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed for during the experiments of this paper.
+In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed during the experiments in this paper.
 
 \subsection{Method}
 The experiment was conducted in two stages.
@@ -474,24 +474,20 @@ Both machines was mounted in an office dock setup connecting the machine to an e
 Approximator utilized the keyboard, mouse and camera as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
 This data was to used later in our process.
 Approximator was specially configured to prompt a visual and audio bell for the test subject at random intervals averaging at two times per hour.
-The test subjects were instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) by show of fingers on one hand when prompted.
+The test subjects were instructed to self-report their own level of interruptibility on a scale of 1 (Highly Interruptible) to 5 (Highly Non-Interruptible) by show of fingers on one hand when prompted.
 The test subjects had no way of pausing the application, but could request retroactively to have sequence deleted if necessary.
 The prompts where the test subjects was not present was removed from the dataset after the experiment.
 If it should happen that the test subjects clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention, then these would be interpreted by us as a highly non-interruptible events.
 
 The experiment was conducted over a period of two workdays from 9 am to 4:30 pm, yielding a total of 30 hours of video and 43 prompts.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=\columnwidth]{figures/survey_introduction.png}
-  \caption{Introduction to the survey.}
-  \label{fig:survey_intro}
-\end{figure}
-
 \subsubsection{Stage Two}
 At this stage an application with the explicit purpose of peer reviewing the collected recordings was created.
 People from the software development community were invited to partake in the survey, and did so under supervision from two of the researchers.
-When the users started the survey, they were first presented with the text in figure~\ref{fig:survey_intro} and informed to ask the researchers if they had any questions.
+
+When the estimator subjects started the survey, they were asked to rate each video on a scale of 1 (Highly Interruptible) to 5 (Highly Non-Interruptible).
+They where informed that they should act as though they where colleges with the video subject.
+And finally that they should ask the researchers if they had any questions.
 Afterwards they were required to enter their demographic information.
 These demographical questions consisted of gender, age, and ethnicity.
 The demographic distribution is provided since it may affect peoples ability to interpret interruptibility,
@@ -503,12 +499,13 @@ The demographic distribution is provided since it may affect peoples ability to 
   \label{fig:webpage}
 \end{figure}
 
-The content survey consists of 5 unique sets with 7 different video clips from the first stage of the experiement.
-These were the 30 seconds leading up to the test subject being prompted for self-report.
-Each person partaking in the survey was shown one of the 5 different sets of video with 3 random repetitions from the same set.
-The 3 random repetition is ensure that the person is confident about their answer.
-If more than two repetitions deviated more than two points compared to the original answer, the results from that test person was deemed invalid.
-The user could replay the sequence as many times as they wanted until they felt they could give a valid assessment.
+The content survey consists of 5 unique sets with 7 different video clips from the first stage of the experiment.
+Each clip contained the last 30 seconds leading up to the video subject being prompted for self-report.
+
+Each estimator subject was shown one of the 5 different sets of video with 3 random repetitions from the same set.
+The 3 random repetition is to ensure that the estimator is confident about their answer.
+If more than two repetitions deviated more than two points compared to the original answer, the results from that estimator subject was deemed invalid.
+The estimator could replay the sequence as many times as they wanted until they felt they could give a valid assessment.
 Each sequence was played in full length before the user could rate it and proceed to the next.
 
 \subsection{Data analysis}
@@ -532,19 +529,20 @@ The remaining 8 was not applicable since the test subject was not present at the
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{figures/Interruptibility_values_videotest.png}
-  \caption{Frequency of interruptibility values reported by the test subjects, ranging from 1 (highly interruptible to 5 highly non-interruptible).}
+  \caption{Frequency of interruptibility values reported by the test subjects, ranging from 1 (Highly Interruptible) to 5 (Highly Non-Interruptible).}
   \label{fig:interruptibilityFrequency}
 \end{figure}
 
-A total of 19 people participated in the survey. 
-The video clip sets A, B, C and D were surveyed by 4 people while set E was surveyed by 3 people. 
-All surveys were valid and consistent answers. 
+A total of 19 people participated in the survey.
+The video clip sets A, B, C and D were surveyed by 4 estimators while set E was surveyed by 3.
+All surveys were valid and had consistent answers.
 
-Although answers were consistent and participants clearly understood the task, the accuracy of the participants were overall poor. 
+Although answers were consistent and participants clearly understood the task, the accuracy of the estimators were overall poor.
 As shown in \autoref{tab:survey_accuracy} the average precision among all sets were around 28\%.
-We attribute this low score to the fact that is very hard to precisely rate another persons interruptibility on a scale from 1 to 5. 
+We attribute this low score to the fact that is very hard to precisely rate another persons interruptibility on a scale from 1 to 5.
 
-\begin{table}[h]
+\begin{figure}[h]
+  \centering
   \begin{tabular}{@{}lll@{}}
     \toprule
     Test Set     & Adjusted & Original \\ \midrule
@@ -557,7 +555,7 @@ We attribute this low score to the fact that is very hard to precisely rate anot
   \end{tabular}
   \caption{Accuracy of survey participants interpreting test subjects interruptibility}
   \label{tab:survey_accuracy}
-\end{table}
+\end{figure}
 
 \begin{figure}[h]
   \centering
