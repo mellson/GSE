@@ -489,6 +489,7 @@ The experiment was conducted over a period of two workdays from 9 am to 4:30 pm,
 \end{figure}
 
 \subsubsection{Stage Two}
+\label{sec:stage_two}
 At this stage an application with the explicit purpose of peer reviewing the collected recordings was created.
 People from the software development community were invited to partake in the survey, and did so under supervision from two of the researchers.
 When the users started the survey, they were first presented with the text in figure~\ref{fig:survey_intro} and informed to ask the researchers if they had any questions.
@@ -543,6 +544,12 @@ All surveys were valid and consistent answers.
 Although answers were consistent and participants clearly understood the task, the accuracy of the participants were overall poor. 
 As shown in \autoref{tab:survey_accuracy} the average precision among all sets were around 28\%.
 We attribute this low score to the fact that is very hard to precisely rate another persons interruptibility on a scale from 1 to 5. 
+In order to account for this we use the same scale conversion as Fogarty.
+For all answers in the survey we change values of 1-3 to be 1 and 4-5 to be 5.
+This gives us a more binary representation of interpretation of the data.
+As shown in \autoref{tab:survey_accuracy} that yields a much improved average accuracy of 63\%.
+
+As discussed previously in \autoref{sec:stage_two} the demography of the participants in the survey may impact the interpreted interruptibility of other people. \autoref{fig:demography_country} shows the distribution of participants by country of origin, \autoref{fig:demography_age} shows by age and \autoref{fig:demography_gender} shows by gender.
 
 \begin{table}[h]
   \begin{tabular}{@{}lll@{}}
@@ -579,18 +586,6 @@ We attribute this low score to the fact that is very hard to precisely rate anot
   \caption{Demography of survey participants by Gender}
   \label{fig:demography_gender}
 \end{figure}
-
-%A total of 19 people participated in the survey.
-%None of the participants we're deemed invalid
-%show the demography here
-%Show the precisions from the results of the different sets.
-%Explain the results are worse than random
-%Discuss why that may be
-%Explain the "trick" the forgarty's paper uses
-%Explain that we use almost the same trick
-%Show results before and after trick
-
-
 
 
 \section{Discussion}
