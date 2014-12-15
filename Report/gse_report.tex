@@ -453,8 +453,8 @@ This could be browsing, moving files or simply a switch of context between work 
 In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed for during the experiments of this paper.
 
 \subsection{Method}
-Our experiment was conducted in two stages.
-First we recorded two test subjects in their work environment with a camera, while Approximators sensors collected data.
+The experiment was conducted in two stages.
+First the two test subjects are recorded in their work environment with a camera, while Approximators sensors collected data.
 The second stage was conducted by inviting people from the software development community to a survey where they reviewed the experiment.
 At the survey the participants were asked to assess interruptibility for the two test users based on short sequences of video, showing the test users in random selected situations in their work environment.
 
@@ -465,7 +465,6 @@ Since the company also have offices in other countries, this test subject often 
 He worked in shared offices, where he shared the office with 3-4 other employees, often people assigned to the same project or with a similar skillset.
 It was possible to close the door to these offices, but that rarely occurred.
 The other test subject owns a company that does software contract work for other businesses.
-
 
 The test subjects was recorded with a Sony Handycam HDR-CX360 with wide angle lens and was recorded in mp4 with 720x576 format at 25 frames per second.
 The original recording was recorded with sound, but the sound was removed for the test.
@@ -484,10 +483,10 @@ Both machines was mounted in an office dock setup connecting the machine to an e
 Approximator utilized the keyboard, mouse and camera as sensors, and sent data from these sensors to the infrastructure throughout the experiment.
 This data was to used later in our process.
 Approximator was specially configured to prompt a visual and audio bell for the test subject at random intervals averaging at two times per hour.
-The test subjects was instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) by show of fingers on one hand when prompted.
+The test subjects were instructed to self-report their own level of interruptibility on a scale of 1 (highly-interruptible) to 5 (highly-non-interruptible) by show of fingers on one hand when prompted.
 The test subjects had no way of pausing the application, but could request retroactively to have sequence deleted if necessary.
 The prompts where the test subjects was not present was removed from the dataset after the experiment.
-If it should happen that the test subjects clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention, then these would be interpreted by us as a high-non-interruptible event.
+If it should happen that the test subjects clearly registered the prompt, but did not signal their interruptibility, due to them being on the phone or engaged in a other activity that required their full attention, then these would be interpreted by us as a highly non-interruptible events.
 
 The experiment was conducted over a period of two workdays from 9 am to 4:30 pm, yielding a total of 30 hours of video and 43 prompts.
 
@@ -499,9 +498,9 @@ The experiment was conducted over a period of two workdays from 9 am to 4:30 pm,
 \end{figure}
 
 \subsubsection{Stage Two}
-At this stage we created a application with the explicit purpose of peer reviewing the recordings we had collected.
+At this stage an application with the explicit purpose of peer reviewing the collected recordings was created.
 People from the software development community were invited to partake in the survey, and did so under supervision from two of the researchers.
-When the users started the survey, they were first presented for the text in figure~\ref{fig:survey_intro} and informed to ask the researchers if they had any questions.
+When the users started the survey, they were first presented with the text in figure~\ref{fig:survey_intro} and informed to ask the researchers if they had any questions.
 Afterwards they were required to enter their demographic information. 
 These demographical questions consisted of gender, age, and ethnicity.
 This is to ensure the validity of the paper, but also to see if their could be any correlation between demographics and interruptibility assessment.
@@ -515,14 +514,14 @@ This is to ensure the validity of the paper, but also to see if their could be a
 
 The user was then presented with 10 sequences of 30 seconds in length.
 These were the 30 seconds leading up to the test subject being prompted for self-report.
-3 of the 10 sequences was repeated for the purpose of seeing if the user answered randomly, and if more than two sequences deviated more than two points compared to the previous answers, the results from that test person was deemed invalid.
+3 of the 10 sequences were repeated for the purpose of seeing if the user answered randomly, and if more than two sequences deviated more than two points compared to the previous answers, the results from that test person was deemed invalid.
 The user could replay the sequence as many times as they wanted until they felt they could give a valid assessment.
-But each sequence was played in full length before the user could rate it and proceed to the next.
+Each sequence was played in full length before the user could rate it and proceed to the next.
 
-A total of 19 persons participated in the survey.
+A total of 19 people participated in the survey.
 
 \subsection{Data analysis}
-When the experiment was concluded, we compared the results gathered from Approximator, the test persons, and the user.
+After the experiment was concluded, the results gathered from Approximator was compared to the test persons, and the users.
 This was done by plotting the values into two confusion matrices.
 One comparing the answers of user to answers of the test users.
 And one comparing the answers of the user to the results of Approximator.
