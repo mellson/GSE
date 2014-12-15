@@ -343,7 +343,7 @@ We use the general programming language Scala \cite{scala} to program our Akka-b
 \begin{figure}[H]
   \centering
   \includegraphics[width=\columnwidth]{figures/infrastructure_design.pdf}
-  \caption{Infrastructure Design}
+  \caption{Infrastructure Design.}
   \label{fig:infrastructure}
 \end{figure}
 
@@ -388,53 +388,42 @@ The infrastructure has a decision module which can calculate interruptibility va
 A manual classification approach has been used to classify the collected data.
 Two test subjects, user A and user B, was recorded in their work environment.
 User A showed a clear coalition between patterns in the sensor data and the reported interruptibility.
-Three major scenarios was identified by looking at the data.
-The three scenarios are listed below.
+Three major scenarios was identified by looking at the data, they are listed in Figure~\ref{fig:scenarios}.
 
-\begin{itemize}
-  \item \textbf{Scenario 1 – Highly Non-Interruptible}
-  \begin{itemize}
-    \item Identified primarily with the camera sensor
-    \item Few data points compared to the other scenarios
-    \item Example tasks
-    \begin{itemize}
-      \item Reading
-      \item Conference call
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
-
-\begin{itemize}
-  \item \textbf{Scenario 2 – Highly Non-Interruptible}
-  \begin{itemize}
-    \item Identified primarily with the keyboard sensor
-    \item Example tasks
-    \begin{itemize}
-      \item Writing
-      \item Coding
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
-
-\begin{itemize}
-  \item \textbf{Scenario 3 – Highly Interruptible}
-  \begin{itemize}
-    \item Identified primarily with the mouse sensor
-    \item Example tasks
-    \begin{itemize}
-      \item Browsing
-      \item Switching context between work sessions
-    \end{itemize}
-  \end{itemize}
-\end{itemize}
+\begin{figure}[H]
+  \centering
+      \begin{tabular}{@{}llll@{}}
+      \toprule
+      \textbf{Scenario} & \textbf{1} & \textbf{2} & \textbf{3}      \\ \midrule
+      Interruptible     & No         & No         & Yes             \\
+      Primary sensor    & Camera     & Keyboard   & Mouse           \\
+      Example task 1    & Reading    & Writing    & Browsing        \\
+      Example task 2    & Video Chat & Coding     & Switching tasks \\ \bottomrule
+      \end{tabular}
+  \caption{The three identified scenarios.}
+  \label{fig:scenarios}
+\end{figure}
 
 User B however did not show any clear indication of patterns that could identify a given scenario.
 This could be because software engineers work in different ways.
 There is also a chance that user B is an outlier and therefore not representing the generic software engineer.
-Maybe it is user A who is an outlier, we do not know.
+Then again it could also be that it is user A who is an outlier, we do not know.
 It would have been much more clear if any of these theories was true if more test subjects had been involved.
 
 \subsection{Scenario detection}
+We use a centralized algorithm to detect which scenario the user is in.
+The algorithm is running on the infrastructure server.
+Here it constantly looks at a moving window of incoming sensor data.
+The window is 30 seconds long and contains all the sensor data from this period.
+The algorithm is shown in Figure~\ref{fig:decision_logic}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\columnwidth]{figures/decision_logic.pdf}
+  \caption{Decision logic for detecting scenarios.}
+  \label{fig:decision_logic}
+\end{figure}
+
 \textbf{Scenario 1} is detected using face detection.
 If a user is sitting in front of the computer the face detection will detect the user as being present.
 Detection happens with a frontal or profile detection depending on the angle the camera sees the users face.
@@ -449,6 +438,7 @@ This work can be writing, coding or other keyboard heavy tasks.
 When a user is moving the mouse a lot, we identify it as \textbf{scenario 3}.
 We hypothesize that heavy mouse activity is an indicator for casual activity.
 This could be browsing, moving files or simply a switch of context between work sessions.
+
 
 \section{Evaluation}
 In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed for during the experiments of this paper.
@@ -475,7 +465,7 @@ The angle did however show as much of the office as possible, while showing the 
 \begin{figure}
   \centering
   \includegraphics[width=\columnwidth]{figures/experiment_setup.png}
-  \caption{View of experiment setup}
+  \caption{View of experiment setup.}
   \label{fig:experiment}
 \end{figure}
 
