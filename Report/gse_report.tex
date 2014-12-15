@@ -516,13 +516,6 @@ One comparing the answers of user to answers of the test users.
 And one comparing the answers of the user to the results of Approximator.
 By finding correlations between hits in the test-user/user and Approximator/user results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
-\subsection{Ablation Test}
-When the confusion matrices was constructed, we investigated which sensors supplied the infrastructure with information supporting a higher/lower hit rate.
-Based on this investigation we performed an ablation test on the sensors to improve our result.
-The experiment involving test users was not repeated as the circumstances in which the experiment was conducted had not changed.
-Instead we had Approximator generate new interruptibility values based on the historic information provided from the subset of sensors leftover after the ablation test.
-This process was repeated until we found the combination of sensors that provided the most accurate information compared to the information given by the user.
-
 \subsection{Results}
 Out of the 43 prompts, 35 was used for the review test.
 The remaining 8 was not applicable since the test subject was not present at the time of the prompt.
