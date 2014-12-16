@@ -71,7 +71,14 @@ breaklinks=true,
 \maketitle
 
 \begin{abstract}
-This paper presents a practical approach on how to get user presence and interruptability information using only a standard laptop.
+When a person needs the attention of another person, it is essential to find the right time to start the interaction.
+It is natural to glance at another person and estimate how occupied they are. With this estimation, we can judge if our interruption is socially appropriate.
+Humans are very good at this negotiation process before starting an interaction.
+Computer system however are largely unaware of the social acceptable behavior between humans.
+
+In 2005, Fogarty et al. did a series of studies where they discovered that interruptibility could be modeled using standard sensors.
+This paper builds on their findings by presenting a practical approach on how to estimate user interruptibility using only a standard laptop.
+
 \end{abstract}
 
 \keywords{
@@ -310,6 +317,19 @@ This sensor can look at the users calendar and get information about events ente
 Events can help identify a users activities during the day, like scheduled meetings or conference calls that would render the user non-interruptible.
 Detecting events from a users calendar is strongly coupled with the way the user adds events to his/her calendar.
 It could be difficult to infer anything more than presence information which is also available through the camera and the keyboard and mouse.
+
+\subsubsection{Chosen Sensors}
+The project scope limits us from using sensors outside of a commodity laptop and from using sensors that requires prior knowledge of the environment or the user. This limitation excludes the Calendar sensor, Geo-location and the Process monitor, as they all require prior knowledge about the user.
+The Calendar sensor needs to know which calendar provider the user is using, the Process monitor requires information on which program are work related for the user and Geo-location needs to know to which areas are home, work and otherwise.
+The Bluetooth and Wi-Fi are also limited by the scope, since they rely on external beacons to signal position.
+The microphone would be a good choice as a sensor, but as most software developers work in shared offices this would generate a significant amount of noise data.
+Therefore we have chosen to omit the microphone.
+By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to infer presence and interruptibility from.
+By using the Camera as sensor we can omit the Lightsensor, due to redundancy in sensor features.
+
+Our final choice of sensors are Camera, Keyboard and Mouse.
+
+
 
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
