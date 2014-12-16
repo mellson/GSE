@@ -333,13 +333,12 @@ Our final choice of sensors are camera, keyboard and mouse.
 
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
-Firstly we need to gather data input from the working environment.
-Secondly we need to aggregate this data and combine it for each user.
-Lastly we need to look at the data and through analyzes provide presence and availability information.
+Firstly, we need to gather data input from the working environment.
+Secondly, we need to aggregate this data and combine it for each user. Lastly we need to look at the data and through analyzes provide presence and availability information.
 
-All these tasks are combined in our infrastructure which can read input from sensors and analyze this with a decision module.
+Our infrastructure handles the tasks. It can read input from sensors and analyze this with a decision module.
+The workflow of the infrastructure is:
 
-The work flow of the infrastructure is:
 \begin{enumerate}
   \item Gather data
   \item Aggregate data
@@ -348,20 +347,20 @@ The work flow of the infrastructure is:
 \end{enumerate}
 
 \subsubsection{Design}
-The infrastructure is built to support many sensors for each user.
+The infrastructure supports multiple sensors for each user.
 This modelling can lead to a very high amount of sensors connecting to the system.
 To support this scalability need we base our system on the actor model by Carl Hewitt \cite{hewitt1973universal}.
 
-Many software applications are written using the object oriented modelling.
+Many software applications builds on the object oriented model.
 The actor model is an alternative way to model computer programs.
-In the actor model the unit of work is an actor.
+In the actor model, the unit of work is an actor.
 In object oriented programming the unit of work is an object.
 Actors communicate by sending messages to each other.
 Actors does not share state, making it possible to run actors in parallel and even on different machines.
 This makes the actor model a good candidate for building highly scalable applications.
 
 There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
-For this project we have chosen Akka because it is Java based.
+For this project, we have chosen Akka because it is Java based.
 This supports the technical knowledge in our group.
 
 We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
@@ -374,35 +373,37 @@ We use the general programming language Scala \cite{scala} to program our Akka-b
   \label{fig:infrastructure}
 \end{figure}
 
-It is possible to deploy Akka applications on a server which can run Java.
-For this project we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
+It is possible to deploy Akka applications on a server, which can run Java.
+For this project, we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
 Having the infrastructure running at a cloud provider makes it reachable from the standard internet.
-This enables us to build sensors and demonstrators that can run anywhere, as long as they have an internet connection they can reach our infrastructure.
+This enables us to build sensors and demonstrators that can run anywhere; as long as they have an internet connection, they can reach our infrastructure.
 
 \subsubsection{Data}
 Gathering data happens by sensors providing data.
 To communicate with our infrastructure a sensor needs to register with the service.
-When a sensor registers itself it provides a username.
-This username is used to aggregate a group of sensors together around the notion of user.
+When a sensor registers itself. it provides a username.
+The username aggregates a group of sensors together around the notion of user.
 
 \subsection{Client}
 Windows based user installable application.
 The sensor actually combines two parts of the system.
-The sensors are built into the client.
-This is done for easy of use for the end user.
-Merging the two parts makes it possible to get both parts on the users laptop with a single installation.
+We have built the sensors into the client.
+This enables ease of use for the end-user.
+Merging the two parts makes it possible to get both parts on the user's laptop with a single installation.
 
 \subsubsection{Ease of deployment}
 We have focused on creating an easy to deploy system.
-The infrastructure component can be deployed to any server capable of running the Java Virtual Machine (JVM).
+The infrastructure component deploys to any server capable of running the Java Virtual Machine (JVM).
 Currently it is possible to get the source code from GitHub\footnote{\url{https://github.com/mofus/GSE/tree/master/Server}}.
-The source code requires that Java and SBT is installed.
-With the source code on the server it is a simple run command which will compile, fetch dependencies and run the infrastructure.
+The source code requires Java and SBT.
+With the source code on the server it is a simple run command, which will compile, fetch dependencies and run the infrastructure.
 
-The client is even easier this is currently a Windows application which can be downloaded and run directly on any newer Windows installation.
+The client is even easier since this is a normal Windows application.
+The application is installable on any newer Windows installation.
 
-The clients source code is available in our GitHub repository.
-The client was written with the .NET framework which makes it easy to build the client on other platform with the Mono compiler.
+The client's source code is available in our GitHub repository.
+The client use the .NET framework, which makes it easy to build the client on other platform with the Mono compiler.
+
 
 \section{Decision Logic}
 \label{sec:decision_logic}
@@ -410,14 +411,14 @@ We want to identify a software engineer's interruptibility value using the senso
 To achieve this there are three sensors providing data; keyboard, mouse and camera (face detection).
 
 Raw sensor data does not say much about presence or availability.
-The captured sensor data must be analyzed in order to make sense of it.
-The infrastructure has a decision module which can calculate interruptibility values from the sensor inputs.
+We analyze the captured sensor data with a decision module in the infrastructure.
+The decision module can calculate interruptibility values from the sensor inputs.
 
 \subsection{Building a model}
-A manual classification approach has been used to classify the collected data.
-Two test subjects, user A and user B, was recorded in their work environment.
+We use a manual classification approach to classify the collected data.
+We have recorded two test subjects, user A and user B in their work environment.
 User A showed a clear coalition between patterns in the sensor data and the reported interruptibility.
-Three major scenarios was identified by looking at the data, they are listed in Figure~\ref{fig:scenarios}.
+We identified three major scenarios by looking at the data from user A; see  Figure~\ref{fig:scenarios}.
 
 \begin{figure}[H]
   \centering
@@ -435,16 +436,17 @@ Three major scenarios was identified by looking at the data, they are listed in 
 
 User B however did not show any clear indication of patterns that could identify a given scenario.
 This could be because software engineers work in different ways.
-There is also a chance that user B is an outlier and therefore not representing the generic software engineer.
-Then again it could also be that it is user A who is an outlier, we do not know.
-It would have been much more clear if any of these theories was true if more test subjects had been involved.
+There is also a chance that User B is an outlier and therefore not representing the generic software engineer.
+Our problem is that we do not know.
+It might as well be user A, who is the outlier.
+It would have been much clearer if any of these theories were true if more test subjects had been involved.
 
 \subsection{Scenario detection}
-We use a centralized algorithm to detect which scenario the user is in.
+We use a centralized algorithm to detect the user's scenario.
 The algorithm is running on the infrastructure server.
 Here it constantly looks at a moving window of incoming sensor data.
 The window is 30 seconds long and contains all the sensor data from this period.
-The algorithm is shown in Figure~\ref{fig:decision_logic}.
+See the algorithm in Figure~\ref{fig:decision_logic}.
 
 \begin{figure}[H]
   \centering
@@ -454,14 +456,14 @@ The algorithm is shown in Figure~\ref{fig:decision_logic}.
 \end{figure}
 
 \textbf{Scenario 1} is detected using face detection.
-If a user is sitting in front of the computer the face detection will detect the user as being present.
+If a user is sitting in front of the computer, the face detection will detect the user as being present.
 Detection happens with a frontal or profile detection depending on the angle the camera sees the users face.
 
 We try to catch the scenario of a user sitting in front of the computer using it without the mouse and keyboard as main input.
 This could be because the user is reading, having a conversation or something similar.
 
 The keyboard sensor identifies \textbf{scenario 2}.
-When a user is typing away, it is interpreted as the user is concentrating on work.
+When a user is typing away, the user is doing concentrated work.
 This work can be writing, coding or other keyboard heavy tasks.
 
 When a user is moving the mouse a lot, we identify it as \textbf{scenario 3}.
@@ -470,7 +472,7 @@ This could be browsing, moving files or simply a switch of context between work 
 
 
 \section{Evaluation}
-In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed during the experiments in this paper.
+In order to compare the performance of Approximator to the result from Forgarty's study, we follow the same method for evaluation during the experiments in this paper.
 
 \subsection{Method}
 \label{method}
@@ -583,7 +585,7 @@ Fogartys data showed that the estimator subjects had a tendency to rate the vide
 Our data shows that there is an even distribution between lower and higher rated values.
 
 When all the data was acquired, we compared the result from the review group to the results from the video experiment.
-This was done in a confusion matrix shown in \autoref{tab:video_to_estimator_matrix}. 
+This was done in a confusion matrix shown in \autoref{tab:video_to_estimator_matrix}.
 This matrix shows that the overall accuracy lies at 30.08\%, and the accuracy within one is at 62.41\%.
 This shows that our review group was about as accurate as Forgarty review group \cite{fogarty2005predicting} that achieved an overall accuracy of 30.7\% and a within one accuracy of 65.8\%.
 
