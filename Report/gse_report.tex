@@ -608,14 +608,29 @@ The distribution of these events can be found in \autoref{tab:event_distribution
   \label{tab:event_distribution}
 \end{table}
 
-This data was used by the decision module to produce interruptibility values based on the interruptibility model mentioned in \autoref{sec:decision_logic}. 
+This data was used by the decision module to produce interruptibility values based on the interruptibility model mentioned in \autoref{method}.
 We compared the data produced from Approximator with the values reported by the video subject the same way as we compared the estimator subjects values with those of the video subjects, see \autoref{tab:video_to_approximator_matrix}.
 
-The overall accuracy of Approximator was 31.43\% making it slightly more accurate than the estimator subjects assessments by 1.35\%. 
+The overall accuracy of Approximator was 31.43\% making it slightly more accurate than the estimator subjects assessments by 1.35\%.
 If we look at the reduced matrices \autoref{tab:reduced_video_to_estimator_matrix} and \autoref{tab:reduced_video_to_approximator_matrix}, we see that the overall accuracy from the estimators are 1.05\% better than Approximators accuracy.
 This seemed fairly odd to us, so we took a closer look at the interruptibility values produced by Approximator.
 The investigation showed that video subject 2 values was very accurate with an overall accuracy of 41.67\% with a within one accuracy of 91.67\%.
 But the investigation also showed that the values for video subject 1 was all ones (highly-non-interruptible).
+
+The reason for this strange abnormality can be pinned down to 5 reasons
+\begin{enumerate}
+  \item The reedings are correct, and video subject 1 was prompted when at interruptibility value 1.
+  \item Video subject 1 did not do much work during the 2 days of recording, but did not want that to appear on the results.
+  \item The sensor units were in some way faulty.
+  \item The decision module was in some way faulty.
+  \item The decision module's interruptibility model does not support video subject 1 tasks as work.
+\end{enumerate}
+We can exclude 1 due to the self-report stating otherwise. 
+Reason 2 seems unlikely due to review groups assessment was more accurate on video subject 1 than on video subject 2.
+Reason 3 can be excluded due to \autoref{tab:event_distribution} shows that there is plenty of sensor input on all sensor channels.
+Reason 4 is also unlikely since the data of video subject 1 and video subject 2 was processed by the same module, and there was no modifications to the module in between processing.
+Reason 5 is the most likely since the interruptibility model, \autoref{fig:scenarios} relies heavy on keyboard input to infer non-interruptibility and mouse events to infer interruptibility. \autoref{tab:event_distribution} shows that that video subject 1 have an approximately 1:3 ratio of keyboard vs mouse events, whereas video subject 2 have an approximately 1:2 ratio of keyboard vs mouse events. 
+This gives an indication that video subject 1 work tasks are more mouse based than those of video subject 2.
 
 
 %Approximator comparison
@@ -720,6 +735,12 @@ An algorithm which could be tailored directly at a given users’ needs would be
 One approach is to construct an algorithm with a learning period.
 In the learning period, the user needs to answer interruptibility questions at random intervals.
 This way the algorithm could build up some training data to use for future evaluations.
+
+The current sensors only give vague clues to a persons context, through the level of activity.
+Additional sensors that could give input about the context, especially in combination with a learning algorithm, could improve our results. 
+Sensors that could give specific clues to the context about how subject was working e.g. advanced gaze tracking, speech detection, posture detection, desktop monitor, process monitor etc..
+Sensors like these would allow for more detailed and less ambiguous interruptibility models, and thereby better accuracy.
+
 
 \subsection{Future Work}
 We chose to focus our paper on the sensors available in a modern laptop for the ease of use and deployability.
