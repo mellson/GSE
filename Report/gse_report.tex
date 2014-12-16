@@ -87,11 +87,11 @@ This paper builds on their findings by presenting a practical approach on how to
 \end{abstract}
 
 \keywords{
-  Global Software Engineering, Presence Awareness, Interruptibility, Social Contracts of Human Interactions
+  Global Software Engineering, Interruptibility, Social Contracts of Human Interactions
 }
 
 \terms{
-  Documentation, Theory
+  Design, Experimentation, Measurement
 }
 
 \section{Introduction}
@@ -102,34 +102,35 @@ Paraphrasing Herbsleb \cite{herbsleb2007}, many of the mechanisms that work corr
 Different approaches \cite{bly1993media} \cite{fogarty2004myvine} \cite{hincapie2011design} \cite{lai2003myteam} \cite{want1992active} have been investigated to improve the awareness of the working context that a member of a virtual team has; nonetheless, information like the presence of virtual team members, trivial in a co-located setting, represent an interesting open area of investigation.
 
 One fundamental difference between a co-located arrangement and a distributed one is the lack of presence awareness.
-The ability to assess how interruptible another user is, becomes very hard when you are not in the same room.
-When you are in the near proximity of another user it is fairly easy to assess the interruptibility of that user.
+The ability to assess how interruptible another user is becomes very hard when you are not in the same room.
+When you are in the near proximity of another user, it is easy to assess the interruptibility of that user.
 We use the interruptibility assessment to facility behavior that we consider socially acceptable.
-If you work in a distributed setting you are dependent on tool support from computer and communication systems to provide availability information about your co-workers.
+If you work in a distributed setting, you are dependent on tool support from computer and communication systems to provide availability information about your co-workers.
 Today these systems are largely unaware of the social contracts of human interactions.
 
 Research by the Human Computer Interaction Institute at Carnegie Mellon University \cite{fogarty2005predicting} shows that you can detect the interruptibility of a user using sensor inputs.
-In their research they find that you can predict interruptibility with sensor inputs at an accuracy of 68\%.
+In their research, they find that you can predict interruptibility with sensor inputs at an accuracy of 68\%.
 The researchers note that their results could ``motivate the development of systems that use these models to negotiate interruptions at socially appropriate times.''
 
-We will build on their research and be inspired by their models in a practical pursuit of a presence and interruptibility-sharing system.
+We will build on their research in a practical pursuit of a presence and interruptibility-sharing system.
 The work presented in this paper represents two primary contributions.
-First, we demonstrate an implementation of a presence and interruptibility-sharing system for global software engineers.
-Second, we evaluate the system.
-This is done with a test where we compare the accuracy of our availability prediction model againts the accuracy achieved by humans trying to predict availability.
+
+First, we demonstrate an implementation of a presence and interruptibility sharing system for global software engineers.
+
+Second, we evaluate the system with a test where we compare the accuracy of our availability prediction model against the accuracy achieved by humans trying to predict availability.
 
 % Sharam: the last paragraph in the introduction section should provide a very quick overview of how the rest of the paper is structured.
-We first discover related work in the field of interruptibility and presence-sharing that can inform the design proces of our system.
-We then introduce Approximator, our solution for interruptibility sensing and sharing.
-We go on to describe and select the sensors used for Approximator.
-Finally we evaluate the system against human estimation of interruptibility.
+This paper starts with related work in the field of interruptibility and presence sharing that can inform the design process of our system.
+Then follows the introduction of Approximator, our solution for interruptibility sensing and sharing.
+This includes a description and discussion about the sensors used for Approximator.
+Finally, we evaluate the system against human estimation of interruptibility.
 
 \section{Related work}
-Research on using technology to support awareness in a distributed setting has been going on since the early 90’s.
+Research on using technology to support awareness in a distributed setting has been going on since the early 90's.
 Some of the work \cite{bly1993media} \cite{gaver1992realizing} \cite{mantei1991experiences} tries to keep an instant audiovisual connection between workplaces.
-This has the benefit that not only intentional communication is supported, but also social communication since the co-workers is always visible.
-But the approach has some drawbacks.
-Users can feel self-conscious about the image of themselves being broadcasted.
+This supports not only intentional communication, but also social communication since the co-workers is always visible.
+Nevertheless, the approach has some drawbacks.
+Users can feel self-conscious about the broadcasted image of themselves.
 Not only that but keeping high quality media streams running all day can also be expensive since it consumes a large amount of bandwidth.
 
 \subsection{Self reporting systems}
@@ -139,14 +140,14 @@ Most IM systems rely on the user manually setting their status or on simple acti
 This does not always reflect the availability of the user.
 
 \subsection{Context-aware systems}
-Fogarty et al. has shown that sensors can be used to extract satisfying accuracy data about a user.
+Fogarty et al. has proved that sensors can extract satisfying accuracy data about a user.
 They have used this data to construct a statistical model \cite{fogarty2004examining}.
 Later Fogarty et al. goes on to show that it is possible to construct a prediction model for human interruptibility based on simple hardware sensors that is as accurate as humans predicting interruptibility from a video recording of a user working \cite{fogarty2005predicting}.
 
 \subsubsection{MyTeam}
 Several systems have tried to build an awareness solution using sensors.
 The earliest work dates back to the active badge system \cite{want1992active}.
-A similar approach has been tried in the IM system MyTeam \cite{lai2003myteam}, where they use an active badge sensor in combination with the users computer activity.
+A similar approach is the IM system MyTeam \cite{lai2003myteam}, where they use an active badge sensor in combination with the  user's computer activity.
 This solution builds on the premise that success of communications is having prior knowledge about the availability of others before initiating contact.
 Lack of this information may explain why over 60\% of business phone calls fail to reach the intended party \cite{whittaker1995rethinking}.
 MyTeam differs from other IM systems in that participants can get information about the availability of colleagues even if that user is not running the MyTeam client.
@@ -154,36 +155,35 @@ MyTeam uses photos on a colored background to indicate availability.
 A drawback of the system is that it takes up a large portion of the users screen. It is also not possible to initiate communication directly from the MyTeam client.
 
 \subsubsection{MyVine}
-A system that also uses sensors to determine availability is MyVine\cite{fogarty2004myvine}.
-MyVine resembles MyTeam in the way that they both show availability, and also uses continuous values (e.g. 0-100) in means of showing this.
-What differs the two systems, is MyVine’s use of holistic aggregated sensors (speech
-detection, location information, computer activity, and calendar information) instead of just two sensors(active badge proximity and keyboard and mouse).
+A system that also uses sensors to determine availability is MyVine \cite{fogarty2004myvine}.
+MyVine resembles MyTeam in the way that they both show availability, and uses continuous values (e.g. 0-100) in means of showing this.
+What differs the two systems is MyVine's use of holistic aggregated sensors (speech detection, location information, computer activity, and calendar information) instead of just two sensors (active badge proximity and keyboard and mouse).
 The two systems differs in two more ways.
-One is that MyVine is symmetric, which means the user has to be online in order to see other users availability.
-The other is that MyVine is an almost-always-on system, which allows the users to continuously be shown as available, despite not having to run in the foreground.
+One is that MyVine is symmetric, which means the user has to be online in order to see other users' availability.
+The other is that MyVine is an almost always-on system, which continuously shows the users as available, despite not having to run in the foreground.
 MyVine has a problem with misinterpretations of speech as an indication of being unavailable, while users has observed the speech as an indication of availability.
 
 \subsubsection{SenSay}
 The SenSay context-aware mobile phone \cite{siewiorek2003sensay} use accelerometer, light, and microphone sensor inputs to determine the availability of the user.
-The phone dynamically adapts it’s volume, vibration etc to match the user's current context.
+The phone dynamically adapts it's volume, vibration etc. to match the user's current context.
 A novel feature about the phone is that the caller can communicate the urgency of their call.
-SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should be in.
+SenSay uses a decision module, which analyzes the sensor input to decide which state the phone should have.
 The system requires the user to carry additional sensors besides the phone, which is not ideal from a user perspective.
 
 \subsubsection{InterruptMe}
-In \cite{hincapie2011design} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability-sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient.
-Informed by the evaluation of other systems InterruptMe is presented.
+In \cite{hincapie2011design} Ramos et al. evaluates the design space of availability-sharing and introduces six new relevant design dimensions for evaluating availability sharing systems: abstraction, presentation, information delivery, symmetry, obtrusiveness and temporal gradient.
+Informed by the evaluation of the other systems they decide to create InterruptMe.
 InterruptMe uses implicit inputs from the user to present availability information.
 However to get these inputs several external sensors are needed.
 This makes the system unable to run on commodity laptops.
 
 \subsubsection{Approximator}
-Approximator differs from MyTeam, SenSey, InterruptMe and self-reporting solutions by being a context-aware application that is easy to deploy and works by utilizing only the sensors that can be found within a standard laptop.
+Approximator differs from MyTeam, SenSay, InterruptMe and self-reporting solutions by being a context-aware application that is easy to deploy and works by utilizing only the sensors found within a standard laptop.
 MyTeam, SenSay and InterruptMe all are, or rely, on external sensors in order to archive context-awareness.
 MyVine on the other hand, utilizes a combination of integrated sensors and contextual information to infer context-awareness.
-MyVine requires information such as computer programs associated with work and access to the persons calendar.
-In Approximator we rely only on automatic non-parameterized sensors, meaning that the sensors we use does not require prior knowledge of the person using the machine.
-Based on this approach we will investigate how Approximator performs in comparison to human judgement using Fogartys method.
+MyVine requires information such as computer programs associated with work and access to the person's calendar.
+In Approximator, we rely only on automatic non-parameterized sensors, meaning that the sensors we use does not require prior knowledge of the person using the machine.
+Based on this approach we will investigate how Approximator performs in comparison to human judgment using Fogarty's method.
 
 \section{Approximator}
 Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
@@ -209,10 +209,10 @@ Approximator consist of three main parts:
 \end{enumerate}
 
 The central component of Approximator is the infrastructure.
-The infrastructure is a server component that is deployed to a cloud service.
-The infrastructure exposes an API that sensors and clients use to communicate with.
+The infrastructure is a server component deployed to a cloud service.
+The infrastructure exposes an API that enables communication with sensors and clients.
 
-A sensor is related to a given user.
+Each sensor connects to a specific user.
 One user can have several sensors.
 Sensors register themselves with the infrastructure, which returns a specific endpoint for each user.
 The sensors sends raw sensors data to this endpoint.
@@ -223,118 +223,118 @@ Client gets the interpreted presence and interruptibility from the infrastructur
 \begin{figure}[H]
   \centering
   \includegraphics[width=\columnwidth]{figures/system_architecture.pdf}
-  \caption{System architecture with communication layer.}
+  \caption{System architecture with communication layer. The dotted line shows the encapsulation in the REST and WebSocket layer.}
   \label{fig:architecture}
 \end{figure}
 
 The next sections will cover each part of the solution in detail.
 
 \subsection{Sensors}
-To gather data about the users presence and availability we use sensors.
-This project has been restricted to only look at sensors which are available in commodity laptops.
+To gather data about the user's presence and availability we use sensors.
+This project has been restricted to look at sensors that are available in commodity laptops.
 We define a commodity laptop to be a device you can buy at any computer store.
 The device should be able to run your operating system of choice.
 It should have a camera, an input device, a microphone and radios such as Wi-Fi and Bluetooth built-in.
 
 %TODO check the section and make sure we do what we say here.
-In this section we will have a look at some of the sensing capabilities of a commodity laptop.
+In this section, we will have a look at some of the sensing capabilities of a commodity laptop.
 We will discuss the strengths and weaknesses of these sensors.
-As well as providing some reasoning for choosing the sensors we have used in our client.
+As well as providing, some reasoning for choosing the sensors we have used in our client.
 
 \subsubsection{Keyboard and Mouse}
-By using the mouse and keyboard as sensors we collect every mouse movement and keyboard events and send the last recorded activity every second.
-With this information we can infer presence due to the fact that there is someone triggering these events.
+By using the mouse and keyboard as sensors, we collect every mouse movement and keyboard events and send the last recorded activity every second.
+With this information, we can infer presence because there is someone triggering these events.
 
-The issue with using keyboard and mouse as sensors, is that even though they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
-We can tie the machine to a specific user, but we can not infer if the machine is being used by a colleague or if a cat decide to rest on the keyboard.
+The issue with using keyboard and mouse as sensors is that even though they are a strong indicator of presence, we cannot decipher, based on these two sensors alone, who or what this presence is.
+We can tie the machine to a specific user, but we cannot infer if a colleague is using the machine or if a cat decided to rest on the keyboard.
 
 Another issue with mouse and keyboard sensors is that they provide a very weak indicator of non-presence.
 When a key is pressed or the mouse moved, we know that someone is interacting with the machine, but the lack of action cannot tell us whether a user is present or non-present.
 A user could be talking on the phone, reading, watching a video etc. all in which the user is present, but the mouse and keyboard cannot provide us with this information.
 
-In terms of interruptibility the information from the mouse and keyboard is too ambiguous to deduct whether a user is busy or interruptible.
-If the identity of the user sitting in front of the computer could be confirmed, it would still be difficult to determine whether the behavior is an indication of interruptibility.
+In terms of interruptibility, the information from the mouse and keyboard is too ambiguous to deduct whether a user is busy or interruptible.
+Even If we knew the identity of the user sitting in front of the computer, it would still be difficult to determine whether the behavior is an indication of interruptibility.
 An approach to determine interruptibility based on these sensors, would involve sending all information to the decision logic, effectively acting as a key logger, and therefore raising security and privacy issues.
 % Jeg ved ikke om det er noget vi skal gå i dybden med, eller om det er nok bare at nævne det her.... eller om det overhoved skal nævnes.
 % Min overvejelse er om man kunne bruge en vægtet dictionary hvor specifikke ord fik en vægt på hvor arbejds releterede de er og evt kombinere det med en form for pattern matching hvor sprog mønstre blev undersøgt.
-This approach will be described later in the decision logic section.
 
 \subsubsection{Microphone}
 The use of a microphone as a sensor allows Approximator to sense the presence of a user, even if the user is not directly interacting with the machine.
-With more advanced speech recognition algorithms it could even be used to identify the user/users speaking.
-This would provide us not only with presence, but also identity, which was a problem with the keyboard and mouse sensors.
+With more advanced speech recognition, algorithms could identify the person(s) speaking.
+This would provide us not only with presence, but also with identity, which was a problem with the keyboard and mouse sensors.
 
-The same issue with the detection of non-presence also appears with the microphone, it is not possible to infer non-presence from the lack of sound.
+The same issue with the detection of non-presence also appears with the microphone, it is not possible to infer absence from the lack of sound.
 As described with the keyboard and mouse sensors, a user can perform activities that does not trigger the sensor, and thus be present without detection.
 
 Beside the detection of presence, the microphone provides a tool for inferring interruptibility.
-According to Fogarty et al\cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
+According to Fogarty et al. \cite{fogarty2005predicting} speaking present a situation of non-interruptibility.
 
 We have chosen to omit the microphone sensor.
 There is a high risk of collecting too much noise compared to the signal we need.
 The work environment would need to be very quiet for us to use a normal microphone as a reliable sensor.
-For this reason we have dropped the microphone sensor.
+For this reason, we have dropped the microphone sensor.
 
 \subsubsection{Camera}
-Like the microphone the camera enables Approximator to sense the presence of a user without the user having to interact with the machine, but differs in the way it does so.
-In the setting of a room a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in this room that they are located.
+Like the microphone, the camera enables Approximator to sense the presence of a user without the user having to interact with the machine, but differs in the way it does so.
+In the setting of a room, a microphone can sense if someone is in the room, but it is hard for the microphone to infer where in a room that they are located.
 
 The camera can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, as well as an indicator of non-presence.
 Unlike the other sensors, the camera can sense if a user is sitting in front of the machine, even if the user is not directly interacting with the machine.
-But even though the camera can infer non-presence, there are still some issues.
-If a user is located in their office but not visible to the camera, the sensor will report non-presence.
+However even though the camera can infer non-presence, there are still some issues.
+If a user is located in their office but not visible to the camera, the sensor will absence.
 
 The camera could apply face-recognition in order to determine the identity of the user present.
-It could also be used to detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that can be used to measure interruptibility.
+It could detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that measure interruptibility.
 
 \subsubsection{Bluetooth and Wi-Fi}
 These radios can detect other devices such as mobile devices or beacons.
-If we assume that a user carries his/her mobile device with them, then the Bluetooth or Wi-Fi beacon from their device can be used to infer the users proximity to the machine.
-Another usage is if the office the user works in have beacons installed at the workplace, either as Bluetooth or Wi-Fi beacons, then the machine can infer its current symbolic location.
-This can be used to infer presence by detecting if the mobile device is nearby.
+If we assume that, a user carries his/her mobile device with them, then the Bluetooth or Wi-Fi beacon from their device can be used to infer the users proximity to the machine.
+Another usage is if the office the user works in have, beacons installed at the workplace, either as Bluetooth or Wi-Fi beacons, then the machine can infer its current symbolic location.
+This can infer presence by detecting if the mobile device is nearby.
 The issue here is if the user should forget their mobile device, either nearby the machine or at home.
 In these cases the sensor would receive false data i.e. data that provides wrongful information regarding presence or interruptibility.
-These sensors rely heavily on factors and devices external to the users laptop which makes it more volatile and prone to errors.
+These sensors rely heavily on factors and devices external to the user's laptop, which makes it more volatile and prone to errors.
 
-\subsubsection{Lightsensor}
+\subsubsection{Light}
 The light sensor measures the ambient light of the environment.
-This can be used to sense if the laptop is in a dark or light room.
-The conclusions that can drawn from this sensor is already provided by the other inputs.
-Darkness can be easily detected using the camera.
+This can sense if the laptop is in a dark or light room.
+The deduced presence information from this sensor is redundant.
+We already know that a user is present if they are using the mouse or keyboard. In addition, if they are visible on camera we know that they are present.
+The camera can also detect the lighting level in a room, so the light sensor seems to be irrelevant.
 
 \subsubsection{Process monitor}
-This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility.
-The idea of the process monitor is to supply it with a list of processes (programs) running on the users computer that it should monitor.
-This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input.
-Through this we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
+This sensor is slightly different from the others since it primary purpose is not to sense presence, but interruptibility.
+The idea of the process monitor is to supply it with a list of processes (programs) running on the user's computer that it should monitor.
+This list consists both of work and leisure associated processes and the process monitor report if any and which program are in the foreground. %and receiving user input.
+Through this, we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
 
 \subsubsection{Geo-location}
 This sensor works by looking up the machines registered IP address, or if available uses the machines built-in GPS, and uses this to acquire a geographical address.
 Knowing the whereabouts of the machine neither infers presence nor interruptibility on its own.
-But it does supply the other sensors and the decision module with useful information regarding the geographical setting of the machine.
-The most simple use of this is to detect if the machine currently resides at the office, home, or another location.
-But one of the more useful appliances would be in combination with the camera.
-If the camera can detect action such as a user entering or leaving the room, this information could tells us whether the a user is in close proximity to the machine, but only that.
+However, it does supply the other sensors and the decision module with useful information regarding the geographical setting of the machine.
+The simplest use of this is to detect if the machine currently resides at the office, home, or another location.
+Nevertheless, one of the more useful appliances would be in combination with the camera.
+If the camera can detect action such as a user entering or leaving the room, this information could tell us whether the a user is in close proximity to the machine, but only that.
 Combined with even the coarse location of the machine, Approximator could infer that a user was in a specific office, in close proximity the machine.
 
 \subsubsection{Calendar Sensor}
-This sensor can look at the users calendar and get information about events entered here.
-Events can help identify a users activities during the day, like scheduled meetings or conference calls that would render the user non-interruptible.
-Detecting events from a users calendar is strongly coupled with the way the user adds events to his/her calendar.
-It could be difficult to infer anything more than presence information which is also available through the camera and the keyboard and mouse.
+This sensor can look at the user's calendar and get information about events entered here.
+Events can help identify a user's activities during the day, like scheduled meetings or conference calls that would render the user non-interruptible.
+Then we rely on the calendar data to be very accurate.
+That is probably not always the case. For instance if a meeting is cancelled and the user does not update his calendar, the model would believe that the user was unavailable.
+This uncertainty has excluded the calendar sensor in this first version of the project.
 
 \subsubsection{Chosen Sensors}
-The project scope limits us from using sensors outside of a commodity laptop and from using sensors that requires prior knowledge of the environment or the user. This limitation excludes the Calendar sensor, Geo-location and the Process monitor, as they all require prior knowledge about the user.
+The project scope limits us from using sensors outside of a commodity laptop and from using sensors, which require prior knowledge of the environment or the user.
+This limitation excludes the calendar sensor, geo-location and the Process monitor, as they all require prior knowledge about the user.
 The Calendar sensor needs to know which calendar provider the user is using, the Process monitor requires information on which program are work related for the user and Geo-location needs to know to which areas are home, work and otherwise.
-The Bluetooth and Wi-Fi are also limited by the scope, since they rely on external beacons to signal position.
+We have excluded The Bluetooth and Wi-Fi sensors since they rely on external beacons to signal position.
 The microphone would be a good choice as a sensor, but as most software developers work in shared offices this would generate a significant amount of noise data.
-Therefore we have chosen to omit the microphone.
-By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to infer presence and interruptibility from.
-By using the Camera as sensor we can omit the Lightsensor, due to redundancy in sensor features.
+Therefore, we have chosen to omit the microphone.
+By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to use in our model.
+By using the camera as sensor, we can omit the light sensor, due to redundancy in sensor features.
 
-Our final choice of sensors are Camera, Keyboard and Mouse.
-
-
+Our final choice of sensors are camera, keyboard and mouse.
 
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
@@ -411,7 +411,7 @@ The client was written with the .NET framework which makes it easy to build the 
 
 \section{Decision Logic}
 \label{sec:decision_logic}
-We want to identify a software engineer’s interruptibility value using the sensors in a laptop.
+We want to identify a software engineer's interruptibility value using the sensors in a laptop.
 To achieve this there are three sensors providing data; keyboard, mouse and camera (face detection).
 
 Raw sensor data does not say much about presence or availability.
@@ -763,8 +763,8 @@ This paper bases its research background and evalutation of the work done in \ci
 We had hoped that both our test subjects would show the same coalition in their data.
 This was unfortunately not the case.
 If a similar project is to succeed, we need a better algorithm for detecting patterns.
-Instead of having a centralized generic algorithm we could have learning algorithms on each users’ machine.
-An algorithm which could be tailored directly at a given users’ needs would be preferable.
+Instead of having a centralized generic algorithm we could have learning algorithms on each users' machine.
+An algorithm which could be tailored directly at a given users' needs would be preferable.
 One approach is to construct an algorithm with a learning period.
 In the learning period, the user needs to answer interruptibility questions at random intervals.
 This way the algorithm could build up some training data to use for future evaluations.
@@ -782,7 +782,7 @@ These devices could supply additional useful data to our infrastructure to enhan
 We leave these devices for future work as they constrain deployability and are not all common case.
 
 \section{Conclusion}
-We set out believing that it was possible to detect a software engineer’s interruptibility value using only the sensors in a laptop.
+We set out believing that it was possible to detect a software engineer's interruptibility value using only the sensors in a laptop.
 It turned out that it was possible for one of our two test subjects.
 This finding opens more questions than it answers. Is our approach still valid have we tested on more subjects?
 
