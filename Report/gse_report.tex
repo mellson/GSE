@@ -6,6 +6,7 @@
 \usepackage{times}    % comment if you want LaTeX's default font
 \usepackage{url}      % llt: nicely formatted URLs
 \usepackage{caption}
+\usepackage{enumitem}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{pdfpages}
@@ -59,7 +60,9 @@ breaklinks=true,
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 % End of preamble. Here it comes the document.
+
 \begin{document}
+\includepdf[pages={1}]{frontpage.pdf}
 
 \title{Deciding presence and interruptibility automatically using only a laptop}
 \numberofauthors{3}
@@ -200,7 +203,7 @@ We define interruptibility as the degree to which the user can be disturbed. A u
 
 \subsection{System Overview}
 Approximator consist of three main parts:
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
   \item Sensors collecting information about the user.
   \item An infrastructure aggregating and classifying sensor data.
   \item A client conveying presence and interruptibility information.
@@ -338,7 +341,7 @@ Secondly, we need to aggregate this data and combine it for each user. Lastly we
 Our infrastructure handles the tasks. It can read input from sensors and analyze this with a decision module.
 The workflow of the infrastructure is:
 
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
   \item Gather data.
   \item Aggregate data.
   \item Analyze data.
@@ -645,7 +648,7 @@ The investigation showed that video subject 2 values was very accurate with an o
 However, the investigation also showed that the values for video subject 1 was all ones (highly non-interruptible).
 
 The reason for this strange abnormality has five possible reasons.
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
   \item The readings are correct, and video subject 1 was prompted when at interruptibility value 1.
   \item Video subject 1 did not do much work during the 2 days of recording, but did not want that to appear on the results.
   \item The sensor units were in some way faulty.
