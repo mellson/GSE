@@ -292,7 +292,7 @@ Darkness can be easily detected using the camera.
 
 \subsubsection{Process monitor}
 This sensor is slightly different than the others since it primary purpose is not to sense presence, but interruptibility.
-The idea of the process monitor is to supply it with a list of processes (programs) that it should monitor.
+The idea of the process monitor is to supply it with a list of processes (programs) running on the users computer that it should monitor.
 This list consists both of work and leisure associated processes, and the process monitor report if any and which program are in the foreground. %and receiving user input.
 Through this we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
 
@@ -307,7 +307,9 @@ Combined with even the coarse location of the machine, Approximator could infer 
 
 \subsubsection{Calendar Sensor}
 This sensor can look at the users calendar and get information about events entered here.
-We can use these events to help us calculate interruptibility.
+Events can help identify a users activities during the day, like scheduled meethings or conference calls that would render the user non-interruptible.
+Detecting events from a users calendar is strongly coupled with the way the user adds events to his/her calendar.
+It could be difficult to infer anything more than presence information which is also available through the camera and the keyboard and mouse.
 
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
