@@ -186,10 +186,10 @@ Based on this approach we will investigate how Approximator performs in comparis
 \section{Approximator}
 Building on the research of Fogarty et al.\cite{fogarty2005predicting} we want to provide a practical user-centric approach to sharing presence and interruptibility information in a Computer Supported Cooperative Work (CSCW) setting.
 
- We scope our project to using sensors found in commodity laptops.
+We scope our project to using sensors found in commodity laptops.
 
- We will evaluate the system by replicating the test done by Fogarty et al.
- Our hope is that we can achieve the same 68\% precision rate using only the sensors in scope.
+We will evaluate the system by replicating the test done by Fogarty et al.
+Our hope is that we can achieve the same 68\% precision rate using only the sensors in scope.
 
 We call our proposed solution ''Approximator''.
 
@@ -217,6 +217,7 @@ The sensors sends raw sensors data to this endpoint.
 The infrastructure aggregates and interprets the raw sensor data to deduct presence and interruptibility of users.
 
 Client gets the interpreted presence and interruptibility from the infrastructure and visualizes this to the user.
+The next sections will cover each part of the solution in detail.
 
 \begin{figure}[H]
   \centering
@@ -224,8 +225,6 @@ Client gets the interpreted presence and interruptibility from the infrastructur
   \caption{System architecture with communication layer. The dotted line shows the encapsulation in the REST and WebSocket layer.}
   \label{fig:architecture}
 \end{figure}
-
-The next sections will cover each part of the solution in detail.
 
 \subsection{Sensors}
 To gather data about the user's presence and availability we use sensors.
@@ -394,10 +393,11 @@ Merging the two parts makes it possible to get both parts on the user's laptop w
 \subsubsection{Ease of deployment}
 We have focused on creating an easy to deploy system.
 The infrastructure component deploys to any server capable of running the Java Virtual Machine (JVM).
-Currently it is possible to get the source code from GitHub\footnote{\url{https://github.com/mofus/GSE/tree/master/Server}}.
-The source code requires Java and SBT.
+Currently it is possible to get the source code, for the server as well as the client, from GitHub\footnote{\url{https://github.com/mofus/GSE}}.
+The server source code requires Java and SBT.
 With the source code on the server it is a simple run command, which will compile, fetch dependencies and run the infrastructure.
 
+The client source code requires a .NET compiler.
 The client is even easier since this is a normal Windows application.
 The application is installable on any newer Windows installation.
 
