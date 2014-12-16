@@ -205,7 +205,7 @@ Approximator consist of three main parts:
 \begin{enumerate}
   \item Sensors collecting information about the user.
   \item An infrastructure aggregating and classifying sensor data.
-  \item A client showing classified presence and interruptibility information.
+  \item A client conveying presence and interruptibility information.
 \end{enumerate}
 
 The central component of Approximator is the infrastructure.
@@ -281,14 +281,14 @@ In the setting of a room, a microphone can sense if someone is in the room, but 
 The camera can sense if someone is directly in front of the screen, which supplies a powerful indicator of presence, as well as an indicator of non-presence.
 Unlike the other sensors, the camera can sense if a user is sitting in front of the machine, even if the user is not directly interacting with the machine.
 However even though the camera can infer non-presence, there are still some issues.
-If a user is located in their office but not visible to the camera, the sensor will absence.
+If a user is located in their office but not visible to the camera, the sensor will infer this as absence.
 
 The camera could apply face-recognition in order to determine the identity of the user present.
-It could detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that measure interruptibility.
+It could detect actions that the user is executing e.g. entering the room leaving, leaving the room, reading a book etc. that measures interruptibility.
 
 \subsubsection{Bluetooth and Wi-Fi}
 These radios can detect other devices such as mobile devices or beacons.
-If we assume that, a user carries his/her mobile device with them, then the Bluetooth or Wi-Fi beacon from their device can be used to infer the users proximity to the machine.
+If we assume that, a user carries their mobile device with them, then the Bluetooth or Wi-Fi beacon from their device can be used to infer the users proximity to the machine.
 Another usage is if the office the user works in have, beacons installed at the workplace, either as Bluetooth or Wi-Fi beacons, then the machine can infer its current symbolic location.
 This can infer presence by detecting if the mobile device is nearby.
 The issue here is if the user should forget their mobile device, either nearby the machine or at home.
@@ -331,7 +331,7 @@ The Calendar sensor needs to know which calendar provider the user is using, the
 We have excluded The Bluetooth and Wi-Fi sensors since they rely on external beacons to signal position.
 The microphone would be a good choice as a sensor, but as most software developers work in shared offices this would generate a significant amount of noise data.
 Therefore, we have chosen to omit the microphone.
-By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to use in our model.
+By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to use in our interruptibility model.
 By using the camera as sensor, we can omit the light sensor, due to redundancy in sensor features.
 
 Our final choice of sensors are camera, keyboard and mouse.
@@ -407,7 +407,7 @@ The client is even easier since this is a normal Windows application.
 The application is installable on any newer Windows installation.
 
 The client's source code is available in our GitHub repository.
-The client use the .NET framework, which makes it easy to build the client on other platform with the Mono compiler.
+The client use the .NET framework, which makes it easy to build the client on other platforms with the Mono compiler.
 
 
 \section{Decision Logic}
