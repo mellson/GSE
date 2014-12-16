@@ -10,6 +10,7 @@
 \usepackage{float}
 \usepackage{pdfpages}
 \usepackage{booktabs}
+\usepackage{multirow}
 
 % llt: Define a global style for URLs, rather that the default one
 \makeatletter
@@ -49,6 +50,9 @@ breaklinks=true,
 % create a shortcut to typeset table headings
 \newcommand\tabhead[1]{\small\textbf{#1}}
 
+% Double lined table cells
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
 
 % End of preamble. Here it comes the document.
 \begin{document}
@@ -377,6 +381,7 @@ The client is even easier this is currently a Windows application which can be d
 The client is also available as source from the GitHub repository should a user wish to rebuild for Mono.
 
 \section{Decision Logic}
+\label{sec:decision_logic}
 We want to identify a software engineer’s interruptibility value using the sensors in a laptop.
 To achieve this there are three sensors providing data; keyboard, mouse and camera (face detection).
 
@@ -444,6 +449,7 @@ This could be browsing, moving files or simply a switch of context between work 
 In order to compare the performance of Approximator to the result from Forgartys study, the same method for evaluation is followed during the experiments in this paper.
 
 \subsection{Method}
+\label{method}
 The experiment was conducted in two stages.
 First the two test subjects are recorded in their work environment with a camera, while Approximators sensors collected data.
 The second stage was conducted by inviting people from the software development community to a survey where they reviewed the experiment.
@@ -501,6 +507,7 @@ The demographic distribution is provided since it may affect peoples ability to 
 \end{figure}
 
 The content survey consists of 5 unique sets with 7 different video clips from the first stage of the experiment.
+
 Each clip contained the last 30 seconds leading up to the video subject being prompted for self-report.
 
 Each estimator subject was shown one of the 5 different sets of video with 3 random repetitions from the same set.
@@ -517,6 +524,10 @@ And one comparing the answers of the user to the results of Approximator.
 By finding correlations between hits in the test-user/user and Approximator/user results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
 \subsection{Results}
+In this section we will go over our results that we have collected through the experiments mentioned in \autoref{sec:method}.
+This section is divided into the results collected from the review group, and the results collected from Approximator.
+
+\subsubsection{Review Group Results}
 Out of the 43 prompts, 35 was used for the review test.
 The remaining 8 was not applicable since the test subject was not present at the time of the prompt.
 
@@ -528,20 +539,128 @@ The remaining 8 was not applicable since the test subject was not present at the
 \end{figure}
 
 A total of 19 people participated in the survey.
-The video clip sets A, B, C and D were surveyed by 4 estimators while set E was surveyed by 3.
-All surveys were valid and had consistent answers.
+The video clip sets A, B, C and D were surveyed by 4 people while set E was surveyed by 3 people.
+All surveys were valid and consistent answers.
+Our dataset has a mean of 2.77, median of 3, mode of 3, range of 4 and a standard deviation of 1.288.
 
-Although answers were consistent and participants clearly understood the task, the accuracy of the estimators were overall poor.
+Although answers were consistent and participants clearly understood the task, the accuracy of the participants were overall poor.
 As shown in \autoref{tab:survey_accuracy} the average precision among all sets were around 28\%.
 We attribute this low score to the fact that is very hard to precisely rate another persons interruptibility on a scale from 1 to 5.
-In order to account for this we use a scale conversion similar to the one Fogarty used.
+In order to account for this we use the same scale conversion as Fogarty\cite{fogarty2005predicting}.
+But unlike Fogarty who did the scale conversion, by converting all values from 1-4 as 1 and 5 as 5, we did it as followed.
 For all answers in the survey we change values of 1-3 to be 1 and 4-5 to be 5.
 This gives us a more binary representation of interpretation of the data.
 As shown in \autoref{tab:survey_accuracy} that yields a much improved average accuracy of 63\%.
-The Adjusted column in \autoref{tab:survey_accuracy} shows the accuracy of the answers where values have been changed as described above.
+The reason that we converted the data differently from Fogarty, lies in Fogartys reason for converting the data in the first place.
+Fogartys data showed that the estimator subjects had a tendency to rate the video subjects interruptibility lower than the self-reported value.
+Our data shows that there is an even distribution between lower and higher rated values.
+
+When all the data was acquired, we compared the result from the review group to the results from the video experiment.
+This was done in a confusion matrix shown in \autoref{tab:video_to_estimator_matrix} and this matrix shows that the overall accuracy lies at 30.08\%, and the accuracy within one is at 62.41\%.
+This shows that our review group was about as accurate as Forgarty review group \cite{fogarty2005predicting} that achieved an overall accuracy of 30.7\% and a within one accuracy of 65.8\%.
 
 As discussed in \nameref{stage_two} the demography of the participants could impact the interpreted interruptibility of other people.
 \autoref{fig:demography_country} shows the distribution of participants by country of origin, \autoref{fig:demography_age} by age and \autoref{fig:demography_gender} by gender.
+
+%Estimator comparison
+\begin{table}[h]
+  \begin{tabular}{c | c c c c c c}
+		\multicolumn{1}{c}{} & & \multicolumn{5}{c}{Estimator Subject Value} \\ \cline{3-7}
+		\multicolumn{1}{c}{} & & 1 & 2 & 3 & 4 & 5 \\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{Video Subject Value}}
+		& 1	    & \specialcell{12 \\ 9.02\% \\ |}    & \specialcell{9 \\ 6.77\% \\ |}    & \specialcell{11 \\ 8.27\% \\ |}   & \specialcell{3 \\ 2.26\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 2		& \specialcell{4 \\ 3.01\% \\ |}     & \specialcell{6 \\ 4.51\% \\ |}    & \specialcell{8 \\ 6.02\% \\ |}    & \specialcell{5 \\ 3.76\% \\ |}    & \specialcell{1 \\ 0.75\% \\ |}\\
+		& 3		& \specialcell{3 \\ 2.26\% \\ |}     & \specialcell{0 \\ 0\% \\ |}       & \specialcell{4 \\ 3.01\% \\ |}    & \specialcell{3 \\ 2.26\% \\ |}    & \specialcell{2 \\ 1.50\% \\ |}\\
+		& 4		& \specialcell{4 \\ 3.01\% \\ |}     & \specialcell{5 \\ 3.76\% \\ |}    & \specialcell{9 \\ 6.77\% \\ |}    & \specialcell{12 \\ 9.02\% \\ |}   & \specialcell{4 \\ 3.01\% \\ |}\\
+        & 5		& \specialcell{7 \\ 5.26\% \\ |}	& \specialcell{5 \\ 3.76\% \\ |}     & \specialcell{4 \\ 3.01\% \\ |}    & \specialcell{6 \\ 4.51\% \\ |}    & \specialcell{6 \\ 4.51\% \\ |}
+  \end{tabular}
+  \caption{Confusion matrix comparing the estimator subject values to the values of the video subject. \\Overall Accuracy: 30.08\% Accuracy Within 1: 62.41\%}
+  \label{tab:video_to_estimator_matrix}
+\end{table}
+
+\begin{table}[h]
+  \begin{tabular}{c | c c c}
+		\multicolumn{1}{c}{} & & \multicolumn{2}{c}{Estimator Subject Value} \\ \cline{3-4}
+		\multicolumn{1}{c}{} & & 1 & 5 \\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{Video Subject}}
+		& 1	    & \specialcell{57 \\ 42.86\% \\ |}    & \specialcell{14 \\ 10.53\% \\ |}\\
+		& 5		& \specialcell{34 \\ 25.56\% \\ |}     & \specialcell{28 \\ 21.05\% \\ | }
+  \end{tabular}
+  \caption{Reduced confusion matrix comparing the estimator subject values to the values of the video subject. \\Overall Accuracy: 63.91\%}
+  \label{tab:reduced_video_to_estimator_matrix}
+\end{table}
+
+\subsubsection{Approximator Results}
+The sensors from Approximator collected data throughout the 30 hours of the experiment resulting in a total collection of 86823 mouse events, 16151 face detection events and 28629 keyboard events.
+In our experiment, we only took the events that could be compared to the video subjects self-reports into account, so the data collected 30 seconds before the video subject was prompted.
+The distribution of these events can be found in \autoref{tab:event_distribution}.
+
+\begin{table}[h]
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+     & Video subject 1 & Video subject 2\\ \midrule
+    Mouse events       & 984    & 534    \\
+    Keyboard events       & 319    & 218    \\
+    Face detection events       & 244    & 113    \\ \midrule
+    Total   & 1547 & 865\\ \bottomrule
+  \end{tabular}
+  \caption{Distribution of events collected by Approximator divided over the Video subjects}
+  \label{tab:event_distribution}
+\end{table}
+
+This data was used by the decision module to produce interruptibility values based on the interruptibility model mentioned in \autoref{sec:decision_logic}. 
+We compared the data produced from Approximator with the values reported by the video subject the same way as we compared the estimator subjects values with those of the video subjects, see \autoref{tab:video_to_approximator_matrix}.
+
+The overall accuracy of Approximator was 31.43\% making it slightly more accurate than the estimator subjects assessments by 1.35\%. 
+If we look at the reduced matrices \autoref{tab:reduced_video_to_estimator_matrix} and \autoref{tab:reduced_video_to_approximator_matrix}, we see that the overall accuracy from the estimators are 1.05\% better than Approximators accuracy.
+This seemed fairly odd to us, so we took a closer look at the interruptibility values produced by Approximator.
+The investigation showed that video subject 2 values was very accurate with an overall accuracy of 41.67\% with a within one accuracy of 91.67\%.
+But the investigation also showed that the values for video subject 1 was all ones (highly-non-interruptible).
+
+
+%Approximator comparison
+\begin{table}[h]
+  \begin{tabular}{c | c c c c c c}
+		\multicolumn{1}{c}{} & & \multicolumn{5}{c}{Approximator Value} \\ \cline{3-7}
+		\multicolumn{1}{c}{} & & 1 & 2 & 3 & 4 & 5 \\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{Video Subject Value}}
+		& 1	    & \specialcell{8 \\ 22.86\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}    & \specialcell{0 \\ 0\% \\ |}   & \specialcell{0 \\ 0\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 2		& \specialcell{5 \\ 14.29\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}    & \specialcell{0 \\ 0\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 3		& \specialcell{2 \\ 5.71\% \\ |}     & \specialcell{0 \\ 0\% \\ |}       & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 4		& \specialcell{6 \\ 17.14\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}   & \specialcell{1 \\ 2.86\% \\ |}\\
+        & 5		& \specialcell{5 \\ 0\% \\ |}	& \specialcell{0 \\ 0\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}    & \specialcell{2 \\ 5.71\% \\ |}
+  \end{tabular}
+  \caption{Confusion matrix comparing the values produced by Approximator to the values of the video subject. \\Overall Accuracy: 31.43\% Accuracy Within 1: 62.86\%}
+  \label{tab:video_to_approximator_matrix}
+\end{table}
+
+\begin{table}[h]
+  \begin{tabular}{c | c c c}
+		\multicolumn{1}{c}{} & & \multicolumn{2}{c}{Approximator Value} \\ \cline{3-4}
+		\multicolumn{1}{c}{} & & 1 & 5 \\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{Video Subject}}
+		& 1	    & \specialcell{17 \\ 48.57\% \\ |}    & \specialcell{1 \\ 2.86\% \\ |}\\
+		& 5		& \specialcell{12 \\ 34.29\% \\ |}     & \specialcell{5 \\ 14.29\% \\ | }
+  \end{tabular}
+  \caption{Reduced confusion matrix comparing the values produced by Approximator to the values of the video subject. \\Overall Accuracy: 62.86\%}
+  \label{tab:reduced_video_to_approximator_matrix}
+\end{table}
+
+%Anders data only
+\begin{table}[h]
+  \begin{tabular}{c | c c c c c c}
+		\multicolumn{1}{c}{} & & \multicolumn{5}{c}{Approximator Value} \\ \cline{3-7}
+		\multicolumn{1}{c}{} & & 1 & 2 & 3 & 4 & 5 \\
+		\multirow{5}{*}{\rotatebox[origin=c]{90}{Video Subject Value}}
+		& 1	    & \specialcell{2 \\ 16.67\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}    & \specialcell{0 \\ 0\% \\ |}   & \specialcell{0 \\ 0\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 2		& \specialcell{0 \\ 0\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}    & \specialcell{0 \\ 0\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 3		& \specialcell{1 \\ 8.33\% \\ |}     & \specialcell{0 \\ 0\% \\ |}       & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}    & \specialcell{0 \\ 0\% \\ |}\\
+		& 4		& \specialcell{0 \\ 0\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}   & \specialcell{1 \\ 8.33\% \\ |}\\
+        & 5		& \specialcell{5 \\ 0\% \\ |}	& \specialcell{0 \\ 0\% \\ |}     & \specialcell{0 \\ 0\% \\ |}    & \specialcell{1 \\ 8.33\% \\ |}    & \specialcell{2 \\ 16.67\% \\ |}
+  \end{tabular}
+  \caption{Confusion matrix comparing a subset of values produced by Approximator to the values of the video subject. \\Overall Accuracy: 41.67\% Accuracy Within 1: 91.67\%}
+  \label{tab:subset_video_to_approximator_matrix}
+\end{table}
 
 \begin{figure}[h]
   \centering
