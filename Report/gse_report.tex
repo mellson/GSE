@@ -118,7 +118,6 @@ First, we demonstrate an implementation of a presence and interruptibility shari
 
 Second, we evaluate the system with a test where we compare the accuracy of our availability prediction model against the accuracy achieved by humans trying to predict availability.
 
-% Sharam: the last paragraph in the introduction section should provide a very quick overview of how the rest of the paper is structured.
 This paper starts with related work in the field of interruptibility and presence sharing that can inform the design process of our system.
 Then follows the introduction of Approximator, our solution for interruptibility sensing and sharing.
 This includes a description and discussion about the sensors used for Approximator.
@@ -235,7 +234,6 @@ We define a commodity laptop to be a device you can buy at any computer store.
 The device should be able to run your operating system of choice.
 It should have a camera, an input device, a microphone and radios such as Wi-Fi and Bluetooth built-in.
 
-%TODO check the section and make sure we do what we say here.
 In this section, we will have a look at some of the sensing capabilities of a commodity laptop.
 We will discuss the strengths and weaknesses of these sensors.
 As well as providing, some reasoning for choosing the sensors we have used in our client.
@@ -254,8 +252,6 @@ A user could be talking on the phone, reading, watching a video etc. all in whic
 In terms of interruptibility, the information from the mouse and keyboard is too ambiguous to deduct whether a user is busy or interruptible.
 Even If we knew the identity of the user sitting in front of the computer, it would still be difficult to determine whether the behavior is an indication of interruptibility.
 An approach to determine interruptibility based on these sensors, would involve sending all information to the decision logic, effectively acting as a key logger, and therefore raising security and privacy issues.
-% Jeg ved ikke om det er noget vi skal gå i dybden med, eller om det er nok bare at nævne det her.... eller om det overhoved skal nævnes.
-% Min overvejelse er om man kunne bruge en vægtet dictionary hvor specifikke ord fik en vægt på hvor arbejds releterede de er og evt kombinere det med en form for pattern matching hvor sprog mønstre blev undersøgt.
 
 \subsubsection{Microphone}
 The use of a microphone as a sensor allows Approximator to sense the presence of a user, even if the user is not directly interacting with the machine.
@@ -304,7 +300,7 @@ The camera can also detect the lighting level in a room, so the light sensor see
 \subsubsection{Process monitor}
 This sensor is slightly different from the others since it primary purpose is not to sense presence, but interruptibility.
 The idea of the process monitor is to supply it with a list of processes (programs) running on the user's computer that it should monitor.
-This list consists both of work and leisure associated processes and the process monitor report if any and which program are in the foreground. %and receiving user input.
+This list consists both of work and leisure associated processes and the process monitor report if any and which program are in the foreground.
 Through this, we obtain the same or weaker notion of presence and non-presence as we did with the keyboard and mouse sensor, but gain a stronger tool to infer interruptibility.
 
 \subsubsection{Geo-location}
@@ -599,11 +595,13 @@ Our data shows that there is an even distribution between lower and higher rated
 
 During the data acquisition, we compared the result from the review group to the results from the video experiment.
 See a confusion matrix in \autoref{tab:video_to_estimator_matrix}.
+Rows correspond to the values reported by the video subjects, and columns correspond to the values from the estimator subjects.
+The unshaded diagonal represents instances when the estimator subject correctly estimated the same value given by the video subject.
 This matrix shows that the overall accuracy lies at 30.08\%, and the accuracy within one is at 62.41\%.
 This shows that our review group was about as accurate as Forgarty's review group \cite{fogarty2005predicting} that achieved an overall accuracy of 30.7\% and a within one accuracy of 65.8\%.
 
 As discussed in \nameref{stage_two} the demography of the participants could have impact the interpreted interruptibility of other people.
-\autoref{fig:demography_country} shows the distribution of participants by country of origin, \autoref{fig:demography_age} by age and \autoref{fig:demography_gender} by gender.
+\autoref{fig:demography} shows the distribution of participants by country of origin, age and gender.
 
 %Estimator comparison
 \begin{table}[h]
@@ -745,23 +743,20 @@ This leads to Reason 5 being the conclusion because the interruptibility model d
 \begin{table}[h]
   \centering
     \begin{tabular}{@{}llllll@{}}
-\toprule
-\textbf{Country}        & count & \textbf{Age} & count & \textbf{Gender} & count \\ \midrule
-Denmark                 & 13    & 18-24        & 7     & Male            & 16    \\
-Romania                 & 3     & 25-34        & 10    & Female          & 3     \\
-Belgium                 & 1     & 35-44        & 1     &                 &       \\
-Germany                 & 1     & 45-54        & 1     &                 &       \\
-Poland                  & 1     &              &       &                 &       \\
-Total participants      & 19    &              & 19    &                 & 19    \\ \bottomrule
-\end{tabular}
+    \toprule
+    \textbf{Country}        & count & \textbf{Age} & count & \textbf{Gender} & count \\ \midrule
+    Denmark                 & 13    & 18-24        & 7     & Male            & 16    \\
+    Romania                 & 3     & 25-34        & 10    & Female          & 3     \\
+    Belgium                 & 1     & 35-44        & 1     &                 &       \\
+    Germany                 & 1     & 45-54        & 1     &                 &       \\
+    Poland                  & 1     &              &       &                 &       \\
+    Total participants      & 19    &              & 19    &                 & 19    \\ \bottomrule
+    \end{tabular}
     \caption{Demography of survey participants by Country of origin, age and gender.}
+    \label{fig:demography}
 \end{table}
 
 \section{Discussion}
-
-% Better ways to do experiment
-%   Asking test subjects to provide their assesed interruptibility might interrupt them
-
 Many factors affect how people assess human interruptibility as noted in \cite{Avrahami2007}.
 These aspects are hard to incorporate in prediction models.
 In this paper, we use a limited demography of people to assess interruptibility.
