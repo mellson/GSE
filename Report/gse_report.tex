@@ -34,7 +34,7 @@
 % since its job is to redefine many LaTeX commands.
 \usepackage[pdftex]{hyperref}
 \hypersetup{
-pdftitle={Deciding presence and interruptibility using only a laptop},
+pdftitle={Deciding presence and interruptibility automatically using only a laptop},
 pdfauthor={Kristian S. M. Andersen, Anders Bech Mellson and Mads Daniel Christensen},
 pdfkeywords={spce, gse, presence, awareness},
 bookmarksnumbered,
@@ -57,7 +57,7 @@ breaklinks=true,
 % End of preamble. Here it comes the document.
 \begin{document}
 
-\title{Deciding presence and interruptibility using only a laptop}
+\title{Deciding presence and interruptibility automatically using only a laptop}
 \numberofauthors{3}
 \author{
   \alignauthor Anders Bech Mellson\\
@@ -521,8 +521,8 @@ At this stage an application with the explicit purpose of peer reviewing the col
 People from the software development community were invited to partake in the survey, and did so under supervision from two of the researchers.
 
 When the estimator subjects started the survey, they were asked to rate each video on a scale of 1 (Highly Interruptible) to 5 (Highly Non-Interruptible).
-They where informed that they should act as though they where colleges with the video subject.
-And finally that they should ask the researchers if they had any questions.
+They were instructed to act as though they where colleges with the video subject.
+They were informed that they should ask the researchers if they had any questions before they started the survey.
 Afterwards they were required to enter their demographic information.
 These demographical questions consisted of gender, age, and ethnicity.
 The demographic distribution is provided since it may affect peoples ability to interpret interruptibility,
@@ -547,12 +547,12 @@ Each sequence was played in full length before the user could rate it and procee
 \subsection{Data analysis}
 After the experiment was concluded, the results gathered from Approximator was compared to the test persons, and the users.
 This was done by plotting the values into two confusion matrices.
-One comparing the answers of user to answers of the test users.
-And one comparing the answers of the user to the results of Approximator.
-By finding correlations between hits in the test-user/user and Approximator/user results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
+One comparing the answers of video subjects to answers of the estimator subjects.
+And one comparing the answers of the video subjects to the results of Approximator.
+By finding correlations between hits in the video/esimator and video/Approximator results, we could compare how Approximator performs in relation to human judgement, and also compare our findings to those found by Fogarty et al \cite{fogarty2005predicting}
 
 \subsection{Results}
-In this section we will go over our results that we have collected through the experiments mentioned in \autoref{sec:method}.
+In this section we will go over our results that we have collected through the experiments mentioned in \nameref{method}.
 This section is divided into the results collected from the review group, and the results collected from Approximator.
 
 \subsubsection{Review Group Results}
@@ -566,28 +566,28 @@ The remaining 8 was not applicable since the test subject was not present at the
   \label{fig:interruptibilityFrequency}
 \end{figure}
 
-A total of 19 people participated in the survey.
-The video clip sets A, B, C and D were surveyed by 4 people while set E was surveyed by 3 people.
+19 volunteers chose to participate in the survey.
+The video clip sets A, B, C and D were surveyed by 4 volunteers while set E was surveyed by 3 volunteers.
 All surveys were valid and consistent answers.
-Our dataset has a mean of 2.77, median of 3, mode of 3, range of 4 and a standard deviation of 1.288.
 
-Although answers were consistent and participants clearly understood the task, the accuracy of the participants were overall poor.
+Although answers were consistent and the volunteers clearly understood the task, the accuracy of the volunteers were overall poor.
 As shown in \autoref{tab:survey_accuracy} the average precision among all sets were around 28\%.
 We attribute this low score to the fact that is very hard to precisely rate another persons interruptibility on a scale from 1 to 5.
 In order to account for this we use the same scale conversion as Fogarty\cite{fogarty2005predicting}.
 But unlike Fogarty who did the scale conversion, by converting all values from 1-4 as 1 and 5 as 5, we did it as followed.
-For all answers in the survey we change values of 1-3 to be 1 and 4-5 to be 5.
-This gives us a more binary representation of interpretation of the data.
-As shown in \autoref{tab:survey_accuracy} that yields a much improved average accuracy of 63\%.
+For all answers in the survey we changed values of 1-3 to be 1 and 4-5 to be 5.
+This gave us a more binary representation of interpretation of the data.
+As shown in \autoref{tab:survey_accuracy} that yielded a much improved average accuracy of 63\%.
 The reason that we converted the data differently from Fogarty, lies in Fogartys reason for converting the data in the first place.
 Fogartys data showed that the estimator subjects had a tendency to rate the video subjects interruptibility lower than the self-reported value.
 Our data shows that there is an even distribution between lower and higher rated values.
 
 When all the data was acquired, we compared the result from the review group to the results from the video experiment.
-This was done in a confusion matrix shown in \autoref{tab:video_to_estimator_matrix} and this matrix shows that the overall accuracy lies at 30.08\%, and the accuracy within one is at 62.41\%.
+This was done in a confusion matrix shown in \autoref{tab:video_to_estimator_matrix}. 
+This matrix shows that the overall accuracy lies at 30.08\%, and the accuracy within one is at 62.41\%.
 This shows that our review group was about as accurate as Forgarty review group \cite{fogarty2005predicting} that achieved an overall accuracy of 30.7\% and a within one accuracy of 65.8\%.
 
-As discussed in \nameref{stage_two} the demography of the participants could impact the interpreted interruptibility of other people.
+As discussed in \nameref{stage_two} the demography of the participants could have impact the interpreted interruptibility of other people.
 \autoref{fig:demography_country} shows the distribution of participants by country of origin, \autoref{fig:demography_age} by age and \autoref{fig:demography_gender} by gender.
 
 %Estimator comparison
@@ -620,7 +620,7 @@ As discussed in \nameref{stage_two} the demography of the participants could imp
 
 \subsubsection{Approximator Results}
 The sensors from Approximator collected data throughout the 30 hours of the experiment resulting in a total collection of 86823 mouse events, 16151 face detection events and 28629 keyboard events.
-In our experiment, we only took the events that could be compared to the video subjects self-reports into account, so the data collected 30 seconds before the video subject was prompted.
+In our experiment, we only took the events into account that could be compared to the video subjects self-reports. That was the data collected 30 seconds before the video subject was prompted.
 The distribution of these events can be found in \autoref{tab:event_distribution}.
 
 \begin{table}[h]
@@ -636,11 +636,11 @@ The distribution of these events can be found in \autoref{tab:event_distribution
   \label{tab:event_distribution}
 \end{table}
 
-This data was used by the decision module to produce interruptibility values based on the interruptibility model mentioned in \nameref{method}.
-We compared the data produced from Approximator with the values reported by the video subject the same way as we compared the estimator subjects values with those of the video subjects, see \autoref{tab:video_to_approximator_matrix}.
+The data was used by the decision module to produce interruptibility values based on the interruptibility model mentioned in \nameref{method}.
+We compared the data produced by Approximator with the values reported by the video subject the same way as we compared the estimator subjects values with those of the video subjects, see \autoref{tab:video_to_approximator_matrix}.
 
 The overall accuracy of Approximator was 31.43\% making it slightly more accurate than the estimator subjects assessments by 1.35\%.
-If we look at the reduced matrices \autoref{tab:reduced_video_to_estimator_matrix} and \autoref{tab:reduced_video_to_approximator_matrix}, we see that the overall accuracy from the estimators are 1.05\% better than Approximators accuracy.
+When we looked at the reduced matrices \autoref{tab:reduced_video_to_estimator_matrix} and \autoref{tab:reduced_video_to_approximator_matrix}, we saw that the overall accuracy from the estimators were 1.05\% better than Approximators accuracy.
 This seemed fairly odd to us, so we took a closer look at the interruptibility values produced by Approximator.
 The investigation showed that video subject 2 values was very accurate with an overall accuracy of 41.67\% with a within one accuracy of 91.67\%.
 But the investigation also showed that the values for video subject 1 was all ones (highly-non-interruptible).
