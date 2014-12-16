@@ -358,11 +358,11 @@ Actors communicate by sending messages to each other.
 Actors does not share state, making it possible to run actors in parallel and even on different machines.
 This makes the actor model a good candidate for building highly scalable applications.
 
-There are several frameworks implementing the actor model, such as Akka \cite{akka}, Project Orleans \cite{orleans} and most famously Erlang \cite{erlang}.
+There are several frameworks implementing the actor model, such as Akka\footnote{\url{http://akka.io/}}, Project Orleans\footnote{\url{http://orleans.codeplex.com/}} and most famously Erlang\footnote{\url{http://www.erlang.org/}}.
 For this project, we have chosen Akka because it is Java based.
 This supports the technical knowledge in our group.
 
-We use the general programming language Scala \cite{scala} to program our Akka-based infrastructure.
+We use the general programming language Scala\footnote{\url{http://www.scala-lang.org/}} to program our Akka-based infrastructure.
 
 
 \begin{figure}[H]
@@ -373,7 +373,7 @@ We use the general programming language Scala \cite{scala} to program our Akka-b
 \end{figure}
 
 It is possible to deploy Akka applications on a server, which can run Java.
-For this project, we have chosen to deploy our system to Azure \cite{azure}, Microsoft's cloud service for developers.
+For this project, we have chosen to deploy our system to Azure\footnote{\url{http://azure.microsoft.com/en-us/}}, Microsoft's cloud service for developers.
 Having the infrastructure running at a cloud provider makes it reachable from the standard internet.
 This enables us to build sensors and demonstrators that can run anywhere; as long as they have an internet connection, they can reach our infrastructure.
 
