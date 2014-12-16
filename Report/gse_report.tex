@@ -311,6 +311,19 @@ Events can help identify a users activities during the day, like scheduled meeti
 Detecting events from a users calendar is strongly coupled with the way the user adds events to his/her calendar.
 It could be difficult to infer anything more than presence information which is also available through the camera and the keyboard and mouse.
 
+\subsubsection{Chosen Sensors}
+The project scope limits us from using sensors outside of a commodity laptop and from using sensors that requires prior knowledge of the environment or the user. This limitation excludes the Calendar sensor, Geo-location and the Process monitor, as they all require prior knowledge about the user.
+The Calendar sensor needs to know which calendar provider the user is using, the Process monitor requires information on which program are work related for the user and Geo-location needs to know to which areas are home, work and otherwise.
+The Bluetooth and Wi-Fi are also limited by the scope, since they rely on external beacons to signal position.
+The microphone would be a good choice as a sensor, but as most software developers work in shared offices this would generate a significant amount of noise data. 
+Therefore we have chosen to omit the microphone.
+By using the Camera, Keyboard and Mouse as sensors, we stay within the scope of the project, and still get a good amount of data to infer presence and interruptibility from.
+By using the Camera as sensor we can omit the Lightsensor, due to redundancy in sensor features.
+
+Our final choice of sensors are Camera, Keyboard and Mouse.
+ 
+ 
+
 \subsection{Infrastructure}
 To provide presence and availability information to cloud workers we need a few things.
 Firstly we need to gather data input from the working environment.
